@@ -35,6 +35,9 @@ class ImageList:
         else:
             self.list = []
 
+    def __len__(self):
+        return len(self.list)
+
     def __setitem__(self, index, value):
         """
         self.list[index] = value

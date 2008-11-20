@@ -10,8 +10,7 @@ def test_nointerp():
     Y = np.random.standard_normal(t.shape + (11,4,5))
     Y = Image(Y, CoordinateMap.identity(['t','z','y','x'], Y.shape))
     f = fromimage(Y, volume_start_times=t)
-    g = slice_time.slice_generator(f, np.zeros(Y.shape[1]))
-    ff = slice_time.slice_time(f, g)
+    ff = slice_time.slice_time(f)
     assert(np.allclose(np.asarray(ff), Y))
 
 def test_nointerp_sinc():
@@ -19,8 +18,7 @@ def test_nointerp_sinc():
     Y = np.random.standard_normal(t.shape + (11,4,5))
     Y = Image(Y, CoordinateMap.identity(['t','z','y','x'], Y.shape))
     f = fromimage(Y, volume_start_times=t)
-    g = slice_time.slice_generator(f, np.zeros(Y.shape[1]))
-    ff = slice_time.slice_time(f, g, interpolator=slice_time.sinc_interp)
+    ff = slice_time.slice_time(f, interpolator=slice_time.sinc_interp)
     assert(np.allclose(np.asarray(ff), Y))
 
 def test_linear():
@@ -29,8 +27,7 @@ def test_linear():
     Y = np.add.outer(np.linspace(0,7,7), np.random.standard_normal((11,4,5)))
     Y = Image(Y, CoordinateMap.identity(['t','z','y','x'], Y.shape))
     f = fromimage(Y, volume_start_times=t)
-    g = slice_time.slice_generator(f, s)
-    ff = slice_time.slice_time(f, g, bounds_error=False, fill_value=0.)
+    ff = slice_time.slice_time(f, bounds_error=False, fill_value=0.)
     A = np.asarray(ff)[3,4] + s[4]/2.3
     B = np.asarray(Y)[3,4]
     assert(np.allclose(A, B))
