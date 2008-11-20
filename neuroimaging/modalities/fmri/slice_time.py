@@ -7,6 +7,7 @@ from scipy.interpolate import interp1d
 from scipy.special.basic import sinc
 
 from fmri import fromimage, FmriImageList
+from neuroimaging.core.api import Image
 
 def make_filter(interpolator, input_times, output_times,
                 *intarg, **intkw):
@@ -48,7 +49,8 @@ def make_filter(interpolator, input_times, output_times,
         A[:,i] = interpolator(input_times, I[:,i], *intarg, **intkw)(output_times)
 
     def f(x):
-        return np.dot(A, x.reshape(x.shape[0], np.product(x.shape[1:]))).reshape((A.shape[0], np.product(x.shape[1:])))
+        y = np.dot(A, x.reshape(x.shape[0], np.product(x.shape[1:]))).reshape((A.shape[0],) + x.shape[1:])
+        return y
     return f
 
 def slice_generator(image_list, slicetimes, axis=0):
@@ -120,7 +122,10 @@ def slice_time(image_list,
 
     """
 
-    assert filter(lambda x: not x, [i.coordmap == image_list[0].coordmap for i in image_list]) == [], 'slice_time expecting all volumes to have the same coordmap'
+    test = filter(lambda x: not x, [i.coordmap == image_list[0].coordmap for i in image_list]) == []
+    # TODO: fix equality check of coordmaps....
+    print map(lambda x: not x, [i.coordmap == image_list[0].coordmap for i in image_list]), 
+
     generator = slice_generator(image_list, image_list.slice_times, axis=image_list.slice_axis)
     output_times = image_list.volume_start_times
     output_data = np.zeros((len(image_list),) + image_list[0].shape)
@@ -137,7 +142,7 @@ def slice_time(image_list,
         ims.append(Image(output_data[i], image_list[i].coordmap.copy()))
     
     return FmriImageList(ims, volume_start_times=image_list.volume_start_times,
-                         slice_times=np.zeros(image_list.shape[image_list.slice_axis]))
+                         slice_times=np.zeros(image_list[0].shape[image_list.slice_axis]))
 
 def axis_interpolator(image_array,
                       generator,
