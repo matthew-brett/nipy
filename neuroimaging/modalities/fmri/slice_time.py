@@ -51,6 +51,7 @@ def make_filter(interpolator, input_times, output_times,
     def f(x):
         y = np.dot(A, x.reshape(x.shape[0], np.product(x.shape[1:]))).reshape((A.shape[0],) + x.shape[1:])
         return y
+    f.A = A
     return f
 
 def slice_generator(image_list, slicetimes, axis=0):
@@ -78,21 +79,49 @@ def fast_sinc(frac, data):
     Inputs:
     =======
     frac : float
+           Indicates the fraction of a sample to delay or advance the sequence
 
     data : ndarray
+           The sequence(s) with time dimension on axis 0
 
     """
-    pass
+    L = data.shape[0]
+    Fnyq = L/2
+    ramp_rate = 2./L
+    data_f = np.fft.fft(data, axis=0)
+    phs_ramp = np.zeros((L,), data_f.dtype)
+    phs_ramp[:Fnyq+1] = np.exp(1j*np.pi*np.arange(Fnyq+1)*frac*ramp_rate)
+    if not L%2:
+        phs_ramp[Fnyq+1:] = phs_ramp[1:Fnyq][::-1].conjugate()
+    else:
+        phs_ramp[Fnyq+1:] = phs_ramp[1:Fnyq+1][::-1].conjugate()
+
+    phs_sl = (slice(None),) + (None,)*(len(data.shape[1:]))
+    data_f *= phs_ramp[phs_sl]
+    data_i = np.fft.ifft(data_f, axis=0).real
+    return data_i
+
 
 
 def detrend(interpolator):
     def new_interpolator(input_times, data, *arg, **kw):
+        # remove 1st order polynomial from data to interpolate
+        a1,a0 = np.polyfit(input_times,
+                           data.reshape(data.shape[0],
+                                        np.product(data.shape[1:])),
+                           1)
+        a1.shape = a0.shape = data.shape[1:]
+        trends = np.multiply.outer(input_times, a1) + a0[None]
+        data -= trends
         g = interpolator(input_times, data, *arg, **kw)
+        data += trends
         def f(x):
-            xmu = np.mean(x, axis=0)
-            y = g(x - np.multiply.outer(np.ones(x.shape[0]), xmu))
-            return y + xmu
+            y = g(x)
+            trends = np.multiply.outer(x, a1) + a0[None]
+            y += trends
+            return y
         return f
+    return new_interpolator
 
 @detrend
 def newinterp(input_times, data):
@@ -130,12 +159,12 @@ def slice_time(image_list,
     output_times = image_list.volume_start_times
     output_data = np.zeros((len(image_list),) + image_list[0].shape)
     axis_interpolator(np.asarray(image_list),
-                                    generator,
-                                    output_times,
-                                    output_data,
-                                    interpolator,
-                                    *intarg,
-                                    **intkw)
+                      generator,
+                      output_times,
+                      output_data,
+                      interpolator,
+                      *intarg,
+                      **intkw)
     ims = []
 
     for i in range(output_data.shape[0]):
@@ -193,8 +222,8 @@ def axis_interpolator(image_array,
     nout = output_values.shape[0]
 
     for input_values, input_indices, output_indices in generator:
+        d = data[:,input_indices]
         if interpolator is not fast_sinc:
-            d = data[:,input_indices]
             f = make_filter(interpolator, input_values, 
                             output_values, *intarg, **intkw)
             output_data[:,output_indices] = f(d)
@@ -202,7 +231,7 @@ def axis_interpolator(image_array,
             tr = output_values[1] - output_values[0]
             assert np.allclose(np.diff(output_values), tr), 'sinc interpolation expects equally spaced time points on output'
             assert np.allclose(np.diff(input_values), tr), 'sinc interpolation expects equally spaced time points on input'
-            assert np.allclose(output_values.shape == input_values.shape), 'sinc interpolation requires the same number of time points on input and output'
+            assert output_values.shape == input_values.shape, 'sinc interpolation requires the same number of time points on input and output'
             output_data[:,output_indices] = fast_sinc((output_values[0] - input_values[0]) / tr, d)
 
     return None
@@ -221,15 +250,21 @@ def sinc_interp(t, x, window=None):
     x = np.asarray(x).copy()
     tr = t[1]-t[0]
     
-    assert np.allclose(t[1:]-t[:-1], tr), 'expecting equally spaced time points'
+    assert np.allclose(np.diff(t), tr), 'expecting equally spaced time points on input times'
 
     def f(tnew):
         m = np.arange(x.shape[0])
-        _t = tnew / float(tr)
-        dmt = np.subtract.outer(m, _t)
+        assert tnew.min() >= (t.min()-tr) and tnew.max() <= (t.max()+tr), 'extrapolating to points more than one sample away from original data'
+        # align tnew relative to t-grid, and find sub-sample spacing
+        _t = (tnew-t[0])/float(tr)
+        dmt = _t[:,None] - m
         d = sinc(dmt)
         if window is not None:
             d *= window(dmt)
-        return np.dot(x.T, d).T
+        return np.dot(d, x)
     return f
+
+@detrend
+def sinc_interp_detrend(t, x, window=None):
+    return sinc_interp(t, x, window=window)
 
