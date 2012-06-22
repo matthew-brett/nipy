@@ -38,6 +38,7 @@ Maintainer: Various
 MaintainerEmail: nipy-devel@neuroimaging.scipy.org
 
 HookFile: bscript
+UseBackends: Waf
 
 ExtraSourceFiles:
     libcstat/fff/*.h,
