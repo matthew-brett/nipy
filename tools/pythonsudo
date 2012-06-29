@@ -1,0 +1,38 @@
+#!/bin/bash
+# This script sets various environment variables tp put useful virtualenv stuff
+# on the path, before dumping you into a root user bash shell. The virualenv
+# stuff allows you to install varioud things into the virtualenv without
+# installing them system-wide.  So, all the packages you need will need to be
+# in the virtualenv site-packages, or already install into the path of the
+# python version you chose.  This script only makes sense for OSX. I use it
+# for making dmgs.
+if [ $# -ne 2 ]
+then
+  echo "Usage: `basename $0` {python-version} {virtualenv-root-path}"
+  echo "e.g `basename $0` 2.7 /home/user/.virtualenvs/python27"
+  exit 1
+fi
+PYV=$1
+VENV=$2
+PYPATH=/Library/Frameworks/Python.framework/Versions/$PYV/bin
+VENV_LIB=$VENV/lib/python$PYV/site-packages
+if [ ! -d "$PYPATH" ]
+then
+    echo "Ah sorry, $PYPATH does not exist"
+    exit 1
+fi
+if [ ! -d "$VENV_LIB" ]
+then
+    echo "Ah sorry, $VENV_LIB does not exist"
+    exit 1
+fi
+export PATH=$PYPATH:$PATH:$VENV/bin
+export PYTHONPATH=$VENV_LIB
+# This might be necessary for python compiles for python 2.5, 2.6
+if [ ["$PYV" == "2.5"] -o ["$PYV" == "2.6"] ]
+then
+    export CC=/usr/bin/gcc-4.0
+    export CXX=/usr/bin/g++-4.0
+fi
+echo "Careful, you are now in a bash shell as the root user"
+bash

@@ -243,18 +243,30 @@ Release checklist
   See `MBs OSX setup
   <http://matthew-brett.github.com/pydagogue/develop_mac.html>`_).
 
+  In particular, you will need to download and unpack the source distribution
+  for bdist_mpkg_.  It looks as though the main package has gone cold, but Ralf
+  Gommers `cloned bdist_mpkg <https://github.com/rgommers/bdist_mpkg>`_ on
+  github.
+
   The problem here is that we need to run the package build as root, so that the
   files have root permissions when installed from the installer.  We also can't
-  use virtualenvs, because the installer needs to find the correct system path
-  into which to install - so the python ``sys.prefix`` has to be e.g.
-  ``/Library/Frameworks/Python.framework/Versions/2.6``.  What I ended up doing
-  was to make a script to set paths etc from a handy virtualenv, but run the
-  relevant system python, as root.  See the crude, fragile ``tools/pythonsudo``
-  bash script for details.  The procedure then::
+  use virtualenvs directly, because the installer needs to find the correct
+  system path into which to install - so the python ``sys.prefix`` has to be
+  e.g.  ``/Library/Frameworks/Python.framework/Versions/2.6``.  What I ended up
+  doing was to make a script to set paths etc from a handy virtualenv that has
+  all the relevant libraries installed, but put with the system python I want,
+  on the path.  I do this as root in order to get the file permissions right.
+  The virtualenv, with the installations, has to be for the same python,
+  obviously.  See the crude, fragile ``tools/pythonsudo`` bash script for
+  details.  The procedure then::
 
-    sudo ./tools/pythonsudo 5
+    sudo ./tools/pythonsudo 6 $WORKON_HOME/python26
+    # Now you're in a bash shell as root, with your env vars set
     make clean
     python tools/osxbuild.py
+
+  ``python`` here will be the python set by the environment variables of the
+  ``pythonsudo`` script.
 
   The ``osxbuild.py`` script comes from numpy and uses the ``bdist_mpkg`` script
   we might have installed above.
@@ -333,5 +345,6 @@ Release checklist
 .. _pytox: http://codespeak.net/tox
 .. _setuptools intro: http://packages.python.org/an_example_pypi_project/setuptools.html
 .. _travis-ci: http://travis-ci.org
+.. _bdist_mpkg: http://pypi.python.org/pypi/bdist_mpkg
 
 .. include:: ../../links_names.txt
