@@ -42,12 +42,38 @@ You will next need to get the NIPY code via version control:
 You should now be able to follow the instructions in
 :ref:`trunk_download`, but with the following modifications:
 
-Running the build / install
----------------------------
+Build install in windows
+------------------------
 
 Here we assume that you do *not* have the Microsoft visual C tools, you
 did not use the ETS_ package (which sets the compiler for you) and *are*
 using a version of  MinGW_ to compile NIPY.
+
+Installing MinGW
+^^^^^^^^^^^^^^^^
+
+To compile nipy, you will need MinGW with gcc-3.  By default, MinGW comes with
+gcc-4.  The following procedure comes from `this mail
+<http://mingw-users.1079350.n2.nabble.com/How-do-I-install-mingw-gcc-3-4-5-td5604746.html>`_
+
+* Make a directory ``c:\MingGW``
+* Download the latest ``mingw-get-inst`` from
+  http://sourceforge.net/projects/mingw/files/Installer/mingw-get-inst
+* Unpack the downloaded archive into ``c:\MinGW``
+* ``cd c:\MinGW\bin``
+* ``mingw-get install gcc-v3-c++``
+* Make sure ``c:\MinGW\bin`` is on your path somehow.
+
+Install Cython
+^^^^^^^^^^^^^^
+
+If you don't have Cython, install via a binary installer at
+http://www.lfd.uci.edu/~gohlke/pythonlibs/#cython
+
+
+
+Running the build install
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 First, for the ``python setup.py`` steps, you will need to add the
 ``--compiler=mingw32`` flag, like this::
