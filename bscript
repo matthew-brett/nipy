@@ -12,5 +12,6 @@ def post_configure(context):
     conf.env.INCLUDES = get_numpy_include_dirs()
     for p in ["wrapper", "fff"]:
         conf.env.INCLUDES.append(op.join("libcstat", p))
+        conf.env.CYTHON_INCLUDES.append(op.join("libcstat", p))
     for p in ["segmentation", "registration"]:
         conf.env.INCLUDES.append(op.join("nipy", "algorithms", p))
