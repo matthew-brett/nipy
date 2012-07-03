@@ -70,14 +70,40 @@ GUI, and then, using the windows shell or similar::
 Non-administrator data package installation
 -------------------------------------------
 
-The commands above assume you are installing into the default system
-directories.  If you want to install into a custom directory, then (in python,
-or ipython, or a text editor) look at the help for
+The simple ugly manual way
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Go to http://nipy.sourceforge.net/data-packages
+* Download the latest *nipy-templates* and *nipy-data* packages
+* Unpack both these into some directory
+* Locate your nipy user directory from the output of this::
+
+    python -c 'import nibabel.data; print(nibabel.data.get_nipy_user_dir())'
+
+  Call that directory ``<nipy-user>``
+* Make a directory in ``<nipy-user>`` called ``nipy``
+* After you have unpacked the templates, you will have a directory called
+  something like ``nipy-templates-0.2``.  In that directory you should see a
+  directory called ``templates``.  Copy / move / link the ``templates``
+  directory into ``<nipy-user>/nipy``, so you now have a directory
+  ``<nipy-user>/nipy/templates``.
+* After you've unpacked the data, you'll have something like
+  ``nipy-data-0.2``.  In that directory you should see a directory called
+  ``data``.  Copy / move / link the ``data`` directory into
+  ``<nipy-user>/nipy``, so you now have a directory
+  ``<nipy-user>/nipy/data``.
+
+The more general way
+^^^^^^^^^^^^^^^^^^^^
+
+The commands for the sytem install above assume you are installing into the
+default system directories.  If you want to install into a custom directory,
+then (in python, or ipython, or a text editor) look at the help for
 ``nibabel.data.get_data_path()`` . There are instructions there for pointing
 your nipy installation to the installed data.
 
 On unix
-~~~~~~~
++++++++
 
 For example, say you installed with::
 
@@ -91,7 +117,7 @@ following contents::
    path=/home/my-user/some-dir/share/nipy
 
 On windows
-~~~~~~~~~~
+++++++++++
 
 Say you installed with (windows shell)::
 
