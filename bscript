@@ -15,3 +15,11 @@ def post_configure(context):
         conf.env.CYTHON_INCLUDES.append(op.join("libcstat", p))
     for p in ["segmentation", "registration"]:
         conf.env.INCLUDES.append(op.join("nipy", "algorithms", p))
+    # This below only expected to work with Linux / gcc
+    conf.env.CFLAGS_cstlib = ["-fPIC"]
+
+
+@hooks.pre_build
+def pre_build(context):
+    context.tweak_extension("nipy.labs.utils.routines",
+                            use = "cstat")
