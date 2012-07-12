@@ -15,7 +15,7 @@ Requires matplotlib
 # Stdlib
 import os
 from os import makedirs, listdir
-from os.path import exists, abspath, isdir, join as pjoin
+from os.path import exists, abspath, isdir, join as pjoin, splitext
 import csv
 from StringIO import StringIO
 
@@ -351,3 +351,41 @@ def rewrite_spec(subj, run, root = "/home/jtaylo/FIAC-HBM2009"):
     initial = csv2rec(fname)
 
     return d, b
+
+
+def compare_results(subj, run, other_root, mask_fname):
+    """ Find and compare calculated results images from a previous run
+
+    Parameters
+    ----------
+    subj : int
+        subject number (0..4, 6..15)
+    run : int
+        run number (1..4)
+    other_root : str
+        path to previous run estimation
+    mask_fname:
+        path to a mask image defining area in which to compare differences
+    """
+    # Get information for this subject and run
+    path_dict = path_info_run(subj, run)
+    # Get mask
+    msk = load_image(mask_fname).get_data().copy().astype(bool)
+    # Get results directories for this run
+    rootdir = path_dict['rootdir']
+    res_dir = pjoin(rootdir, 'results_%02d' % run)
+    if not isdir(res_dir):
+        return
+    for dirpath, dirnames, filenames in os.walk(res_dir):
+        for fname in filenames:
+            froot, ext = splitext(fname)
+            if froot in ('effect', 'sd', 'F', 't'):
+                this_fname = pjoin(dirpath, fname)
+                other_fname = this_fname.replace(DATADIR, other_root)
+                if not exists(other_fname):
+                    print this_fname, 'present but ', other_fname, 'missing'
+                this_arr = load_image(this_fname).get_data()
+                other_arr = load_image(other_fname).get_data()
+                diff = np.abs(this_arr[msk] - other_arr[msk]).max()
+                print ('Maximum difference between', this_fname, other_fname,
+                       '==', diff)
