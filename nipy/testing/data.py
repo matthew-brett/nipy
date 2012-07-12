@@ -22,7 +22,8 @@ datapath = os.path.expanduser(os.path.join('~', '.nipy', 'tests', 'data'))
 
 # If the data directory does not exist, download it.
 if not os.path.exists(datapath):
-    get_data()
+    pass
+    # get_data()
 
 
 def datapjoin(filename):

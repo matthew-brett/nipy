@@ -15,7 +15,7 @@ from nipy.core import api
 
 # data
 
-datadir = "/home/jtaylo/fiac-curated"
+datadir = "/home/mb312/data/fiac/hbm2009"
 
 # For group analysis
 
