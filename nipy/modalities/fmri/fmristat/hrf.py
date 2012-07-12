@@ -57,7 +57,7 @@ def spectral_decomposition(hrf2decompose,
         TODO
     """
     if time is None:
-        time = np.linspace(-15,50,3251)
+        time = np.linspace(-15,50,3751)
     dt = time[1] - time[0]
     if delta is None:
         delta = np.arange(-4.5, 4.6, 0.1)

@@ -55,7 +55,7 @@ def run_model(subj, run):
     # The TR of the experiment
     TR = 2.5
     # The time of the first volume
-    Tstart = 0.0
+    Tstart = 1.25
     # The array of times corresponding to each volume in the fMRI data
     volume_times = np.arange(nvol) * TR + Tstart
     # This recarray of times has one column named 't'.  It is used in the
