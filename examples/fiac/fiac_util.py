@@ -1,3 +1,4 @@
+
 # emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
 # vi: set ft=python sts=4 ts=4 sw=4 et:
 """Support utilities for FIAC example, mostly path management.
@@ -16,6 +17,7 @@ Requires matplotlib
 import os
 from os import makedirs, listdir
 from os.path import exists, abspath, isdir, join as pjoin, splitext
+import sys
 import csv
 from StringIO import StringIO
 
@@ -356,6 +358,12 @@ def rewrite_spec(subj, run, root = "/home/jtaylo/FIAC-HBM2009"):
 def compare_results(subj, run, other_root, mask_fname):
     """ Find and compare calculated results images from a previous run
 
+    This scipt checks that another directory containing results of this same
+    analysis are similar in the sense of numpy ``allclose`` within a brain mask.
+    This test passed comparing a slightly modified trunk as of 13 July 2012, to
+    the stored results from June 2009 when the script was first run.  Note lower
+    mask for subject 6 and reanalysis of subject 3.
+
     Parameters
     ----------
     subj : int
@@ -387,10 +395,30 @@ def compare_results(subj, run, other_root, mask_fname):
                     continue
                 this_arr = load_image(this_fname).get_data()
                 other_arr = load_image(other_fname).get_data()
-                diff = np.abs(this_arr[msk] - other_arr[msk]).max()
-                if froot in ('effect', 'sd', 't'): # Maybe a sign flip
-                    diff_flip = np.abs(this_arr[msk] + other_arr[msk]).max()
-                    diff = np.min([diff, diff_flip])
-                print 'Maximum difference between', this_fname, other_fname,
-                print '==', diff
-                assert diff < 1e-4
+                ok = np.allclose(this_arr[msk], other_arr[msk])
+                if not ok and froot in ('effect', 'sd', 't'): # Maybe a sign flip
+                    ok = np.allclose(this_arr[msk], -other_arr[msk])
+                if not ok:
+                    print 'Difference between', this_fname, other_fname
+
+
+def compare_all(other_root, mask_fname):
+    for subj in range(5) + range(6, 16):
+        for run in range(1, 5):
+            compare_results(subj, run, other_root, mask_fname)
+
+
+def main():
+    try:
+        other_root = sys.argv[1]
+    except IndexError:
+        return
+    try:
+        mask_fname = sys.argv[2]
+    except IndexError:
+        mask_fname = pjoin(DATADIR, 'group', 'mask.nii')
+    compare_all(other_root, mask_fname)
+
+
+if __name__ == '__main__':
+    main()
