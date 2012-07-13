@@ -384,8 +384,13 @@ def compare_results(subj, run, other_root, mask_fname):
                 other_fname = this_fname.replace(DATADIR, other_root)
                 if not exists(other_fname):
                     print this_fname, 'present but ', other_fname, 'missing'
+                    continue
                 this_arr = load_image(this_fname).get_data()
                 other_arr = load_image(other_fname).get_data()
                 diff = np.abs(this_arr[msk] - other_arr[msk]).max()
-                print ('Maximum difference between', this_fname, other_fname,
-                       '==', diff)
+                if froot in ('effect', 'sd', 't'): # Maybe a sign flip
+                    diff_flip = np.abs(this_arr[msk] + other_arr[msk]).max()
+                    diff = np.min([diff, diff_flip])
+                print 'Maximum difference between', this_fname, other_fname,
+                print '==', diff
+                assert diff < 1e-4
