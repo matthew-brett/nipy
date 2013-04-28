@@ -56,6 +56,7 @@ def make_filter(interpolator, input_times, output_times,
     f.A = A
     return f
 
+
 def slice_generator(image_list, slicetimes, axis=0):
     """
     A generator, given an array of slicetimes along a given axis
@@ -73,6 +74,7 @@ def slice_generator(image_list, slicetimes, axis=0):
         if len(ij) == 1:
             ij = ij[0]
         yield image_list.volume_start_times + slicetimes[j], ij, ij
+
 
 def fast_sinc(frac, data):
     """
@@ -104,8 +106,9 @@ def fast_sinc(frac, data):
     return data_i
 
 
-
 def detrend(interpolator):
+    """ Decorator for interpolators to remove linear trends from data
+    """
     def new_interpolator(input_times, data, *arg, **kw):
         # remove 1st order polynomial from data to interpolate
         a1,a0 = np.polyfit(input_times,
@@ -125,34 +128,38 @@ def detrend(interpolator):
         return f
     return new_interpolator
 
+
 @detrend
 def newinterp(input_times, data):
     return interp1d(input_times, data)
+
 
 def slice_time(image_list,
                interpolator=interp1d,
                *intarg,
                **intkw):
+    """ Slice time correction for an entire fMRI image.
+
+    Returns an fMRI image where each slice of each volume is interpolated in
+    time so as to appear to be acquired at the start_time for that volume.
+
+    Parameters
+    ----------
+    image_list : FmriImageList
+        fMRI image to be slice-timed
+    interpolator : callable, optional
+        Callable returning an interpolating function that can be evaluated at
+        output_times.
+    \*intarg : positional args, optional
+        Positional arguments to interpolator
+    \*\*intkw : keyword args, optional
+       Keyword arguments to interpolator
+
+    Returns
+    -------
+    fimg : FmriImageList
+        FmriImage list with interpolated data
     """
-
-    Slice time correction for an entire fMRI image.
-    Returns an fMRI image where each slice of each volume is interpolated
-    in time so as to appear to be acquired at the start_time for that volume.
-
-    Inputs:
-    =======
-    image_list: FmriImageList
-                fMRI image to be slice-timed
-
-    interpolator: callable
-                  Callable returning an interpolating function that can be
-                  evaluated at output_times.
-
-    intarg, intkw:
-                  Optional arguments to interpolator
-
-    """
-
     test = filter(lambda x: not x, [i.coordmap == image_list[0].coordmap for i in image_list]) == []
     # TODO: fix equality check of coordmaps....
     print map(lambda x: not x, [i.coordmap == image_list[0].coordmap for i in image_list]),
@@ -176,6 +183,7 @@ def slice_time(image_list,
     return FmriImageList(ims, volume_start_times=image_list.volume_start_times,
                          slice_times=np.zeros(image_list[0].shape[image_list.slice_axis]))
 
+
 def axis_interpolator(image_array,
                       generator,
                       output_values,
@@ -184,7 +192,6 @@ def axis_interpolator(image_array,
                       *intarg,
                       **intkw):
     """
-
     image_array: ndarray
                 Data to be interpolated along a given axis (determined by the
                 generator).
@@ -217,7 +224,6 @@ def axis_interpolator(image_array,
     None. (Data is filled in to output_data above).
 
     """
-
     data = np.asarray(image_array)
 
     output_values = np.asarray(output_values)
@@ -238,6 +244,7 @@ def axis_interpolator(image_array,
             output_data[:,output_indices] = fast_sinc((output_values[0] - input_values[0]) / tr, d)
 
     return None
+
 
 def sinc_interp(t, x, window=None):
     """
@@ -266,6 +273,7 @@ def sinc_interp(t, x, window=None):
             d *= window(dmt)
         return np.dot(d, x)
     return f
+
 
 @detrend
 def sinc_interp_detrend(t, x, window=None):
