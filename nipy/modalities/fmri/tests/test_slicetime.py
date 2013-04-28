@@ -2,14 +2,16 @@ import numpy as np
 
 from nipy.modalities.fmri import slice_time
 
-from nipy.core.api import CoordinateMap, Image
-from nipy.modalities.fmri.api import fromimage
+from nipy.core.api import AffineTransform, Image
+from nipy.modalities.fmri.api import FmriImageList
+
+from_image = FmriImageList.from_image
 
 def test_nointerp():
     t = np.linspace(0,1,7)
     Y = np.random.standard_normal(t.shape + (11,4,5))
-    Y = Image(Y, CoordinateMap.identity(['t','z','y','x'], Y.shape))
-    f = fromimage(Y, volume_start_times=t)
+    Y = Image(Y, AffineTransform.identity(['t','z','y','x'], Y.shape))
+    f = from_image(Y, volume_start_times=t)
     f.slice_times = np.zeros(f[0].shape[0])
     f.slice_axis = 0
     ff = slice_time.slice_time(f)
@@ -18,8 +20,8 @@ def test_nointerp():
 def test_nointerp_sinc():
     t = np.linspace(0,1,7)
     Y = np.random.standard_normal(t.shape + (11,4,5))
-    Y = Image(Y, CoordinateMap.identity(['t','z','y','x'], Y.shape))
-    f = fromimage(Y, volume_start_times=t)
+    Y = Image(Y, AffineTransform.identity(['t','z','y','x'], Y.shape))
+    f = from_image(Y, volume_start_times=t)
     f.slice_axis = 0
     f.slice_times = np.zeros(f[0].shape[0])
     ff = slice_time.slice_time(f, interpolator=slice_time.sinc_interp)
@@ -31,8 +33,8 @@ def test_linear():
     # Y is a collection of time-series where
     # f(t,i,j,k) = t/7 + N(i,j,k)
     Y = np.add.outer(np.linspace(0,7,7), np.random.standard_normal((11,4,5)))
-    Y = Image(Y, CoordinateMap.identity(['t','z','y','x'], Y.shape))
-    f = fromimage(Y, volume_start_times=t, slice_times=s)
+    Y = Image(Y, AffineTransform.identity(['t','z','y','x'], Y.shape))
+    f = from_image(Y, volume_start_times=t, slice_times=s)
     f.slice_axis = 0
     ff = slice_time.slice_time(f, bounds_error=False, fill_value=0.)
     # all the points of ff(:,4,:,:) should be shifted back-in-time
@@ -51,8 +53,8 @@ def test_periodic_sincinterp():
     tempo = np.sin(2*np.pi*f0*t)
     vol = np.random.standard_normal((11,4,5))
     Y = np.add.outer(tempo, vol)
-    Y = Image(Y, CoordinateMap.identity(['t', 'z', 'y', 'x'], Y.shape))
-    f = fromimage(Y, volume_start_times=t, slice_times=s)
+    Y = Image(Y, AffineTransform.identity(['t', 'z', 'y', 'x'], Y.shape))
+    f = from_image(Y, volume_start_times=t, slice_times=s)
     f.slice_axis = 0
     ff = slice_time.slice_time(f, interpolator=slice_time.sinc_interp)
 
@@ -81,8 +83,8 @@ def test_detrended_periodic_sincinterp():
     tempo = np.sin(2*np.pi*f0*t)
     vol = np.random.standard_normal((11,4,5))
     Y = np.add.outer(tempo, vol)
-    Y = Image(Y, CoordinateMap.identity(['t', 'z', 'y', 'x'], Y.shape))
-    f = fromimage(Y, volume_start_times=t, slice_times=s)
+    Y = Image(Y, AffineTransform.identity(['t', 'z', 'y', 'x'], Y.shape))
+    f = from_image(Y, volume_start_times=t, slice_times=s)
     f.slice_axis = 0
     ff = slice_time.slice_time(f, interpolator=slice_time.sinc_interp_detrend)
 
@@ -110,8 +112,8 @@ def test_periodic_fastsinc():
     tempo = np.sin(2*np.pi*f0*t)
     vol = np.random.standard_normal((11,4,5))
     Y = np.add.outer(tempo, vol)
-    Y = Image(Y, CoordinateMap.identity(['t', 'z', 'y', 'x'], Y.shape))
-    f = fromimage(Y, volume_start_times=t, slice_times=s)
+    Y = Image(Y, AffineTransform.identity(['t', 'z', 'y', 'x'], Y.shape))
+    f = from_image(Y, volume_start_times=t, slice_times=s)
     f.slice_axis = 0
     ff = slice_time.slice_time(f, interpolator=slice_time.fast_sinc)
 

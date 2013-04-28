@@ -2,11 +2,13 @@
 This module implements some basic slice timing routines.
 """
 
+from copy import copy
+
 import numpy as np
 from scipy.interpolate import interp1d
 from scipy.special.basic import sinc
 
-from fmri import fromimage, FmriImageList
+from .fmri import FmriImageList
 from nipy.core.api import Image
 
 def make_filter(interpolator, input_times, output_times,
@@ -168,7 +170,8 @@ def slice_time(image_list,
     ims = []
 
     for i in range(output_data.shape[0]):
-        ims.append(Image(output_data[i], image_list[i].coordmap.copy()))
+        ims.append(Image(output_data[i],
+                         copy(image_list[i].coordmap)))
 
     return FmriImageList(ims, volume_start_times=image_list.volume_start_times,
                          slice_times=np.zeros(image_list[0].shape[image_list.slice_axis]))
