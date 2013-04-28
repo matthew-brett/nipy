@@ -7,6 +7,10 @@ from nipy.modalities.fmri.api import FmriImageList
 
 from_image = FmriImageList.from_image
 
+from nose.tools import assert_true
+
+from numpy.testing import assert_almost_equal
+
 def test_nointerp():
     t = np.linspace(0,1,7)
     Y = np.random.standard_normal(t.shape + (11,4,5))
@@ -15,7 +19,8 @@ def test_nointerp():
     f.slice_times = np.zeros(f[0].shape[0])
     f.slice_axis = 0
     ff = slice_time.slice_time(f)
-    assert(np.allclose(np.asarray(ff), Y))
+    assert_almost_equal(np.asarray(ff), Y)
+
 
 def test_nointerp_sinc():
     t = np.linspace(0,1,7)
@@ -25,7 +30,8 @@ def test_nointerp_sinc():
     f.slice_axis = 0
     f.slice_times = np.zeros(f[0].shape[0])
     ff = slice_time.slice_time(f, interpolator=slice_time.sinc_interp)
-    assert(np.allclose(np.asarray(ff), Y))
+    assert_almost_equal(np.asarray(ff), Y)
+
 
 def test_linear():
     t = np.linspace(0,7*2.3,7)
@@ -42,7 +48,8 @@ def test_linear():
     # a linear ramp, this shift just moves the intercept back-in-time
     A = np.asarray(ff)[3,4] + s[4]/2.3
     B = np.asarray(Y)[3,4]
-    assert(np.allclose(A, B))
+    assert_almost_equal(A, B)
+
 
 ## import pylab as P
 def test_periodic_sincinterp():
@@ -73,7 +80,7 @@ def test_periodic_sincinterp():
 ##     P.title('normal sinc interp')
 ##     P.show()
 
-    assert err_nrg < 0.01 * sig_nrg
+    assert_true(err_nrg < 0.01 * sig_nrg)
 
 def test_detrended_periodic_sincinterp():
     tr = 2.3
@@ -124,4 +131,4 @@ def test_periodic_fastsinc():
     err_nrg = ((exact_sig - interp_sig)**2).sum()
     sig_nrg = (exact_sig**2).sum()
 
-    assert err_nrg < 0.01 * sig_nrg
+    assert_true(err_nrg < 0.01 * sig_nrg)
