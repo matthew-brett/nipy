@@ -1,30 +1,37 @@
 #!/usr/bin/env python
 # emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
 # vi: set ft=python sts=4 ts=4 sw=4 et:
-''' Tiny script to write 4D file in any format that we write (nifti,
-analyze, at the moment, from input 3d files '''
+DESCRIP = 'Read 3D image files and write a 4D file'
+EPILOG = \
+'''nipy_3dto4d will take a series of 3D nifti images in any format readable by
+nibabel and concatenate them into a 4D image, and write the image with format
+guessed from the output image filename. You can set the filename with the
+``--out-4d`` parameter, or we make a filename from the input names.
+'''
 
 import os
 from os.path import join as pjoin
 
-import nipy.externals.argparse as argparse
-import nipy.io.imageformats as nii
+from nipy.externals.argparse import (ArgumentParser,
+                                     RawDescriptionHelpFormatter)
+
+import nibabel as nib
 
 
 def do_3d_to_4d(filenames, check_affines=True):
     imgs = []
     for fname in filenames:
-        img = nii.load(fname)
+        img = nib.load(fname)
         imgs.append(img)
-    return nii.concat_images(imgs, check_affines=check_affines)
+    return nib.concat_images(imgs, check_affines=check_affines)
 
 
 def main():
-    # create the parser
-    parser = argparse.ArgumentParser()
-    # add the arguments
+    parser = ArgumentParser(description=DESCRIP,
+                            epilog=EPILOG,
+                            formatter_class=RawDescriptionHelpFormatter)
     parser.add_argument('in_filenames', type=str,
-                        nargs='+', 
+                        nargs='+',
                         help='3D image filenames')
     parser.add_argument('--out-4d', type=str,
                         help='4D output image name')
@@ -52,10 +59,8 @@ def main():
             gz = ''
         out_fname = pjoin(pth, froot + '_4d' + ext + gz)
     img4d = do_3d_to_4d(filenames, check_affines=check_affines)
-    nii.save(img4d, out_fname)
-    
+    nib.save(img4d, out_fname)
+
 
 if __name__ == '__main__':
     main()
-
-        

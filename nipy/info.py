@@ -7,9 +7,10 @@ docs.  In setup.py in particular, we exec this file, so it cannot import nipy
 # full release.  '.dev' as a _version_extra string means this is a development
 # version
 _version_major = 0
-_version_minor = 3
+_version_minor = 4
 _version_micro = 0
-_version_extra = '.dev'
+_version_extra = '.dev' # For development
+#_version_extra = '' # For release
 
 # Format expected by setup.py and doc/source/conf.py: string of form "X.Y.Z"
 __version__ = "%s.%s.%s%s" % (_version_major,
@@ -85,14 +86,14 @@ You can find our sources and single-click downloads:
 .. _main repository: http://github.com/nipy/nipy
 .. _Documentation: http://nipy.org/nipy
 .. _current trunk: http://github.com/nipy/nipy/archives/master
-.. _available releases: http://github.com/nipy/nipy/downloads
+.. _available releases: http://pypi.python.org/pypi/nipy
 
 Dependencies
 ============
 
 To run NIPY, you will need:
 
-* python_ >= 2.5.  We don't yet run on python 3, sad to say.
+* python_ >= 2.5 (tested with 2.5, 2.6, 2.7, 3.2, 3.3)
 * numpy_ >= 1.2
 * scipy_ >= 0.7.0
 * sympy_ >= 0.6.6
@@ -138,18 +139,18 @@ MICRO               = _version_micro
 ISRELEASE           = _version_extra == ''
 VERSION             = __version__
 REQUIRES            = ["numpy", "scipy", "sympy"]
-STATUS              = 'alpha'
+STATUS              = 'beta'
 
 # versions
 NUMPY_MIN_VERSION='1.2'
-SCIPY_MIN_VERSION = '0.5'
+SCIPY_MIN_VERSION = '0.7'
 NIBABEL_MIN_VERSION = '1.2'
 SYMPY_MIN_VERSION = '0.6.6'
 MAYAVI_MIN_VERSION = '3.0'
 CYTHON_MIN_VERSION = '0.12.1'
 
 # Versions and locations of optional data packages
-NIPY_DATA_URL= 'http://nipy.sourceforge.net/data-packages/'
+NIPY_DATA_URL= 'http://nipy.org/data-packages/'
 DATA_PKGS = {'nipy-data': {'min version':'0.2',
                            'relpath':'nipy/data'},
              'nipy-templates': {'min version':'0.2',

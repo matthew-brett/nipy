@@ -28,7 +28,7 @@ We first begin by describing typically encountered fMRI designs.
 
 * Continuous stimuli, i.e. a rotating checkerboard
 
-* Events with amplitiudes, i.e. non-categorical values
+* Events with amplitudes, i.e. non-categorical values
 
 * Events with random amplitudes
 
@@ -257,8 +257,11 @@ Thus, the cumulative neuronal model can be expressed as
 .. testcode::
 
    from sympy import Symbol, Heaviside
-   ta = [0,4,8,12,16]; tb = [2,6,10,14,18]
-   ba = Symbol('ba'); bb = Symbol('bb')
+   t = Symbol('t')
+   ta = [0,4,8,12,16]
+   tb = [2,6,10,14,18]
+   ba = Symbol('ba')
+   bb = Symbol('bb')
    fa = sum([Heaviside(t-_t) for _t in ta]) * ba
    fb = sum([Heaviside(t-_t) for _t in tb]) * bb
    N = fa+fb
@@ -272,13 +275,13 @@ the same :math:`f` above), but the different experimental model :math:`E` yields
 
 .. testcode::
 
-   from sympy import Symbol, Heaviside
+   from sympy import Symbol, Piecewise
    ta = [0,4,8,12,16]; tb = [2,6,10,14,18]
-   ba = Symbol('ba'); bb = Symbol('bb')
+   ba = Symbol('ba')
+   bb = Symbol('bb')
    fa = sum([Piecewise((0, (t<_t)), ((t-_t)/0.5, (t<_t+0.5)), (1, (t >= _t+0.5))) for _t in ta])*ba
    fb = sum([Piecewise((0, (t<_t)), ((t-_t)/0.5, (t<_t+0.5)), (1, (t >= _t+0.5))) for _t in tb])*bb
    N = fa+fb
-   print N
 
 Or, graphically, if we set :math:`\beta_a=1` and :math:`\beta_b=-2`, as
 
@@ -318,10 +321,13 @@ terms of delta functions
    t = Symbol('t')
    ba = Symbol('ba')
    fa = sum([Heaviside(t-_t) for _t in ta]) * ba
-   print fa.diff(t)
+   print(fa.diff(t))
+
+.. testoutput::
+
+    ba*(DiracDelta(t) + DiracDelta(t - 16) + DiracDelta(t - 12) + DiracDelta(t - 8) + DiracDelta(t - 4))
 
 .. plot:: users/plots/hrf_delta.py
-
 
 Convolution
 ===========
@@ -440,13 +446,11 @@ group :math:`b`. This yields a hemodynamic model
 .. testcode::
 
    from nipy.modalities.fmri import hrf
-   glover = hrf.glover_sympy
-   afni = hrf.afni_sympy
 
    ta = [0,4,8,12,16]; tb = [2,6,10,14,18]
    ba = 1; bb = -2
-   na = ba * sum([glover(hrf.t - t) for t in ta])
-   nb = bb * sum([afni(hrf.t - t) for t in tb])
+   na = ba * sum([hrf.glover(hrf.T - t) for t in ta])
+   nb = bb * sum([hrf.afni(hrf.T - t) for t in tb])
    n = na + nb
 
 .. plot:: users/plots/hrf_different.py
@@ -460,14 +464,13 @@ HRF yields a hemodynamic model
 
 .. testcode::
 
-   from nipy.modalities.fmri.utils import events, Symbol
-   from nipy.modalities.fmri.hrf import glover_sympy
    import numpy as np
+   from nipy.modalities.fmri.utils import events, Symbol
 
    a = Symbol('a')
    b = np.linspace(0,50,6)
    amp = b*([-1,1]*3)
-   d = events(b, amplitudes=amp, g=a+0.5*a**2, f=glover_sympy)
+   d = events(b, amplitudes=amp, g=a+0.5*a**2, f=hrf.glover)
 
 .. plot:: users/plots/event_amplitude.py
 

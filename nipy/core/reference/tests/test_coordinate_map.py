@@ -1,5 +1,7 @@
 # emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
 # vi: set ft=python sts=4 ts=4 sw=4 et:
+from copy import copy
+
 import numpy as np
 
 # this import line is a little ridiculous...
@@ -718,13 +720,21 @@ def test_axmap():
                                'i': 2, 'j': 0, 'k': 1})
     assert_equal(axmap(cmap, 'out2in'), {2: 0, 0: 1, 1: 2,
                                          'z': 0, 'x': 1, 'y': 2})
+    # Test in presence of nasty zero
     cmap = AffineTransform('ijk', 'xyz', np.diag([2, 3, 0, 1]))
-    assert_equal(axmap(cmap), {0: 0, 1: 1, 2: None,
-                               'i': 0, 'j': 1, 'k': None})
-    assert_equal(axmap(cmap, 'out2in'), {0: 0, 1: 1, 2: None,
-                                         'x': 0, 'y': 1, 'z': None})
+    # Default is to fix zero
+    assert_equal(axmap(cmap), {0: 0, 1: 1, 2: 2,
+                               'i': 0, 'j': 1, 'k': 2})
     assert_equal(axmap(cmap, fix0=True), {0: 0, 1: 1, 2: 2,
                                           'i': 0, 'j': 1, 'k': 2})
+    assert_equal(axmap(cmap, 'out2in'), {0: 0, 1: 1, 2: 2,
+                                         'x': 0, 'y': 1, 'z': 2})
+    # If turned off, we can't find the axis anymore
+    assert_equal(axmap(cmap, fix0=False), {0: 0, 1: 1, 2: None,
+                                           'i': 0, 'j': 1, 'k': None})
+    assert_equal(axmap(cmap, 'out2in', fix0=False), {0: 0, 1: 1, 2: None,
+                                                    'x': 0, 'y': 1, 'z': None})
+    # Need in2out or out2in as action strings
     assert_raises(ValueError, axmap, cmap, 'do what exactly?')
     # Non-square
     cmap = AffineTransform('ij', 'xyz', [[0, 1, 0],
@@ -792,12 +802,13 @@ def test_input_axis_index():
     assert_raises(AxisError, input_axis_index, cmap_b, 'i')
     # Name not found, AxisError
     assert_raises(AxisError, input_axis_index, cmap_b, 'q')
-    # 0 usually leads to no match
+    # 0 leads to no match if fix0 turned off
     cmap_z = AffineTransform('ijk', 'xyz', np.diag([2, 3, 0, 1]))
-    assert_equal(input_axis_index(cmap_z, 'y'), 1)
-    assert_raises(AxisError, input_axis_index, cmap_z, 'z')
-    # Unless fix0 in place
+    assert_equal(input_axis_index(cmap_z, 'z'), 2)
     assert_equal(input_axis_index(cmap_z, 'z', fix0=True), 2)
+    assert_raises(AxisError, input_axis_index, cmap_z, 'z', fix0=False)
+    # Other axes not affected in presence of 0
+    assert_equal(input_axis_index(cmap_z, 'y'), 1)
 
 
 def test_io_axis_indices():
@@ -819,20 +830,30 @@ def test_io_axis_indices():
         assert_equal(io_axis_indices(cmap_m, i), (i, 2-i))
         assert_equal(io_axis_indices(cmap_m, in_name), (i, 2-i))
         assert_equal(io_axis_indices(cmap_m, out_name), (2-i, i))
-    # If they don't match, AxisError
+    # If they don't match, AxisError, if selecting by name
     cmap_b = AffineTransform('ijk', 'xiz', np.eye(4))
-    assert_equal(io_axis_indices(cmap_m, 'j'), (1, 1))
     assert_raises(AxisError, io_axis_indices, cmap_b, 'i')
+    # ... but not if name corresponds
+    assert_equal(io_axis_indices(cmap_b, 'k'), (2, 2))
+    # ... or if input name not found in output
+    assert_equal(io_axis_indices(cmap_b, 'j'), (1, 1))
+    # ... or if selecting by number
+    assert_equal(io_axis_indices(cmap_b, 0), (0, 0))
     # Name not found, AxisError
     assert_raises(AxisError, io_axis_indices, cmap_b, 'q')
-    # 0 usually leads to no match
+    # 0 leads to no match if fix0 set to false
     cmap_z = AffineTransform('ijk', 'xyz', np.diag([2, 3, 0, 1]))
     assert_equal(io_axis_indices(cmap_z, 'y'), (1, 1))
-    assert_equal(io_axis_indices(cmap_z, 'z'), (None, 2))
+    assert_equal(io_axis_indices(cmap_z, 'z'), (2, 2))
+    assert_equal(io_axis_indices(cmap_z, 'z', fix0=False), (None, 2))
     # For either input or output
-    assert_equal(io_axis_indices(cmap_z, 'k'), (2, None))
-    # Unless fix0 in place
-    assert_equal(io_axis_indices(cmap_z, 'z', fix0=True), (2, 2))
+    assert_equal(io_axis_indices(cmap_z, 'k'), (2, 2))
+    assert_equal(io_axis_indices(cmap_z, 'k', fix0=False), (2, None))
+    # axis name and number access without fix0
+    cmap = AffineTransform('ijkt', 'xyzt', np.diag([1, 1, 1, 0, 1]))
+    assert_raises(AxisError, io_axis_indices, cmap, 't', fix0=False)
+    in_ax, out_ax = io_axis_indices(cmap, -1, fix0=False)
+    assert_equal((in_ax, out_ax), (3, None))
     # Non-square is OK
     cmap = AffineTransform('ij', 'xyz', [[0, 1, 0],
                                          [0, 0, 0],
@@ -912,3 +933,123 @@ def test_make_cmap():
                         [0,0,4,0],
                         [0,0,0,1]])
     assert_equal(cmm.make_affine(aff, 4), AffineTransform(dcs, rcs, exp_aff))
+
+
+def test_dtype_cmap_inverses():
+    # Check that we can make functional inverses of AffineTransforms, and
+    # CoordinateMap versions of AffineTransforms
+    dtypes = (np.sctypes['int'] + np.sctypes['uint'] + np.sctypes['float']
+              + np.sctypes['complex'] + [np.object])
+    arr_p1 = np.eye(4)[:, [0, 2, 1, 3]]
+    in_list = [0, 1, 2]
+    out_list = [0, 2, 1]
+    for dt in dtypes:
+        in_cs = CoordinateSystem('ijk', coord_dtype=dt)
+        out_cs = CoordinateSystem('xyz', coord_dtype=dt)
+        cmap = AffineTransform(in_cs, out_cs, arr_p1.astype(dt))
+        coord = np.array(in_list, dtype=dt)
+        out_coord = np.array(out_list, dtype=dt)
+        # Expected output type of inverse, not preserving
+        if dt in np.sctypes['int'] + np.sctypes['uint']:
+            exp_i_dt = np.float64
+        else:
+            exp_i_dt = dt
+        # Default inverse cmap may alter coordinate types
+        r_cmap = cmap.inverse()
+        res = r_cmap(out_coord)
+        assert_array_equal(res, coord)
+        assert_equal(res.dtype, exp_i_dt)
+        # Default behavior is preserve_type=False
+        r_cmap = cmap.inverse(preserve_dtype=False)
+        res = r_cmap(out_coord)
+        assert_array_equal(res, coord)
+        assert_equal(res.dtype, exp_i_dt)
+        # Preserve_dtype=True - preserves dtype
+        r_cmap = cmap.inverse(preserve_dtype=True)
+        res = r_cmap(out_coord)
+        assert_array_equal(res, coord)
+        assert_equal(res.dtype, dt)
+        # Preserve_dtype=True is default for conversion to CoordinateMap
+        cm_cmap = _as_coordinate_map(cmap)
+        assert_array_equal(cm_cmap(coord), out_list)
+        rcm_cmap = cm_cmap.inverse()
+        assert_array_equal(rcm_cmap(coord), out_list)
+        res = rcm_cmap(out_coord)
+        assert_array_equal(res, coord)
+        assert_equal(res.dtype, dt)
+    # For integer types, where there is no integer inverse, return floatey
+    # inverse by default, and None for inverse when preserve_dtype=True
+    arr_p2 = arr_p1 * 2
+    arr_p2[-1, -1] = 1
+    out_list = [0, 4, 2]
+    for dt in np.sctypes['int'] + np.sctypes['uint']:
+        in_cs = CoordinateSystem('ijk', coord_dtype=dt)
+        out_cs = CoordinateSystem('xyz', coord_dtype=dt)
+        cmap = AffineTransform(in_cs, out_cs, arr_p2.astype(dt))
+        coord = np.array(in_list, dtype=dt)
+        out_coord = np.array(out_list, dtype=dt)
+        # Default
+        r_cmap = cmap.inverse()
+        res = r_cmap(out_coord)
+        assert_array_equal(res, coord)
+        assert_equal(res.dtype, np.float64)
+        # Default is preserve_type=False
+        r_cmap = cmap.inverse(preserve_dtype=False)
+        res = r_cmap(out_coord)
+        assert_array_equal(res, coord)
+        assert_equal(res.dtype, np.float64)
+        # preserve_dtype=True means there is no valid inverse for non integer
+        # affine inverses, as here
+        assert_equal(cmap.inverse(preserve_dtype=True), None)
+
+
+def test_subtype_equalities():
+    # Check cmap compare equal if subtypes, on either side
+    in_cs = CoordinateSystem('ijk')
+    out_cs = CoordinateSystem('xyz')
+    f = lambda x : x + 1
+    cmap = CoordinateMap(in_cs, out_cs, f)
+    class CM2(CoordinateMap): pass
+    cmap2 = CM2(in_cs, out_cs, f)
+    assert_equal(cmap, cmap2)
+    assert_equal(cmap2, cmap)
+    cmap = AffineTransform(in_cs, out_cs, np.eye(4))
+    class AT2(AffineTransform): pass
+    cmap2 = AT2(in_cs, out_cs, np.eye(4))
+    assert_equal(cmap, cmap2)
+    assert_equal(cmap2, cmap)
+
+
+def test_cmap_coord_types():
+    # Check that we can use full range of coordinate system types.  The inverse
+    # of an AffineTransform should generate coordinates in the input coordinate
+    # system dtype
+    dtypes = (np.sctypes['int'] + np.sctypes['uint'] + np.sctypes['float']
+              + np.sctypes['complex'] + [np.object])
+    arr_p1 = np.eye(4)
+    arr_p1[:3, 3] = 1
+    for dt in dtypes:
+        in_cs = CoordinateSystem('ijk', coord_dtype=dt)
+        out_cs = CoordinateSystem('xyz', coord_dtype=dt)
+        # CoordinateMap
+        cmap = CoordinateMap(in_cs, out_cs, lambda x : x + 1)
+        assert_equal(cmap, copy(cmap))
+        res = cmap(np.array([0, 1, 2], dtype=dt))
+        assert_array_equal(res, [1, 2, 3])
+        assert_equal(res.dtype, in_cs.coord_dtype)
+        # Check reordering works
+        rcmap = cmap.reordered_domain('ikj').reordered_range('yxz')
+        res = rcmap(np.array([0, 1, 2], dtype=dt))
+        assert_array_equal(res, [3, 1, 2])
+        assert_equal(res.dtype, in_cs.coord_dtype)
+        # AffineTransform
+        cmap = AffineTransform(in_cs, out_cs, arr_p1.astype(dt))
+        res = cmap(np.array([0, 1, 2], dtype=dt))
+        assert_array_equal(res, [1, 2, 3])
+        assert_equal(res.dtype, in_cs.coord_dtype)
+        assert_equal(cmap, copy(cmap))
+        # Check reordering works
+        rcmap = cmap.reordered_domain('ikj').reordered_range('yxz')
+        res = rcmap(np.array([0, 1, 2], dtype=dt))
+        assert_array_equal(res, [3, 1, 2])
+        assert_equal(res.dtype, in_cs.coord_dtype)

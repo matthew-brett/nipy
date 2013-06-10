@@ -32,6 +32,8 @@ Example of fixed effects statistics across two contrasts
 
 import numpy as np
 
+from warnings import warn
+
 import scipy.stats as sps
 
 from nibabel import load, Nifti1Image
@@ -39,6 +41,7 @@ from nibabel import load, Nifti1Image
 from nipy.labs.mask import compute_mask_sessions
 from nipy.algorithms.statistics.models.regression import OLSModel, ARModel
 from nipy.algorithms.statistics.utils import multiple_mahalanobis, z_score
+from nipy.core.api import is_image
 
 from nipy.testing.decorators import skip_doctest_if
 from nipy.utils import HAVE_EXAMPLE_DATA
@@ -415,9 +418,9 @@ class FMRILinearModel(object):
         ----------
         fmri_data : Image or str or sequence of Images / str
             fmri images / paths of the (4D) fmri images
-        design_matricesi : arrays or str or sequence of arrays / str
+        design_matrices : arrays or str or sequence of arrays / str
             design matrix arrays / paths of .npz files
-        mask : str or Image or None
+        mask : str or Image or None, optional
             string can be 'compute' or a path to an image
             image is an input (assumed binary) mask image(s),
             if 'compute', the mask is computed
@@ -450,13 +453,12 @@ class FMRILinearModel(object):
         671
         """
         # manipulate the arguments
-        if not hasattr(fmri_data, '__iter__'):
+        if isinstance(fmri_data, basestring) or hasattr(fmri_data, 'get_data'):
             fmri_data = [fmri_data]
-        if (not hasattr(design_matrices, '__iter__') or
-            type(design_matrices) == np.ndarray):
+        if isinstance(design_matrices, (basestring, np.ndarray)):
             design_matrices = [design_matrices]
         if len(fmri_data) != len(design_matrices):
-            raise ValueError('Incompatible number of fmri runs and'
+            raise ValueError('Incompatible number of fmri runs and '
                              'design matrices were provided')
         self.fmri_data, self.design_matrices = [], []
         self.glms, self.means = [], []
@@ -473,15 +475,15 @@ class FMRILinearModel(object):
         # load the designs
         for design_matrix in design_matrices:
             if isinstance(design_matrix, basestring):
-                self.design_matrices.append(
-                    np.load(design_matrix).items()[0][1])
+                loaded = np.load(design_matrix)
+                self.design_matrices.append(loaded[loaded.files[0]])
             else:
                 self.design_matrices.append(design_matrix)
 
         # load the mask
         if mask == 'compute':
             mask = compute_mask_sessions(
-                fmri_data, m=m, M=M, cc=1, threshold=threshold)
+                fmri_data, m=m, M=M, cc=1, threshold=threshold, opening=0)
             self.mask = Nifti1Image(mask.astype(np.int8), self.affine)
         elif mask == None:
             mask = np.ones(self.fmri_data[0].shape[:3]).astype(np.int8)
@@ -561,8 +563,11 @@ class FMRILinearModel(object):
                 'contrasts must be a sequence of %d session contrasts' %
                 len(self.glms))
 
+        contrast_ = None
         for i, (glm, con) in enumerate(zip(self.glms, contrasts)):
-            if i == 0:
+            if np.all(con == 0):
+                warn('Contrast for session %d is null' % i)
+            elif contrast_ is None:
                 contrast_ = glm.contrast(con, contrast_type)
             else:
                 contrast_ = contrast_ + glm.contrast(con, contrast_type)

@@ -6,13 +6,14 @@ from os.path import join as pjoin
 import numpy as np
 
 from ...core.api import Image, drop_io_dim, append_io_dim
+from ...core.reference.coordinate_map import input_axis_index, AxisError
 from ...io.api import save_image
 from ..utils import pca
 from .timediff import time_slice_diffs
 from .tsdiffplot import plot_tsdiffs
 
 
-def screen(img4d, ncomp=10):
+def screen(img4d, ncomp=10, time_axis='t', slice_axis=None):
     ''' Diagnostic screen for 4d FMRI image
 
     Includes PCA, tsdiffana and mean, std, min, max images.
@@ -23,6 +24,12 @@ def screen(img4d, ncomp=10):
        4d image file
     ncomp : int, optional
        number of component images to return.  Default is 10
+    time_axis : str or int, optional
+        Axis over which to do PCA, time difference analysis. Defaults to `t`
+    slice_axis : None or str or int, optional
+        Name or index of input axis over which to do slice analysis for time
+        difference analysis.  If None, look for input axis ``slice``, otherwise,
+        assume slice is the last non-time axis.
 
     Returns
     -------
@@ -52,23 +59,36 @@ def screen(img4d, ncomp=10):
         raise ValueError('Expecting a 4d image')
     data = img4d.get_data()
     cmap = img4d.coordmap
+    # Get numerical index for time axis in data array
+    time_axis = input_axis_index(cmap, time_axis)
+    # Get numerical index for slice axis in data array
+    if slice_axis is None:
+        try:
+            slice_axis = input_axis_index(cmap, 'slice')
+        except AxisError:
+            slice_axis = 2 if time_axis == 3 else 3
+    else:
+        slice_axis = input_axis_index(cmap, slice_axis)
+    # 3D coordinate map for summary images
     cmap_3d = drop_io_dim(cmap, 't')
     screen_res = {}
     # standard processed images
-    screen_res['mean'] = Image(np.mean(data, axis=-1), cmap_3d)
-    screen_res['std'] = Image(np.std(data, axis=-1), cmap_3d)
-    screen_res['max'] = Image(np.max(data, axis=-1), cmap_3d)
-    screen_res['min'] = Image(np.min(data, axis=-1), cmap_3d)
+    screen_res['mean'] = Image(np.mean(data, axis=time_axis), cmap_3d)
+    screen_res['std'] = Image(np.std(data, axis=time_axis), cmap_3d)
+    screen_res['max'] = Image(np.max(data, axis=time_axis), cmap_3d)
+    screen_res['min'] = Image(np.min(data, axis=time_axis), cmap_3d)
     # PCA
     screen_res['pca_res'] = pca.pca(data,
-                                    axis=-1,
+                                    axis=time_axis,
                                     standardize=False,
                                     ncomp=ncomp)
     cmap_4d = append_io_dim(cmap_3d, 'l' , 't')
     screen_res['pca'] = Image(screen_res['pca_res']['basis_projections'],
                               cmap_4d)
     # tsdiffana
-    screen_res['ts_res'] = time_slice_diffs(data)
+    screen_res['ts_res'] = time_slice_diffs(data,
+                                            time_axis=time_axis,
+                                            slice_axis=slice_axis)
     return screen_res
 
 
@@ -76,7 +96,7 @@ def write_screen_res(res, out_path, out_root,
                      out_img_ext='.nii',
                      pcnt_var_thresh=0.1):
     ''' Write results from ``screen`` to disk as images
-    
+
     Parameters
     ----------
     res : dict
@@ -105,9 +125,16 @@ def write_screen_res(res, out_path, out_root,
                                              out_root,
                                              out_img_ext))
         save_image(res[key], fname)
-    # plot, save component time courses
+    # plot, save component time courses and some tsdiffana stuff
     ncomp = res['pca'].shape[-1]
     vectors = res['pca_res']['basis_vectors']
+    pcnt_var = res['pca_res']['pcnt_var']
+    np.savez(pjoin(out_path, 'vectors_components_%s.npz' % out_root),
+             basis_vectors=vectors,
+             pcnt_var=pcnt_var,
+             volume_means=res['ts_res']['volume_means'],
+             slice_mean_diff2=res['ts_res']['slice_mean_diff2'],
+            )
     plt.figure()
     for c in range(ncomp):
         plt.subplot(ncomp, 1, c+1)
@@ -117,7 +144,6 @@ def write_screen_res(res, out_path, out_root,
     plt.savefig(pjoin(out_path, 'components_%s.png' % out_root))
     # plot percent variance
     plt.figure()
-    pcnt_var = res['pca_res']['pcnt_var']
     plt.plot(pcnt_var[pcnt_var >= pcnt_var_thresh])
     plt.axis('tight')
     plt.suptitle(out_root + ': PCA percent variance')

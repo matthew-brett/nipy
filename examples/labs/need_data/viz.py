@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
 # vi: set ft=python sts=4 ts=4 sw=4 et:
-"""
-Example of activation image vizualization with nipy.labs vizualization tools
+from __future__ import print_function # Python 2/3 compatibility
+__doc__ = """
+Example of activation image visualization with nipy.labs visualization tools
 
 Needs *example data* package.
 
 Needs matplotlib
 """
-print __doc__
+print(__doc__)
 
 import os.path
 
@@ -43,22 +44,22 @@ try:
                                               'nobias_anubis.nii.gz'))
     anat = anat_img.get_data()
     anat_affine = anat_img.get_affine()
-except OSError, e:
+except OSError as e:
     # File does not exist: the data package is not installed
-    print e
+    print(e)
     anat = None
     anat_affine = None
 
 viz.plot_map(data, affine, anat=anat, anat_affine=anat_affine,
-             slicer='z', threshold=2, cmap=viz.cm.cold_hot)
+             slicer='z', threshold=2, cmap=viz.cm.cold_hot, black_bg=True)
 plt.savefig('z_view.png')
 
 viz.plot_map(data, affine, anat=anat, anat_affine=anat_affine,
-             slicer='x', threshold=2, cmap=viz.cm.cold_hot)
+             slicer='x', threshold=2, cmap=viz.cm.cold_hot, black_bg=True)
 plt.savefig('x_view.png')
 
 viz.plot_map(data, affine, anat=anat, anat_affine=anat_affine,
-             slicer='y', threshold=2, cmap=viz.cm.cold_hot)
+             slicer='y', threshold=2, cmap=viz.cm.cold_hot, black_bg=True)
 plt.savefig('y_view.png')
 
 plt.show()

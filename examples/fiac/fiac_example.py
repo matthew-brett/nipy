@@ -19,6 +19,7 @@ to some of these analyses.
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
+from __future__ import print_function # Python 2/3 compatibility
 
 # Stdlib
 from tempfile import NamedTemporaryFile
@@ -181,7 +182,7 @@ def run_model(subj, run):
     # Load in the fMRI data, saving it as an array.  It is transposed to have
     # time as the first dimension, i.e. fmri[t] gives the t-th volume.
     fmri_im = futil.get_fmri(path_info) # an Image
-    fmri_im = rollimg(fmri_im, 't', fix0=True)
+    fmri_im = rollimg(fmri_im, 't')
     fmri = fmri_im.get_data() # now, it's an ndarray
 
     nvol, volshape = fmri.shape[0], fmri.shape[1:]
@@ -488,7 +489,7 @@ def run_run_models(subject_nos=SUBJECTS, run_nos = RUNS):
             try:
                 run_model(subj, run)
             except IOError:
-                print 'Skipping subject %d, run %d' % (subj, run)
+                print('Skipping subject %d, run %d' % (subj, run))
 
 
 def run_fixed_models(subject_nos=SUBJECTS, designs=DESIGNS):
@@ -498,7 +499,7 @@ def run_fixed_models(subject_nos=SUBJECTS, designs=DESIGNS):
             try:
                 fixed_effects(subj, design)
             except IOError:
-                print 'Skipping subject %d, design %s' % (subj, design)
+                print('Skipping subject %d, design %s' % (subj, design))
 
 
 def run_group_models(designs=DESIGNS, contrasts=CONTRASTS):

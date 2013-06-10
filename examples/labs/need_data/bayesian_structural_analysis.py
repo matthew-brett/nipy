@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
 # vi: set ft=python sts=4 ts=4 sw=4 et:
-"""
+from __future__ import print_function # Python 2/3 compatibility
+__doc__ = """
 Example of a script that uses the BSA (Bayesian Structural Analysis) i.e.
 nipy.labs.spatial_models.bayesian_structural_analysis module.
 
-Author : Bertrand Thirion, 2008-2010
+Author : Bertrand Thirion, 2008-2013
 """
-print __doc__
+print(__doc__)
 
 #autoindent
 from os import mkdir, getcwd, path
-import pickle
 
 from numpy import array
 from scipy import stats
@@ -38,27 +38,22 @@ if missing_file:
 
 # set various parameters
 subj_id = ['%04d' % i for i in range(12)]
-theta = float(stats.t.isf(0.01, 100))
-dmax = 4.
-ths = 0
-thq = 0.95
-verbose = 1
+threshold = float(stats.t.isf(0.01, 100))
+sigma = 4.
+prevalence_threshold = 2
+prevalence_pval = 0.95
 smin = 5
 write_dir = path.join(getcwd(), 'results')
 if not path.exists(write_dir):
     mkdir(write_dir)
-method = 'quick'
-print 'method used:', method
+
+algorithm = 'density'
+print('algorithm used:', algorithm)
 
 # call the function
-AF, BF = make_bsa_image(mask_images, betas, theta, dmax, ths, thq, smin,
-                        write_dir, method, subj_id, '%04d' % nbeta,
-                        reshuffle=False)
+landmarks, individual_rois = make_bsa_image(
+    mask_images, betas, threshold, smin, sigma, prevalence_threshold, 
+    prevalence_pval, write_dir,  algorithm=algorithm,
+    contrast_id='%04d' % nbeta)
 
-# Write the result. OK, this is only a temporary solution
-picname = path.join(write_dir, "AF_%04d.pic" % nbeta)
-pickle.dump(AF, open(picname, 'w'), 2)
-picname = path.join(write_dir, "BF_%04d.pic" % nbeta)
-pickle.dump(BF, open(picname, 'w'), 2)
-
-print "Wrote all the results in directory %s" % write_dir
+print("Wrote all the results in directory %s" % write_dir)
