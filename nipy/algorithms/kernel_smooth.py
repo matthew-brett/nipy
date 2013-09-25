@@ -28,7 +28,9 @@ class LinearFilter(object):
         Parameters
         ----------
         coordmap : ``CoordinateMap``
+            Coordinate map for axes over which we will do the smoothing
         shape : sequence
+            shape of axes over which we will do the smoothing
         fwhm : float, optional
            fwhm for Gaussian kernel, default is 6.0
         scale : float, optional
@@ -122,17 +124,21 @@ class LinearFilter(object):
         t = np.less_equal(_normsq, 15)
         return np.exp(-np.minimum(_normsq, 15)) * t
 
-    def smooth(self, inimage, clean=False, is_fft=False):
+    def smooth(self, inimage, clean=False, is_fft=False, axis=None):
         """ Apply smoothing to `inimage`
 
         Parameters
         ----------
         inimage : ``Image``
-           The image to be smoothed.  Should be 3D.
+           The image to be smoothed.  Should be 3D or 4D
         clean : bool, optional
            Should we call ``nan_to_num`` on the data before smoothing?
         is_fft : bool, optional
            Has the data already been fft'd?
+        axis : None or int, optional
+            Volume axis.  If None, and `inimage` is 3D, there is no volume axis.
+            If None and `inimage` is 4D, try to infer volume axis from
+            `inimage.coordmap`, raising an error on failure
 
         Returns
         -------
