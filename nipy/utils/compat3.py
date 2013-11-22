@@ -13,8 +13,10 @@ if py3:
         if isinstance(s, bytes):
             return s.decode('latin1')
         return str(s)
+    string_types = str,
 else:
     to_str = str
+    string_types = basestring,
 
 
 def open4csv(fname, mode):

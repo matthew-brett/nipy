@@ -3,3 +3,4 @@
 # init for externals package
 from . import argparse
 from . import configobj
+from . import sh
