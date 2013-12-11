@@ -86,6 +86,14 @@ def as_filename(img):
     return fobj.name
 
 
+def make_prefixer(prefix):
+    """ Make a function that prepends `prefix` to input filename """
+    def add_prefix(fname):
+        pth, fname = psplit(fname)
+        return pjoin(pth, prefix + fname)
+    return add_prefix
+
+
 class N4BiasFieldCorrection(object):
     """ Class to make callable interface to N4BiasCorrection from ANTS
 
@@ -112,7 +120,7 @@ class N4BiasFieldCorrection(object):
                  convergence=((50, 50, 50, 50), 0.000001),
                  bspline_fitting=(200, 3),
                  histogram_sharpening=(0.15,0.01,200),
-                 prefix='repaired_',
+                 pathmaker=make_prefixer('repaired_')
                 ):
         self.image_dimensionality=image_dimensionality
         self.shrink_factor=shrink_factor
@@ -121,7 +129,7 @@ class N4BiasFieldCorrection(object):
         self.convergence=convergence
         self.bspline_fitting=bspline_fitting
         self.histogram_sharpening=histogram_sharpening
-        self.prefix=prefix
+        self.pathmaker=pathmaker
         self._cmd = sh.Command(pjoin(get_antspath(), 'N4BiasFieldCorrection'))
 
     def _process_kwargs(self):
@@ -151,7 +159,8 @@ class N4BiasFieldCorrection(object):
     def __call__(self, input, out_fname=None):
         in_fname = as_filename(input)
         if out_fname is None:
-            pth, fname = psplit(in_fname)
-            out_fname = pjoin(pth, self.prefix + fname)
+            out_fname = self.pathmaker
+        if hasattr(out_fname, '__call__'):
+            out_fname = out_fname(in_fname)
         self._cmd(i=in_fname, o=out_fname, **self._process_kwargs())
         return load_image(out_fname)
