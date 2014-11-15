@@ -135,7 +135,8 @@ def write_screen_res(res, out_path, out_root,
                                              out_img_ext))
         save_image(res[key], fname)
     # plot, save component time courses and some tsdiffana stuff
-    ncomp = res['pca_res']['axis']
+    axis = res['pca_res']['axis']
+    ncomp = res['pca_res']['basis_projections'].shape[axis]
     vectors = res['pca_res']['basis_vectors']
     pcnt_var = res['pca_res']['pcnt_var']
     np.savez(pjoin(out_path, 'vectors_components_%s.npz' % out_root),

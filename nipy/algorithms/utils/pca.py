@@ -164,8 +164,8 @@ def pca(data, axis=0, mask=None, ncomp=None, standardize=True,
     rank = (SX/SX.max() > tol_ratio).sum()
     UX = UX[:,:rank].T
     # calculate covariance matrix in full-rank column space.  The returned
-    # array is roughly: YX = dot(UX, data); C = dot(YX, YX.T), perhaps where the
-    # data has been standarized, perhaps summed over slices
+    # array is roughly: YX = dot(UX, data); C = dot(YX, YX.T), perhaps where
+    # the data has been standarized, perhaps summed over slices
     C_full_rank  = _get_covariance(data, UX, rmse_scales_func, mask)
     # find the eigenvalues D and eigenvectors Vs of the covariance
     # matrix
