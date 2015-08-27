@@ -1,0 +1,570 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="API" href="../index.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">labs.datasets.volumes.volume_img</a><ul>
+<li><a class="reference internal" href="#module-labs-datasets-volumes-volume-img">Module: <code class="docutils literal"><span class="pre">labs.datasets.volumes.volume_img</span></code></a></li>
+<li><a class="reference internal" href="#volumeimg"><code class="docutils literal"><span class="pre">VolumeImg</span></code></a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/generated/nipy.labs.datasets.volumes.volume_img.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="labs-datasets-volumes-volume-img">
+<h1>labs.datasets.volumes.volume_img<a class="headerlink" href="#labs-datasets-volumes-volume-img" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-labs-datasets-volumes-volume-img">
+<h2>Module: <code class="xref py py-mod docutils literal"><span class="pre">labs.datasets.volumes.volume_img</span></code><a class="headerlink" href="#module-labs-datasets-volumes-volume-img" title="Permalink to this headline">¶</a></h2>
+<p>Inheritance diagram for <code class="docutils literal"><span class="pre">nipy.labs.datasets.volumes.volume_img</span></code>:</p>
+<p class="graphviz">
+<img src="../../_images/inheritance-ea116e078fa1342e7210b91c039b904eb4d25a5a.png" alt="Inheritance diagram of nipy.labs.datasets.volumes.volume_img" usemap="#inheritance61209169ab" class="inheritance"/>
+<map id="inheritance61209169ab" name="inheritance61209169ab">
+<area shape="rect" id="node1" href="nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData" title="A class representing data embedded in a 3D space " alt="" coords="205,4,372,22"/>
+<area shape="rect" id="node3" href="nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid" title="A class representing data stored in a 3+D array embedded in a 3D" alt="" coords="405,4,570,22"/>
+<area shape="rect" id="node2" href="nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField" title="The base volumetric structure." alt="" coords="4,4,172,22"/>
+<area shape="rect" id="node4" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg" title="A regularly&#45;spaced image for embedding data in an x, y, z 3D" alt="" coords="603,4,764,22"/>
+</map>
+</p>
+<span class="target" id="module-nipy.labs.datasets.volumes.volume_img"></span><p>An image that stores the data as an (x, y, z, ...) array, with an
+affine mapping to the world space</p>
+</div>
+<div class="section" id="volumeimg">
+<h2><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg" title="nipy.labs.datasets.volumes.volume_img.VolumeImg"><code class="xref py py-class docutils literal"><span class="pre">VolumeImg</span></code></a><a class="headerlink" href="#volumeimg" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg">
+<em class="property">class </em><code class="descclassname">nipy.labs.datasets.volumes.volume_img.</code><code class="descname">VolumeImg</code><span class="sig-paren">(</span><em>data</em>, <em>affine</em>, <em>world_space</em>, <em>metadata=None</em>, <em>interpolation='continuous'</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid" title="nipy.labs.datasets.volumes.volume_grid.VolumeGrid"><code class="xref py py-class docutils literal"><span class="pre">nipy.labs.datasets.volumes.volume_grid.VolumeGrid</span></code></a></p>
+<p>A regularly-spaced image for embedding data in an x, y, z 3D
+world, for neuroimaging.</p>
+<p>This object is an ndarray representing a volume, with the first 3
+dimensions being spatial, and mapped to a named world space using
+an affine (4x4 matrix).</p>
+<p class="rubric">Notes</p>
+<p>The data is stored in an undefined way: prescalings might need to
+be applied to it before using it, or the data might be loaded on
+demand. The best practice to access the data is not to access the
+_data attribute, but to use the <cite>get_data</cite> method.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.affine" title="nipy.labs.datasets.volumes.volume_img.VolumeImg.affine"><code class="xref py py-obj docutils literal"><span class="pre">affine</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.world_space" title="nipy.labs.datasets.volumes.volume_img.VolumeImg.world_space"><code class="xref py py-obj docutils literal"><span class="pre">world_space</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.metadata" title="nipy.labs.datasets.volumes.volume_img.VolumeImg.metadata"><code class="xref py py-obj docutils literal"><span class="pre">metadata</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.interpolation" title="nipy.labs.datasets.volumes.volume_img.VolumeImg.interpolation"><code class="xref py py-obj docutils literal"><span class="pre">interpolation</span></code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>_data :</td>
+<td>Private pointer to the data.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.as_volume_img" title="nipy.labs.datasets.volumes.volume_img.VolumeImg.as_volume_img"><code class="xref py py-obj docutils literal"><span class="pre">as_volume_img</span></code></a>([affine,&nbsp;shape,&nbsp;...])</td>
+<td>Resample the image to be an image with the data points lying on a regular grid with an affine mapping to the word space (a nipy VolumeImg).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.get_affine" title="nipy.labs.datasets.volumes.volume_img.VolumeImg.get_affine"><code class="xref py py-obj docutils literal"><span class="pre">get_affine</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.get_transform" title="nipy.labs.datasets.volumes.volume_img.VolumeImg.get_transform"><code class="xref py py-obj docutils literal"><span class="pre">get_transform</span></code></a>()</td>
+<td>Returns the transform object associated with the volumetric structure which is a general description of the mapping from  the values to the world space.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.like_from_data" title="nipy.labs.datasets.volumes.volume_img.VolumeImg.like_from_data"><code class="xref py py-obj docutils literal"><span class="pre">like_from_data</span></code></a>(data)</td>
+<td>Returns an volumetric data structure with the same relationship between data and world space, and same metadata,  but different data.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.resampled_to_img" title="nipy.labs.datasets.volumes.volume_img.VolumeImg.resampled_to_img"><code class="xref py py-obj docutils literal"><span class="pre">resampled_to_img</span></code></a>(target_image[,&nbsp;interpolation])</td>
+<td>Resample the data to be on the same voxel grid than the target  volume structure.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.xyz_ordered" title="nipy.labs.datasets.volumes.volume_img.VolumeImg.xyz_ordered"><code class="xref py py-obj docutils literal"><span class="pre">xyz_ordered</span></code></a>([resample,&nbsp;copy])</td>
+<td>Returns an image with the affine diagonal and positive in the world space it is embedded in.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data</em>, <em>affine</em>, <em>world_space</em>, <em>metadata=None</em>, <em>interpolation='continuous'</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new neuroimaging image with an affine mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : ndarray</p>
+<blockquote>
+<div><p>ndarray representing the data.</p>
+</div></blockquote>
+<p><strong>affine</strong> : 4x4 ndarray</p>
+<blockquote>
+<div><p>affine transformation to the reference world space</p>
+</div></blockquote>
+<p><strong>world_space</strong> : string</p>
+<blockquote>
+<div><p>name of the reference world space.</p>
+</div></blockquote>
+<p><strong>metadata</strong> : dictionnary</p>
+<blockquote class="last">
+<div><p>dictionnary of user-specified information to store with
+the image.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.affine">
+<code class="descname">affine</code><em class="property"> = array([[ 1.,  0.,  0.,  0.],        [ 0.,  1.,  0.,  0.],        [ 0.,  0.,  1.,  0.],        [ 0.,  0.,  0.,  1.]])</em><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.affine" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.as_volume_img">
+<code class="descname">as_volume_img</code><span class="sig-paren">(</span><em>affine=None</em>, <em>shape=None</em>, <em>interpolation=None</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.as_volume_img" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resample the image to be an image with the data points lying
+on a regular grid with an affine mapping to the word space (a
+nipy VolumeImg).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>affine: 4x4 or 3x3 ndarray, optional</strong> :</p>
+<blockquote>
+<div><p>Affine of the new voxel grid or transform object pointing
+to the new voxel coordinate grid. If a 3x3 ndarray is given, 
+it is considered to be the rotation part of the affine, 
+and the best possible bounding box is calculated,
+in this case, the shape argument is not used. If None
+is given, a default affine is provided by the image.</p>
+</div></blockquote>
+<p><strong>shape: (n_x, n_y, n_z), tuple of integers, optional</strong> :</p>
+<blockquote>
+<div><p>The shape of the grid used for sampling, if None
+is given, a default affine is provided by the image.</p>
+</div></blockquote>
+<p><strong>interpolation</strong> : None, &#8216;continuous&#8217; or &#8216;nearest&#8217;, optional</p>
+<blockquote>
+<div><p>Interpolation type used when calculating values in
+different word spaces. If None, the image&#8217;s interpolation
+logic is used.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>resampled_image</strong> : nipy VolumeImg</p>
+<blockquote class="last">
+<div><p>New nipy VolumeImg with the data sampled on the grid
+defined by the affine and shape.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The coordinate system of the image is not changed: the
+returned image points to the same world space.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.composed_with_transform">
+<code class="descname">composed_with_transform</code><span class="sig-paren">(</span><em>w2w_transform</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.composed_with_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new image embedding the same data in a different 
+word space using the given world to world transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>w2w_transform</strong> : transform object</p>
+<blockquote>
+<div><p>The transform object giving the mapping between
+the current world space of the image, and the new
+word space.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>remapped_image</strong> : nipy image</p>
+<blockquote class="last">
+<div><p>An image containing the same data, expressed
+in the new world space.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.get_affine">
+<code class="descname">get_affine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.get_affine" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return data as a numpy array.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.get_transform">
+<code class="descname">get_transform</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.get_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the transform object associated with the volumetric
+structure which is a general description of the mapping from 
+the values to the world space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>transform</strong> : nipy.datasets.Transform object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.get_world_coords">
+<code class="descname">get_world_coords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.get_world_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the data points coordinates in the world
+space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>x: ndarray</strong> :</p>
+<blockquote>
+<div><p>x coordinates of the data points in world space</p>
+</div></blockquote>
+<p><strong>y: ndarray</strong> :</p>
+<blockquote>
+<div><p>y coordinates of the data points in world space</p>
+</div></blockquote>
+<p><strong>z: ndarray</strong> :</p>
+<blockquote class="last">
+<div><p>z coordinates of the data points in world space</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.interpolation">
+<code class="descname">interpolation</code><em class="property"> = 'continuous'</em><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.interpolation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.like_from_data">
+<code class="descname">like_from_data</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.like_from_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an volumetric data structure with the same
+relationship between data and world space, and same metadata, 
+but different data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data: ndarray</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.metadata">
+<code class="descname">metadata</code><em class="property"> = {}</em><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.resampled_to_img">
+<code class="descname">resampled_to_img</code><span class="sig-paren">(</span><em>target_image</em>, <em>interpolation=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.resampled_to_img" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resample the data to be on the same voxel grid than the target 
+volume structure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>target_image</strong> : nipy image</p>
+<blockquote>
+<div><p>Nipy image onto the voxel grid of which the data will be
+resampled. This can be any kind of img understood by Nipy
+(datasets, pynifti objects, nibabel object) or a string
+giving the path to a nifti of analyse image.</p>
+</div></blockquote>
+<p><strong>interpolation</strong> : None, &#8216;continuous&#8217; or &#8216;nearest&#8217;, optional</p>
+<blockquote>
+<div><p>Interpolation type used when calculating values in
+different word spaces. If None, the image&#8217;s interpolation
+logic is used.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>resampled_image</strong> : nipy_image</p>
+<blockquote class="last">
+<div><p>New nipy image with the data resampled.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Both the target image and the original image should be
+embedded in the same world space.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.values_in_world">
+<code class="descname">values_in_world</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>interpolation=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.values_in_world" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the values of the data at the world-space positions given by 
+x, y, z</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : number or ndarray</p>
+<blockquote>
+<div><p>x positions in world space, in other words milimeters</p>
+</div></blockquote>
+<p><strong>y</strong> : number or ndarray</p>
+<blockquote>
+<div><p>y positions in world space, in other words milimeters.
+The shape of y should match the shape of x</p>
+</div></blockquote>
+<p><strong>z</strong> : number or ndarray</p>
+<blockquote>
+<div><p>z positions in world space, in other words milimeters.
+The shape of z should match the shape of x</p>
+</div></blockquote>
+<p><strong>interpolation</strong> : None, &#8216;continuous&#8217; or &#8216;nearest&#8217;, optional</p>
+<blockquote>
+<div><p>Interpolation type used when calculating values in
+different word spaces. If None, the image&#8217;s interpolation
+logic is used.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>values</strong> : number or ndarray</p>
+<blockquote class="last">
+<div><p>Data values interpolated at the given world position.
+This is a number or an ndarray, depending on the shape of
+the input coordinate.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.world_space">
+<code class="descname">world_space</code><em class="property"> = ''</em><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.world_space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.volumes.volume_img.VolumeImg.xyz_ordered">
+<code class="descname">xyz_ordered</code><span class="sig-paren">(</span><em>resample=False</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.volumes.volume_img.VolumeImg.xyz_ordered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an image with the affine diagonal and positive
+in the world space it is embedded in.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>resample: boolean, optional</strong> :</p>
+<blockquote>
+<div><p>If resample is False, no resampling is performed, the
+axis are only permuted. If it is impossible
+to get xyz ordering by permuting the axis, a
+&#8216;CompositionError&#8217; is raised.</p>
+</div></blockquote>
+<p><strong>copy: boolean, optional</strong> :</p>
+<blockquote class="last">
+<div><p>If copy is True, a deep copy of the image (including the
+data) is made.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

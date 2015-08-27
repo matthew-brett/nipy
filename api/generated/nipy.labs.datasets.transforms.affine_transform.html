@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="API" href="../index.html" />
+    <link rel="prev" title="labs.datasets.converters" href="nipy.labs.datasets.converters.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.labs.datasets.converters.html" title="labs.datasets.converters"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">labs.datasets.transforms.affine_transform</a><ul>
+<li><a class="reference internal" href="#module-labs-datasets-transforms-affine-transform">Module: <code class="docutils literal"><span class="pre">labs.datasets.transforms.affine_transform</span></code></a></li>
+<li><a class="reference internal" href="#affinetransform"><code class="docutils literal"><span class="pre">AffineTransform</span></code></a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nipy.labs.datasets.converters.html"
+                        title="previous chapter">labs.datasets.converters</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/generated/nipy.labs.datasets.transforms.affine_transform.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="labs-datasets-transforms-affine-transform">
+<h1>labs.datasets.transforms.affine_transform<a class="headerlink" href="#labs-datasets-transforms-affine-transform" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-labs-datasets-transforms-affine-transform">
+<h2>Module: <code class="xref py py-mod docutils literal"><span class="pre">labs.datasets.transforms.affine_transform</span></code><a class="headerlink" href="#module-labs-datasets-transforms-affine-transform" title="Permalink to this headline">¶</a></h2>
+<p>Inheritance diagram for <code class="docutils literal"><span class="pre">nipy.labs.datasets.transforms.affine_transform</span></code>:</p>
+<p class="graphviz">
+<img src="../../_images/inheritance-c274a18f36734a322495aaea9aaeccc30debd5b0.png" alt="Inheritance diagram of nipy.labs.datasets.transforms.affine_transform" usemap="#inheritance9f44365024" class="inheritance"/>
+<map id="inheritance9f44365024" name="inheritance9f44365024">
+<area shape="rect" id="node1" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform" title="A transformation from an input 3D space to an output 3D space defined" alt="" coords="282,5,590,32"/>
+<area shape="rect" id="node2" href="nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.Transform" title="A transform is a representation of a transformation from one 3D space to" alt="" coords="5,5,234,32"/>
+</map>
+</p>
+<span class="target" id="module-nipy.labs.datasets.transforms.affine_transform"></span><p>The AffineTransform class</p>
+</div>
+<div class="section" id="affinetransform">
+<h2><a class="reference internal" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform" title="nipy.labs.datasets.transforms.affine_transform.AffineTransform"><code class="xref py py-class docutils literal"><span class="pre">AffineTransform</span></code></a><a class="headerlink" href="#affinetransform" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="nipy.labs.datasets.transforms.affine_transform.AffineTransform">
+<em class="property">class </em><code class="descclassname">nipy.labs.datasets.transforms.affine_transform.</code><code class="descname">AffineTransform</code><span class="sig-paren">(</span><em>input_space</em>, <em>output_space</em>, <em>affine</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.Transform" title="nipy.labs.datasets.transforms.transform.Transform"><code class="xref py py-class docutils literal"><span class="pre">nipy.labs.datasets.transforms.transform.Transform</span></code></a></p>
+<p>A transformation from an input 3D space to an output 3D space defined
+by an affine matrix.</p>
+<p>It is defined by the affine matrix , and the name of the input and output 
+spaces.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.affine" title="nipy.labs.datasets.transforms.affine_transform.AffineTransform.affine"><code class="xref py py-obj docutils literal"><span class="pre">affine</span></code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.composed_with" title="nipy.labs.datasets.transforms.affine_transform.AffineTransform.composed_with"><code class="xref py py-obj docutils literal"><span class="pre">composed_with</span></code></a>(transform)</td>
+<td>Returns a new transform obtained by composing this transform with the one provided.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.get_inverse" title="nipy.labs.datasets.transforms.affine_transform.AffineTransform.get_inverse"><code class="xref py py-obj docutils literal"><span class="pre">get_inverse</span></code></a>()</td>
+<td>Return the inverse transform.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.inverse_mapping" title="nipy.labs.datasets.transforms.affine_transform.AffineTransform.inverse_mapping"><code class="xref py py-obj docutils literal"><span class="pre">inverse_mapping</span></code></a>(x,&nbsp;y,&nbsp;z)</td>
+<td>Transform the given coordinate from output space to input space.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.mapping" title="nipy.labs.datasets.transforms.affine_transform.AffineTransform.mapping"><code class="xref py py-obj docutils literal"><span class="pre">mapping</span></code></a>(x,&nbsp;y,&nbsp;z)</td>
+<td>Transform the given coordinate from input space to output space.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nipy.labs.datasets.transforms.affine_transform.AffineTransform.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>input_space</em>, <em>output_space</em>, <em>affine</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new affine transform object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>input_space: string</strong> :</p>
+<blockquote>
+<div><p>Name of the input space</p>
+</div></blockquote>
+<p><strong>output_space: string</strong> :</p>
+<blockquote>
+<div><p>Name of the output space</p>
+</div></blockquote>
+<p><strong>affine: 4x4 ndarray</strong> :</p>
+<blockquote class="last">
+<div><p>Affine matrix giving the coordinate mapping between the 
+input and output space.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.labs.datasets.transforms.affine_transform.AffineTransform.affine">
+<code class="descname">affine</code><em class="property"> = None</em><a class="headerlink" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.affine" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.transforms.affine_transform.AffineTransform.composed_with">
+<code class="descname">composed_with</code><span class="sig-paren">(</span><em>transform</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.composed_with" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new transform obtained by composing this transform
+with the one provided.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transform: nipy.core.transforms.transform object</strong> :</p>
+<blockquote class="last">
+<div><p>The transform to compose with.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.transforms.affine_transform.AffineTransform.get_inverse">
+<code class="descname">get_inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.get_inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the inverse transform.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.labs.datasets.transforms.affine_transform.AffineTransform.input_space">
+<code class="descname">input_space</code><em class="property"> = ''</em><a class="headerlink" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.input_space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.transforms.affine_transform.AffineTransform.inverse_mapping">
+<code class="descname">inverse_mapping</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.inverse_mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the given coordinate from output space to input space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x: number or ndarray</strong> :</p>
+<blockquote>
+<div><p>The x coordinates</p>
+</div></blockquote>
+<p><strong>y: number or ndarray</strong> :</p>
+<blockquote>
+<div><p>The y coordinates</p>
+</div></blockquote>
+<p><strong>z: number or ndarray</strong> :</p>
+<blockquote class="last">
+<div><p>The z coordinates</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.datasets.transforms.affine_transform.AffineTransform.mapping">
+<code class="descname">mapping</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the given coordinate from input space to output space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x: number or ndarray</strong> :</p>
+<blockquote>
+<div><p>The x coordinates</p>
+</div></blockquote>
+<p><strong>y: number or ndarray</strong> :</p>
+<blockquote>
+<div><p>The y coordinates</p>
+</div></blockquote>
+<p><strong>z: number or ndarray</strong> :</p>
+<blockquote class="last">
+<div><p>The z coordinates</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.labs.datasets.transforms.affine_transform.AffineTransform.output_space">
+<code class="descname">output_space</code><em class="property"> = ''</em><a class="headerlink" href="#nipy.labs.datasets.transforms.affine_transform.AffineTransform.output_space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.labs.datasets.converters.html" title="labs.datasets.converters"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

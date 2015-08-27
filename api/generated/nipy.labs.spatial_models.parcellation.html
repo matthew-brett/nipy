@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="API" href="../index.html" />
+    <link rel="prev" title="labs.spatial_models.parcel_io" href="nipy.labs.spatial_models.parcel_io.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.labs.spatial_models.parcel_io.html" title="labs.spatial_models.parcel_io"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">labs.spatial_models.parcellation</a><ul>
+<li><a class="reference internal" href="#module-labs-spatial-models-parcellation">Module: <code class="docutils literal"><span class="pre">labs.spatial_models.parcellation</span></code></a></li>
+<li><a class="reference internal" href="#multisubjectparcellation"><code class="docutils literal"><span class="pre">MultiSubjectParcellation</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nipy.labs.spatial_models.parcel_io.html"
+                        title="previous chapter">labs.spatial_models.parcel_io</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/generated/nipy.labs.spatial_models.parcellation.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="labs-spatial-models-parcellation">
+<h1>labs.spatial_models.parcellation<a class="headerlink" href="#labs-spatial-models-parcellation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-labs-spatial-models-parcellation">
+<h2>Module: <code class="xref py py-mod docutils literal"><span class="pre">labs.spatial_models.parcellation</span></code><a class="headerlink" href="#module-labs-spatial-models-parcellation" title="Permalink to this headline">¶</a></h2>
+<p>Inheritance diagram for <code class="docutils literal"><span class="pre">nipy.labs.spatial_models.parcellation</span></code>:</p>
+<p class="graphviz">
+<img src="../../_images/inheritance-3fcdd186e30d3dae8fc0275721a804128429d715.png" alt="Inheritance diagram of nipy.labs.spatial_models.parcellation" usemap="#inheritance05382fd5ce" class="inheritance"/>
+<map id="inheritance05382fd5ce" name="inheritance05382fd5ce">
+<area shape="rect" id="node1" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation" title="MultiSubjectParcellation class are used to represent parcels" alt="" coords="5,5,360,32"/>
+</map>
+</p>
+<span class="target" id="module-nipy.labs.spatial_models.parcellation"></span><p>Generic Parcellation class:
+Contains all the items that define a multi-subject parcellation</p>
+<p>Author : Bertrand Thirion, 2005-2008</p>
+<p>TODO : add a method &#8216;global field&#8217;, i.e. non-subject-specific info</p>
+</div>
+<div class="section" id="multisubjectparcellation">
+<h2><a class="reference internal" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation" title="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation"><code class="xref py py-class docutils literal"><span class="pre">MultiSubjectParcellation</span></code></a><a class="headerlink" href="#multisubjectparcellation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation">
+<em class="property">class </em><code class="descclassname">nipy.labs.spatial_models.parcellation.</code><code class="descname">MultiSubjectParcellation</code><span class="sig-paren">(</span><em>domain</em>, <em>template_labels=None</em>, <em>individual_labels=None</em>, <em>nb_parcel=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>MultiSubjectParcellation class are used to represent parcels
+that can have different spatial different contours
+in a given group of subject
+It consists of
+self.domain: the specification of a domain
+self.template_labels the specification of a template parcellation
+self.individual_labels the specification of individual parcellations</p>
+<p>fixme:should inherit from mroi.MultiROI</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.check" title="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.check"><code class="xref py py-obj docutils literal"><span class="pre">check</span></code></a>()</td>
+<td>Performs an elementary check on self</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.copy" title="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a>()</td>
+<td>Returns a copy of self</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.get_feature" title="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.get_feature"><code class="xref py py-obj docutils literal"><span class="pre">get_feature</span></code></a>(fid)</td>
+<td>Get feature defined by <cite>fid</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.make_feature" title="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.make_feature"><code class="xref py py-obj docutils literal"><span class="pre">make_feature</span></code></a>(fid,&nbsp;data)</td>
+<td>Compute parcel-level averages of data</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.population" title="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.population"><code class="xref py py-obj docutils literal"><span class="pre">population</span></code></a>()</td>
+<td>Returns the counting of labels per voxel per subject</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_feature" title="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_feature"><code class="xref py py-obj docutils literal"><span class="pre">set_feature</span></code></a>(fid,&nbsp;data)</td>
+<td>Set feature defined by <cite>fid</cite> and <cite>data</cite> into <code class="docutils literal"><span class="pre">self</span></code></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_individual_labels" title="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_individual_labels"><code class="xref py py-obj docutils literal"><span class="pre">set_individual_labels</span></code></a>(individual_labels)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_template_labels" title="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_template_labels"><code class="xref py py-obj docutils literal"><span class="pre">set_template_labels</span></code></a>(template_labels)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>domain</em>, <em>template_labels=None</em>, <em>individual_labels=None</em>, <em>nb_parcel=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize multi-subject parcellation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>domain: discrete_domain.DiscreteDomain instance,</strong> :</p>
+<blockquote>
+<div><p>definition of the space considered in the parcellation</p>
+</div></blockquote>
+<p><strong>template_labels: array of shape domain.size, optional</strong> :</p>
+<blockquote>
+<div><p>definition of the template labelling</p>
+</div></blockquote>
+<p><strong>individual_labels: array of shape (domain.size, nb_subjects), optional,</strong> :</p>
+<blockquote>
+<div><p>the individual parcellations
+corresponding to the template</p>
+</div></blockquote>
+<p><strong>nb_parcel: int, optional,</strong> :</p>
+<blockquote class="last">
+<div><p>number of parcels in the model
+can be inferred as template_labels.max()+1, or 1 by default
+cannot be smaller than template_labels.max()+1</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs an elementary check on self</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of self</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.get_feature">
+<code class="descname">get_feature</code><span class="sig-paren">(</span><em>fid</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.get_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get feature defined by <cite>fid</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fid: string, the feature identifier</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.make_feature">
+<code class="descname">make_feature</code><span class="sig-paren">(</span><em>fid</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.make_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute parcel-level averages of data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fid: string, the feature identifier</strong> :</p>
+<p><strong>data: array of shape (self.domain.size, self.nb_subj, dim) or</strong> :</p>
+<blockquote>
+<div><p>(self.domain.sire, self.nb_subj)
+Some information at the voxel level</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pfeature: array of shape(self.nb_parcel, self.nbsubj, dim)</strong> :</p>
+<blockquote class="last">
+<div><p>the computed feature data</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.population">
+<code class="descname">population</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.population" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the counting of labels per voxel per subject</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>population: array of shape (self.nb_parcel, self.nb_subj)</strong> :</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_feature">
+<code class="descname">set_feature</code><span class="sig-paren">(</span><em>fid</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set feature defined by <cite>fid</cite> and <cite>data</cite> into <code class="docutils literal"><span class="pre">self</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fid: string</strong> :</p>
+<blockquote>
+<div><p>the feature identifier</p>
+</div></blockquote>
+<p><strong>data: array of shape (self.nb_parcel, self.nb_subj, dim) or</strong> :</p>
+<blockquote class="last">
+<div><blockquote>
+<div><p>(self.nb_parcel, self.nb_subj)</p>
+</div></blockquote>
+<p>the data to be set as parcel- and subject-level information</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_individual_labels">
+<code class="descname">set_individual_labels</code><span class="sig-paren">(</span><em>individual_labels</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_individual_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_template_labels">
+<code class="descname">set_template_labels</code><span class="sig-paren">(</span><em>template_labels</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_template_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.labs.spatial_models.parcel_io.html" title="labs.spatial_models.parcel_io"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

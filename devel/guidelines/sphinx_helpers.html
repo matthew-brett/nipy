@@ -1,0 +1,705 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="Development Guidelines" href="index.html" />
+    <link rel="next" title="Working with nipy source code" href="gitwash/index.html" />
+    <link rel="prev" title="How to write documentation" href="howto_document.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gitwash/index.html" title="Working with nipy source code"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="howto_document.html" title="How to write documentation"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >Developer Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" accesskey="U">Development Guidelines</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Sphinx Cheat Sheet</a><ul>
+<li><a class="reference internal" href="#making-a-list">Making a list</a><ul>
+<li><a class="reference internal" href="#bullet-points">Bullet points</a></li>
+<li><a class="reference internal" href="#enumerated-points">Enumerated points</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#making-a-table">Making a table</a></li>
+<li><a class="reference internal" href="#making-links">Making links</a><ul>
+<li><a class="reference internal" href="#cross-references-sections-and-documents">Cross-references sections and documents</a></li>
+<li><a class="reference internal" href="#external-links">External links</a></li>
+<li><a class="reference internal" href="#links-to-classes-modules-and-functions">Links to classes, modules and functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ipython-sessions">ipython sessions</a></li>
+<li><a class="reference internal" href="#formatting-text">Formatting text</a></li>
+<li><a class="reference internal" href="#using-math">Using math</a></li>
+<li><a class="reference internal" href="#inserting-matplotlib-plots">Inserting matplotlib plots</a></li>
+<li><a class="reference internal" href="#emacs-helpers">Emacs helpers</a></li>
+<li><a class="reference internal" href="#inheritance-diagrams">Inheritance diagrams</a></li>
+<li><a class="reference internal" href="#this-file">This file</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="howto_document.html"
+                        title="previous chapter">How to write documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gitwash/index.html"
+                        title="next chapter">Working with <em>nipy</em> source code</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/devel/guidelines/sphinx_helpers.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sphinx-cheat-sheet">
+<span id="sphinx-helpers"></span><h1>Sphinx Cheat Sheet<a class="headerlink" href="#sphinx-cheat-sheet" title="Permalink to this headline">¶</a></h1>
+<p>Wherein I show by example how to do some things in Sphinx (you can see
+a literal version of this file below in <a class="reference internal" href="#sphinx-literal"><span>This file</span></a>)</p>
+<div class="section" id="making-a-list">
+<span id="id1"></span><h2>Making a list<a class="headerlink" href="#making-a-list" title="Permalink to this headline">¶</a></h2>
+<p>It is easy to make lists in rest</p>
+<div class="section" id="bullet-points">
+<h3>Bullet points<a class="headerlink" href="#bullet-points" title="Permalink to this headline">¶</a></h3>
+<p>This is a subsection making bullet points</p>
+<ul class="simple">
+<li>point A</li>
+<li>point B</li>
+<li>point C</li>
+</ul>
+</div>
+<div class="section" id="enumerated-points">
+<h3>Enumerated points<a class="headerlink" href="#enumerated-points" title="Permalink to this headline">¶</a></h3>
+<p>This is a subsection making numbered points</p>
+<ol class="arabic simple">
+<li>point A</li>
+<li>point B</li>
+<li>point C</li>
+</ol>
+</div>
+</div>
+<div class="section" id="making-a-table">
+<span id="id2"></span><h2>Making a table<a class="headerlink" href="#making-a-table" title="Permalink to this headline">¶</a></h2>
+<p>This shows you how to make a table &#8211; if you only want to make a list
+see <a class="reference internal" href="#making-a-list"><span>Making a list</span></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="60%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Age</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>John D Hunter</td>
+<td>40</td>
+</tr>
+<tr class="row-odd"><td>Cast of Thousands</td>
+<td>41</td>
+</tr>
+<tr class="row-even"><td>And Still More</td>
+<td>42</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="making-links">
+<span id="id3"></span><h2>Making links<a class="headerlink" href="#making-links" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cross-references-sections-and-documents">
+<h3>Cross-references sections and documents<a class="headerlink" href="#cross-references-sections-and-documents" title="Permalink to this headline">¶</a></h3>
+<p>Use reST labels to cross-reference sections and other documents. The
+mechanism for referencing another reST document or a subsection in any
+document, including within a document are identical. Place a
+<em>reference label</em> above the section heading, like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>.. _sphinx_helpers:
+
+====================
+ Sphinx Cheat Sheet
+====================
+</pre></div>
+</div>
+<p>Note the blank line between the <em>reference label</em> and the section
+heading is important!</p>
+<p>Then refer to the <em>reference label</em> in another
+document like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>:ref:`sphinx_helpers`
+</pre></div>
+</div>
+<p>The reference is replaced with the section title when Sphinx builds
+the document while maintaining the linking mechanism.  For example,
+the above reference will appear as <a class="reference internal" href="#sphinx-helpers"><span>Sphinx Cheat Sheet</span></a>.  As the
+documentation grows there are many references to keep track of.</p>
+<p>For documents, please use a <em>reference label</em> that matches the file
+name.  For sections, please try and make the <em>refence label</em> something
+meaningful and try to keep abbreviations limited.  Along these lines,
+we are using <em>underscores</em> for multiple-word <em>reference labels</em>
+instead of hyphens.</p>
+<p>Sphinx documentation on <a class="reference external" href="http://sphinx.pocoo.org/markup/inline.html#cross-referencing-arbitrary-locations">Cross-referencing arbitrary locations</a>
+has more details.</p>
+</div>
+<div class="section" id="external-links">
+<h3>External links<a class="headerlink" href="#external-links" title="Permalink to this headline">¶</a></h3>
+<p>For external links you are likely to use only once, simple include the
+like in the text.  This link to <a class="reference external" href="http://www.google.com">google</a> was
+made like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>`google &lt;http://www.google.com&gt;`_
+</pre></div>
+</div>
+<p>For external links you will reference frequently, we have created a
+<code class="docutils literal"><span class="pre">links_names.txt</span></code> file.  These links can then be used throughout the
+documentation.  Links in the <code class="docutils literal"><span class="pre">links_names.txt</span></code> file are created
+using the <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html#hyperlink-targets">reST reference</a>
+syntax:</p>
+<div class="highlight-python"><div class="highlight"><pre>.. _targetname: http://www.external_website.org
+</pre></div>
+</div>
+<p>To refer to the reference in a separate reST file, include the
+<code class="docutils literal"><span class="pre">links_names.txt</span></code> file and refer to the link through it&#8217;s target
+name.  For example, put this include at the bottom of your reST
+document:</p>
+<div class="highlight-python"><div class="highlight"><pre>.. include:: ../links_names.txt
+</pre></div>
+</div>
+<p>and refer to the hyperlink target:</p>
+<div class="highlight-python"><div class="highlight"><pre>blah blah blah targetname_ more blah
+</pre></div>
+</div>
+</div>
+<div class="section" id="links-to-classes-modules-and-functions">
+<h3>Links to classes, modules and functions<a class="headerlink" href="#links-to-classes-modules-and-functions" title="Permalink to this headline">¶</a></h3>
+<p>You can also reference classes, modules, functions, etc that are
+documented using the sphinx <a class="reference external" href="http://sphinx.pocoo.org/ext/autodoc.html">autodoc</a> facilites.  For example,
+see the module <code class="xref py py-mod docutils literal"><span class="pre">matplotlib.backend_bases</span></code> documentation, or the
+class <code class="xref py py-class docutils literal"><span class="pre">LocationEvent</span></code>, or the method
+<code class="xref py py-meth docutils literal"><span class="pre">mpl_connect()</span></code>.</p>
+</div>
+</div>
+<div class="section" id="ipython-sessions">
+<span id="ipython-highlighting"></span><h2>ipython sessions<a class="headerlink" href="#ipython-sessions" title="Permalink to this headline">¶</a></h2>
+<p>Michael Droettboom contributed a sphinx extension which does pygments
+syntax highlighting on ipython sessions</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [69]: </span><span class="n">lines</span> <span class="o">=</span> <span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="gp">In [70]: </span><span class="n">setp</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<span class="go">  alpha: float</span>
+<span class="go">  animated: [True | False]</span>
+<span class="go">  antialiased or aa: [True | False]</span>
+<span class="go">  ...snip</span>
+</pre></div>
+</div>
+<p>This support is included in this template, but will also be included
+in a future version of Pygments by default.</p>
+</div>
+<div class="section" id="formatting-text">
+<span id="id4"></span><h2>Formatting text<a class="headerlink" href="#formatting-text" title="Permalink to this headline">¶</a></h2>
+<p>You use inline markup to make text <em>italics</em>, <strong>bold</strong>, or <code class="docutils literal"><span class="pre">monotype</span></code>.</p>
+<p>You can represent code blocks fairly easily:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or literally include code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-</span>
+<span class="c"># vi: set ft=python sts=4 ts=4 sw=4 et:</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;some more numbers&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-math">
+<span id="id5"></span><h2>Using math<a class="headerlink" href="#using-math" title="Permalink to this headline">¶</a></h2>
+<p>In sphinx you can include inline math <span class="math">\(x\leftarrow y\ x\forall
+y\ x-y\)</span> or display math</p>
+<div class="math">
+\[W^{3\beta}_{\delta_1 \rho_1 \sigma_2} = U^{3\beta}_{\delta_1 \rho_1} + \frac{1}{8 \pi 2} \int^{\alpha_2}_{\alpha_2} d \alpha^\prime_2 \left[\frac{ U^{2\beta}_{\delta_1 \rho_1} - \alpha^\prime_2U^{1\beta}_{\rho_1 \sigma_2} }{U^{0\beta}_{\rho_1 \sigma_2}}\right]\]</div>
+<p>This documentation framework includes a Sphinx extension,
+<code class="file docutils literal"><span class="pre">sphinxext/mathmpl.py</span></code>, that uses matplotlib to render math
+equations when generating HTML, and LaTeX itself when generating a
+PDF.  This can be useful on systems that have matplotlib, but not
+LaTeX, installed.  To use it, add <code class="docutils literal"><span class="pre">mathpng</span></code> to the list of
+extensions in <code class="file docutils literal"><span class="pre">conf.py</span></code>.</p>
+<p>Current SVN versions of Sphinx now include built-in support for math.
+There are two flavors:</p>
+<blockquote>
+<div><ul class="simple">
+<li>pngmath: uses dvipng to render the equation</li>
+<li>jsmath: renders the math in the browser using Javascript</li>
+</ul>
+</div></blockquote>
+<p>To use these extensions instead, add <code class="docutils literal"><span class="pre">sphinx.ext.pngmath</span></code> or
+<code class="docutils literal"><span class="pre">sphinx.ext.jsmath</span></code> to the list of extensions in <code class="file docutils literal"><span class="pre">conf.py</span></code>.</p>
+<p>All three of these options for math are designed to behave in the same
+way.</p>
+</div>
+<div class="section" id="inserting-matplotlib-plots">
+<h2>Inserting matplotlib plots<a class="headerlink" href="#inserting-matplotlib-plots" title="Permalink to this headline">¶</a></h2>
+<p>Inserting automatically-generated plots is easy.  Simply put the script to
+generate the plot in any directory you want, and refer to it using the <code class="docutils literal"><span class="pre">plot</span></code>
+directive.  All paths are considered relative to the top-level of the
+documentation tree.  To include the source code for the plot in the document,
+pass the <code class="docutils literal"><span class="pre">include-source</span></code> parameter:</p>
+<div class="highlight-python"><div class="highlight"><pre>.. plot:: devel/guidelines/elegant.py
+   :include-source:
+</pre></div>
+</div>
+<p>In the HTML version of the document, the plot includes links to the
+original source code, a high-resolution PNG and a PDF.  In the PDF
+version of the document, the plot is included as a scalable PDF.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-</span>
+<span class="c"># vi: set ft=python sts=4 ts=4 sw=4 et:</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;some more numbers&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../../devel/guidelines/elegant.py">Source code</a>, <a class="reference external" href="../../devel/guidelines/elegant.png">png</a>, <a class="reference external" href="../../devel/guidelines/elegant.hires.png">hires.png</a>, <a class="reference external" href="../../devel/guidelines/elegant.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../../_images/elegant.png" src="../../_images/elegant.png" />
+</div>
+</div>
+<div class="section" id="emacs-helpers">
+<h2>Emacs helpers<a class="headerlink" href="#emacs-helpers" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="../tools/tricked_out_emacs.html#rst-emacs"><span>ReST mode</span></a></p>
+</div>
+<div class="section" id="inheritance-diagrams">
+<h2>Inheritance diagrams<a class="headerlink" href="#inheritance-diagrams" title="Permalink to this headline">¶</a></h2>
+<p>Inheritance diagrams can be inserted directly into the document by
+providing a list of class or module names to the
+<code class="docutils literal"><span class="pre">inheritance-diagram</span></code> directive.</p>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre>.. inheritance-diagram:: codecs
+</pre></div>
+</div>
+<p>produces:</p>
+<p class="graphviz">
+<img src="../../_images/inheritance-3009202eb64df54ca14a4bc85b0240d9277ee6eb.png" alt="Inheritance diagram of codecs" usemap="#inheritance7e56675552" class="inheritance"/>
+<map id="inheritance7e56675552" name="inheritance7e56675552">
+<area shape="rect" id="node1" title="This subclass of IncrementalDecoder can be used as the baseclass for an" alt="" coords="253,284,506,310"/>
+<area shape="rect" id="node2" title="An IncrementalDecoder decodes an input in multiple steps. The input can be" alt="" coords="5,284,205,310"/>
+<area shape="rect" id="node3" title="This subclass of IncrementalEncoder can be used as the baseclass for an" alt="" coords="254,233,505,260"/>
+<area shape="rect" id="node4" title="An IncrementalEncoder encodes an input in multiple steps. The input can be" alt="" coords="6,233,204,260"/>
+<area shape="rect" id="node5" title="Defines the interface for stateless encoders/decoders." alt="" coords="50,157,160,184"/>
+<area shape="rect" id="node8" title="StreamReaderWriter instances allow wrapping streams which" alt="" coords="6,56,204,82"/>
+<area shape="rect" id="node9" title="StreamRecoder instances provide a frontend &#45; backend" alt="" coords="22,5,188,32"/>
+</map>
+</p>
+</div>
+<div class="section" id="this-file">
+<span id="sphinx-literal"></span><h2>This file<a class="headerlink" href="#this-file" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>.. _sphinx_helpers:
+
+====================
+ Sphinx Cheat Sheet
+====================
+
+Wherein I show by example how to do some things in Sphinx (you can see
+a literal version of this file below in :ref:`sphinx_literal`)
+
+
+.. _making_a_list:
+
+Making a list
+-------------
+
+It is easy to make lists in rest
+
+Bullet points
+^^^^^^^^^^^^^
+
+This is a subsection making bullet points
+
+* point A
+
+* point B
+
+* point C
+
+
+Enumerated points
+^^^^^^^^^^^^^^^^^
+
+This is a subsection making numbered points
+
+#. point A
+
+#. point B
+
+#. point C
+
+
+.. _making_a_table:
+
+Making a table
+--------------
+
+This shows you how to make a table -- if you only want to make a list
+see :ref:`making_a_list`.
+
+==================   ============
+Name                 Age
+==================   ============
+John D Hunter        40
+Cast of Thousands    41
+And Still More       42
+==================   ============
+
+.. _making_links:
+
+Making links
+------------
+
+Cross-references sections and documents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use reST labels to cross-reference sections and other documents. The
+mechanism for referencing another reST document or a subsection in any
+document, including within a document are identical. Place a
+*reference label* above the section heading, like this::
+
+	.. _sphinx_helpers:
+
+	====================
+	 Sphinx Cheat Sheet
+	====================
+
+Note the blank line between the *reference label* and the section
+heading is important!
+
+Then refer to the *reference label* in another
+document like this::
+
+     :ref:`sphinx_helpers`
+
+The reference is replaced with the section title when Sphinx builds
+the document while maintaining the linking mechanism.  For example,
+the above reference will appear as :ref:`sphinx_helpers`.  As the
+documentation grows there are many references to keep track of.
+
+For documents, please use a *reference label* that matches the file
+name.  For sections, please try and make the *refence label* something
+meaningful and try to keep abbreviations limited.  Along these lines,
+we are using *underscores* for multiple-word *reference labels*
+instead of hyphens.
+
+Sphinx documentation on `Cross-referencing arbitrary locations
+&lt;http://sphinx.pocoo.org/markup/inline.html#cross-referencing-arbitrary-locations&gt;`_
+has more details.
+
+External links
+^^^^^^^^^^^^^^
+
+For external links you are likely to use only once, simple include the
+like in the text.  This link to `google &lt;http://www.google.com&gt;`_ was
+made like this::
+
+     `google &lt;http://www.google.com&gt;`_
+
+For external links you will reference frequently, we have created a
+``links_names.txt`` file.  These links can then be used throughout the
+documentation.  Links in the ``links_names.txt`` file are created
+using the `reST reference
+&lt;http://docutils.sourceforge.net/docs/user/rst/quickref.html#hyperlink-targets&gt;`_
+syntax::
+
+	.. _targetname: http://www.external_website.org
+
+To refer to the reference in a separate reST file, include the
+``links_names.txt`` file and refer to the link through it&#39;s target
+name.  For example, put this include at the bottom of your reST
+document::
+     
+     .. include:: ../links_names.txt
+
+and refer to the hyperlink target::
+
+    blah blah blah targetname_ more blah
+
+
+
+Links to classes, modules and functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can also reference classes, modules, functions, etc that are
+documented using the sphinx `autodoc
+&lt;http://sphinx.pocoo.org/ext/autodoc.html&gt;`_ facilites.  For example,
+see the module :mod:`matplotlib.backend_bases` documentation, or the
+class :class:`~matplotlib.backend_bases.LocationEvent`, or the method
+:meth:`~matplotlib.backend_bases.FigureCanvasBase.mpl_connect`.
+
+.. _ipython_highlighting:
+
+ipython sessions
+----------------
+
+Michael Droettboom contributed a sphinx extension which does pygments
+syntax highlighting on ipython sessions
+
+.. sourcecode:: ipython
+
+    In [69]: lines = plot([1,2,3])
+
+    In [70]: setp(lines)
+      alpha: float
+      animated: [True | False]
+      antialiased or aa: [True | False]
+      ...snip
+
+This support is included in this template, but will also be included
+in a future version of Pygments by default.
+
+.. _formatting_text:
+
+Formatting text
+---------------
+
+You use inline markup to make text *italics*, **bold**, or ``monotype``.
+
+You can represent code blocks fairly easily::
+
+   import numpy as np
+   x = np.random.rand(12)
+
+Or literally include code:
+
+.. literalinclude:: elegant.py
+
+
+.. _using_math:
+
+Using math
+----------
+
+In sphinx you can include inline math :math:`x\leftarrow y\ x\forall
+y\ x-y` or display math
+
+.. math::
+
+  W^{3\beta}_{\delta_1 \rho_1 \sigma_2} = U^{3\beta}_{\delta_1 \rho_1} + \frac{1}{8 \pi 2} \int^{\alpha_2}_{\alpha_2} d \alpha^\prime_2 \left[\frac{ U^{2\beta}_{\delta_1 \rho_1} - \alpha^\prime_2U^{1\beta}_{\rho_1 \sigma_2} }{U^{0\beta}_{\rho_1 \sigma_2}}\right]
+
+This documentation framework includes a Sphinx extension,
+:file:`sphinxext/mathmpl.py`, that uses matplotlib to render math
+equations when generating HTML, and LaTeX itself when generating a
+PDF.  This can be useful on systems that have matplotlib, but not
+LaTeX, installed.  To use it, add ``mathpng`` to the list of
+extensions in :file:`conf.py`.
+
+Current SVN versions of Sphinx now include built-in support for math.
+There are two flavors:
+
+  - pngmath: uses dvipng to render the equation
+
+  - jsmath: renders the math in the browser using Javascript
+
+To use these extensions instead, add ``sphinx.ext.pngmath`` or
+``sphinx.ext.jsmath`` to the list of extensions in :file:`conf.py`.
+
+All three of these options for math are designed to behave in the same
+way.
+
+Inserting matplotlib plots
+--------------------------
+
+Inserting automatically-generated plots is easy.  Simply put the script to
+generate the plot in any directory you want, and refer to it using the ``plot``
+directive.  All paths are considered relative to the top-level of the
+documentation tree.  To include the source code for the plot in the document,
+pass the ``include-source`` parameter::
+
+  .. plot:: devel/guidelines/elegant.py
+     :include-source:
+
+In the HTML version of the document, the plot includes links to the
+original source code, a high-resolution PNG and a PDF.  In the PDF
+version of the document, the plot is included as a scalable PDF.
+
+.. plot:: devel/guidelines/elegant.py
+   :include-source:
+
+Emacs helpers
+-------------
+
+See :ref:`rst_emacs`
+
+Inheritance diagrams
+--------------------
+
+Inheritance diagrams can be inserted directly into the document by
+providing a list of class or module names to the
+``inheritance-diagram`` directive.
+
+For example::
+
+  .. inheritance-diagram:: codecs
+
+produces:
+
+.. inheritance-diagram:: codecs
+
+.. _sphinx_literal:
+
+This file
+---------
+
+.. literalinclude:: sphinx_helpers.rst
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gitwash/index.html" title="Working with nipy source code"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="howto_document.html" title="How to write documentation"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >Developer Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" >Development Guidelines</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

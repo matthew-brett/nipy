@@ -1,0 +1,432 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="API" href="../index.html" />
+    <link rel="prev" title="testing.nosepatch" href="nipy.testing.nosepatch.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.testing.nosepatch.html" title="testing.nosepatch"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">testing.nosetester</a><ul>
+<li><a class="reference internal" href="#module-testing-nosetester">Module: <code class="docutils literal"><span class="pre">testing.nosetester</span></code></a></li>
+<li><a class="reference internal" href="#class">Class</a></li>
+<li><a class="reference internal" href="#nipynosetester"><code class="docutils literal"><span class="pre">NipyNoseTester</span></code></a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nipy.testing.nosepatch.html"
+                        title="previous chapter">testing.nosepatch</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/generated/nipy.testing.nosetester.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="testing-nosetester">
+<h1>testing.nosetester<a class="headerlink" href="#testing-nosetester" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-testing-nosetester">
+<h2>Module: <code class="xref py py-mod docutils literal"><span class="pre">testing.nosetester</span></code><a class="headerlink" href="#module-testing-nosetester" title="Permalink to this headline">¶</a></h2>
+<p>Inheritance diagram for <code class="docutils literal"><span class="pre">nipy.testing.nosetester</span></code>:</p>
+<p class="graphviz">
+<img src="../../_images/inheritance-03dddc8b4980e5eb9515dade88d900b0d790cbaf.png" alt="Inheritance diagram of nipy.testing.nosetester" usemap="#inheritancec9e4adb685" class="inheritance"/>
+<map id="inheritancec9e4adb685" name="inheritancec9e4adb685">
+<area shape="rect" id="node1" href="#nipy.testing.nosetester.NipyNoseTester" title="Numpy&#45;like testing class" alt="" coords="264,5,503,32"/>
+<area shape="rect" id="node2" title="Nose test runner." alt="" coords="5,5,216,32"/>
+</map>
+</p>
+<span class="target" id="module-nipy.testing.nosetester"></span><p>Nipy nosetester</p>
+<p>Sets doctests to run by default</p>
+<p>Use our own doctest plugin (based on that of numpy)</p>
+</div>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="nipynosetester">
+<h2><a class="reference internal" href="#nipy.testing.nosetester.NipyNoseTester" title="nipy.testing.nosetester.NipyNoseTester"><code class="xref py py-class docutils literal"><span class="pre">NipyNoseTester</span></code></a><a class="headerlink" href="#nipynosetester" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="nipy.testing.nosetester.NipyNoseTester">
+<em class="property">class </em><code class="descclassname">nipy.testing.nosetester.</code><code class="descname">NipyNoseTester</code><span class="sig-paren">(</span><em>package=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.nosetester.NipyNoseTester" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">nipy.fixes.numpy.testing.nosetester.NoseTester</span></code></p>
+<p>Numpy-like testing class</p>
+<ul class="simple">
+<li>Removes some numpy-specific excludes</li>
+<li>Disables numpy&#8217;s fierce clearout of module import context for doctests</li>
+<li>Run doctests by default</li>
+</ul>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.testing.nosetester.NipyNoseTester.test" title="nipy.testing.nosetester.NipyNoseTester.test"><code class="xref py py-obj docutils literal"><span class="pre">test</span></code></a>([label,&nbsp;verbose,&nbsp;extra_argv,&nbsp;doctests,&nbsp;...])</td>
+<td>Run tests for module using nose.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nipy.testing.nosetester.NipyNoseTester.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>package=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.nosetester.NipyNoseTester.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test class init</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>package</strong> : string or module</p>
+<blockquote class="last">
+<div><p>If string, gives full path to package
+If None, extract calling module path
+Default is None</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.nosetester.NipyNoseTester.bench">
+<code class="descname">bench</code><span class="sig-paren">(</span><em>label='fast'</em>, <em>verbose=1</em>, <em>extra_argv=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.nosetester.NipyNoseTester.bench" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run benchmarks for module using nose.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>label</strong> : {&#8216;fast&#8217;, &#8216;full&#8217;, &#8216;&#8217;, attribute identifier}, optional</p>
+<blockquote>
+<div><p>Identifies the benchmarks to run. This can be a string to pass to
+the nosetests executable with the &#8216;-A&#8217; option, or one of several
+special values.  Special values are:
+* &#8216;fast&#8217; - the default - which corresponds to the <code class="docutils literal"><span class="pre">nosetests</span> <span class="pre">-A</span></code></p>
+<blockquote>
+<div><p>option of &#8216;not slow&#8217;.</p>
+</div></blockquote>
+<ul class="simple">
+<li>&#8216;full&#8217; - fast (as above) and slow benchmarks as in the
+&#8216;no -A&#8217; option to nosetests - this is the same as &#8216;&#8217;.</li>
+<li>None or &#8216;&#8217; - run all tests.</li>
+</ul>
+<p>attribute_identifier - string passed directly to nosetests as &#8216;-A&#8217;.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : int, optional</p>
+<blockquote>
+<div><p>Verbosity value for benchmark outputs, in the range 1-10. Default is 1.</p>
+</div></blockquote>
+<p><strong>extra_argv</strong> : list, optional</p>
+<blockquote>
+<div><p>List with any extra arguments to pass to nosetests.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>success</strong> : bool</p>
+<blockquote class="last">
+<div><p>Returns True if running the benchmarks works, False if an error
+occurred.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Benchmarks are like tests, but have names starting with &#8220;bench&#8221; instead
+of &#8220;test&#8221;, and can be found under the &#8220;benchmarks&#8221; sub-directory of the
+module.</p>
+<p>Each NumPy module exposes <cite>bench</cite> in its namespace to run all benchmarks
+for it.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">success</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">bench</span><span class="p">()</span> 
+<span class="go">Running benchmarks for numpy.lib</span>
+<span class="gp">...</span>
+<span class="go">using 562341 items:</span>
+<span class="go">unique:</span>
+<span class="go">0.11</span>
+<span class="go">unique1d:</span>
+<span class="go">0.11</span>
+<span class="go">ratio: 1.0</span>
+<span class="go">nUnique: 56230 == 56230</span>
+<span class="gp">...</span>
+<span class="go">OK</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">success</span> 
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.nosetester.NipyNoseTester.excludes">
+<code class="descname">excludes</code><em class="property"> = []</em><a class="headerlink" href="#nipy.testing.nosetester.NipyNoseTester.excludes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.nosetester.NipyNoseTester.prepare_test_args">
+<code class="descname">prepare_test_args</code><span class="sig-paren">(</span><em>label='fast'</em>, <em>verbose=1</em>, <em>extra_argv=None</em>, <em>doctests=False</em>, <em>coverage=False</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.nosetester.NipyNoseTester.prepare_test_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run tests for module using nose.</p>
+<p>This method does the heavy lifting for the <cite>test</cite> method. It takes all
+the same arguments, for details see <cite>test</cite>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#nipy.testing.nosetester.NipyNoseTester.test" title="nipy.testing.nosetester.NipyNoseTester.test"><code class="xref py py-obj docutils literal"><span class="pre">test</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.nosetester.NipyNoseTester.test">
+<code class="descname">test</code><span class="sig-paren">(</span><em>label='fast'</em>, <em>verbose=1</em>, <em>extra_argv=None</em>, <em>doctests=True</em>, <em>coverage=False</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.nosetester.NipyNoseTester.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run tests for module using nose.</p>
+<p>As for numpy tester, except enable tests by default.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>label</strong> : {&#8216;fast&#8217;, &#8216;full&#8217;, &#8216;&#8217;, attribute identifier}, optional</p>
+<blockquote>
+<div><p>Identifies the tests to run. This can be a string to pass to
+directly the nosetests executable with the &#8216;-A&#8217; option (an attribute
+identifier), or one of several special values.  Special values are:</p>
+<ul class="simple">
+<li>&#8216;fast&#8217; - the default - which corresponds to the <code class="docutils literal"><span class="pre">nosetests</span> <span class="pre">-A</span></code>
+option of &#8216;not slow&#8217;.</li>
+<li>&#8216;full&#8217; - fast (as above) and slow tests as in the
+&#8216;no -A&#8217; option to nosetests - this is the same as &#8216;&#8217;.</li>
+<li>None or &#8216;&#8217; - run all tests.</li>
+</ul>
+</div></blockquote>
+<p><strong>verbose</strong> : int, optional</p>
+<blockquote>
+<div><p>Verbosity value for test outputs, in the range 1-10. Default is 1.</p>
+</div></blockquote>
+<p><strong>extra_argv</strong> : list, optional</p>
+<blockquote>
+<div><p>List with any extra arguments to pass to nosetests.</p>
+</div></blockquote>
+<p><strong>doctests</strong> : bool, optional</p>
+<blockquote>
+<div><p>If True, run doctests in module. Default is True.</p>
+</div></blockquote>
+<p><strong>coverage</strong> : bool, optional</p>
+<blockquote>
+<div><p>If True, report coverage of nipy code. Default is False.
+(This requires the <a href="#id1"><span class="problematic" id="id2">`</span></a>coverage module:</p>
+<blockquote>
+<div><p>&lt;<a class="reference external" href="http://nedbatchelder.com/code/modules/coverage.html">http://nedbatchelder.com/code/modules/coverage.html</a>&gt;`_).</p>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : object</p>
+<blockquote class="last">
+<div><p>Returns the result of running the tests as a
+<code class="docutils literal"><span class="pre">nose.result.TextTestResult</span></code> object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Each nipy module should expose <cite>test</cite> in its namespace to run all tests
+for it.  For example, to run all tests for nipy.algorithms:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nipy.algorithms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nipy</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">test</span><span class="p">()</span> 
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="nipy.testing.nosetester.fpw_opt_str">
+<code class="descclassname">nipy.testing.nosetester.</code><code class="descname">fpw_opt_str</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.nosetester.fpw_opt_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return first-package-wins option string for this version of nose</p>
+<p>Versions of nose prior to 1.1.0 needed <code class="docutils literal"><span class="pre">=True</span></code> for <code class="docutils literal"><span class="pre">first-package-wins</span></code>,
+versions after won&#8217;t accept it.</p>
+<p>changeset:   816:c344a4552d76
+<a class="reference external" href="http://code.google.com/p/python-nose/issues/detail?id=293">http://code.google.com/p/python-nose/issues/detail?id=293</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fpw_str</strong> : str</p>
+<blockquote class="last">
+<div><p>Either &#8216;&#8211;first-package-wins&#8217; or &#8216;&#8211;first-package-wins=True&#8217; depending
+on the nose version we are running.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.testing.nosetester.prepare_imports">
+<code class="descclassname">nipy.testing.nosetester.</code><code class="descname">prepare_imports</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.nosetester.prepare_imports" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare any imports for testing run</p>
+<p>At the moment, we prepare matplotlib by trying to make it use a backend that
+does not need a display</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.testing.nosepatch.html" title="testing.nosepatch"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

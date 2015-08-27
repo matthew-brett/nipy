@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../index.html" />
+    <link rel="up" title="Tutorials" href="tutorial.html" />
+    <link rel="next" title="Specifying a GLM in NiPy" href="glm_spec.html" />
+    <link rel="prev" title="Basic Data IO" href="basic_io.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../index.html">
+  <img src="../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="glm_spec.html" title="Specifying a GLM in NiPy"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="basic_io.html" title="Basic Data IO"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >User Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="tutorial.html" accesskey="U">Tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../documentation.html">Documentation</a></li>
+    <li><a href="../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basics of the Coordinate Map</a><ul>
+<li><a class="reference internal" href="#use-of-the-coordinate-map-for-spatial-normalization">Use of the Coordinate Map for spatial normalization</a></li>
+<li><a class="reference internal" href="#mathematical-definition">Mathematical definition</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basic_io.html"
+                        title="previous chapter">Basic Data IO</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="glm_spec.html"
+                        title="next chapter">Specifying a GLM in NiPy</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/users/coordinate_map.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basics-of-the-coordinate-map">
+<span id="coordinate-map"></span><h1>Basics of the Coordinate Map<a class="headerlink" href="#basics-of-the-coordinate-map" title="Permalink to this headline">¶</a></h1>
+<p>When you load an image it will have an associated Coordinate Map</p>
+<p><strong>Coordinate Map</strong></p>
+<blockquote>
+<div>The Coordinate Map contains information defining the input (domain) and
+output (range) Coordinate Systems of the image, and the mapping between the
+two Coordinate systems.</div></blockquote>
+<p>The <em>input</em> or <em>domain</em> in an image are voxel coordinates in the image array.
+The <em>output</em> or <em>range</em> are the millimetre coordinates in some space, that
+correspond to the input (voxel) coordinates.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">nipy</span>
+</pre></div>
+</div>
+<p>Get a filename for an example file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.testing</span> <span class="kn">import</span> <span class="n">anatfile</span>
+</pre></div>
+</div>
+<p>Get the coordinate map for the image:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">anat_img</span> <span class="o">=</span> <span class="n">nipy</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">anatfile</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordmap</span> <span class="o">=</span> <span class="n">anat_img</span><span class="o">.</span><span class="n">coordmap</span>
+</pre></div>
+</div>
+<p>For more on Coordinate Systems and thier properties
+<a class="reference internal" href="../api/generated/nipy.core.reference.coordinate_system.html#module-nipy.core.reference.coordinate_system" title="nipy.core.reference.coordinate_system"><code class="xref py py-mod docutils literal"><span class="pre">nipy.core.reference.coordinate_system</span></code></a></p>
+<p>You can inspect a coordinate map:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coordmap</span><span class="o">.</span><span class="n">function_domain</span><span class="o">.</span><span class="n">coord_names</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="s">&#39;i&#39;</span><span class="p">,</span> <span class="s">&#39;j&#39;</span><span class="p">,</span> <span class="s">&#39;k&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coordmap</span><span class="o">.</span><span class="n">function_range</span><span class="o">.</span><span class="n">coord_names</span>
+<span class="go">(&#39;aligned-x=L-&gt;R&#39;, &#39;aligned-y=P-&gt;A&#39;, &#39;aligned-z=I-&gt;S&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coordmap</span><span class="o">.</span><span class="n">function_domain</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;voxels&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coordmap</span><span class="o">.</span><span class="n">function_range</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;aligned&#39;</span>
+</pre></div>
+</div>
+<p>A Coordinate Map has a mapping from the <em>input</em> Coordinate System to the
+<em>output</em> Coordinate System</p>
+<p>Here we can see we have a voxel to millimeter mapping from the voxel
+space (i,j,k) to the millimeter space (x,y,z)</p>
+<p>We can also get the name of the respective Coordinate Systems that our
+Coordinate Map maps between.</p>
+<p>A Coordinate Map is two Coordinate Systems with a mapping between
+them.  Formally the mapping is a function that takes points from the
+input Coordinate System and returns points from the output Coordinate
+System.  This is the same as saying that the mapping takes points in the mapping
+function <em>domain</em> and transforms them to points in the mapping function <em>range</em>.</p>
+<p>Often this is simple as applying an Affine transform. In that case the
+Coordinate System may well have an affine property which returns the
+affine matrix corresponding to the transform.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coordmap</span><span class="o">.</span><span class="n">affine</span>
+<span class="go">array([[ -2.,   0.,   0.,  32.],</span>
+<span class="go">       [  0.,   2.,   0., -40.],</span>
+<span class="go">       [  0.,   0.,   2., -16.],</span>
+<span class="go">       [  0.,   0.,   0.,   1.]])</span>
+</pre></div>
+</div>
+<p>If you call the Coordinate Map you will apply the mapping function
+between the two Coordinate Systems. In this case from (i,j,k) to (x,y,z):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coordmap</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">array([ 30., -36., -10.])</span>
+</pre></div>
+</div>
+<p>It can also be used to  get the inverse mapping, or in this example from (x,y,z)
+back to (i,j,k):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coordmap</span><span class="o">.</span><span class="n">inverse</span><span class="p">()([</span><span class="mf">30.</span><span class="p">,</span><span class="o">-</span><span class="mf">36.</span><span class="p">,</span><span class="o">-</span><span class="mf">10.</span><span class="p">])</span>
+<span class="go">array([ 1.,  2.,  3.])</span>
+</pre></div>
+</div>
+<p>We can see how this works if we just apply the affine
+ourselves using dot product.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice the affine is using homogeneous coordinates so we need to add a 1 to
+our input. (And note how  a direct call to the coordinate map does this work
+for you)</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coordmap</span><span class="o">.</span><span class="n">affine</span>
+<span class="go">array([[ -2.,   0.,   0.,  32.],</span>
+<span class="go">       [  0.,   2.,   0., -40.],</span>
+<span class="go">       [  0.,   0.,   2., -16.],</span>
+<span class="go">       [  0.,   0.,   0.,   1.]])</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">coordmap</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="go">array([ 30., -36., -10.,   1.])</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The answer is the same as above (except for the added 1)</p>
+</div>
+<div class="section" id="use-of-the-coordinate-map-for-spatial-normalization">
+<span id="normalize-coordmap"></span><h2>Use of the Coordinate Map for spatial normalization<a class="headerlink" href="#use-of-the-coordinate-map-for-spatial-normalization" title="Permalink to this headline">¶</a></h2>
+<p>The Coordinate Map can be used to describe the transformations needed to perform
+spatial normalization. Suppose we have an anatomical Image from one subject
+<em>subject_img</em> and we want to create an Image in a standard space like Tailarach
+space. An affine registration algorithm will produce a 4-by-4 matrix
+representing the affine transformation, <em>T</em>, that takes a point in the subject&#8217;s
+coordinates <em>subject_world</em> to a point in Tailarach space <em>tailarach_world</em>. The
+subject&#8217;s Image has its own Coordinate Map, <em>subject_cmap</em> and there is a
+Coordinate Map for Tailarach space which we will call <em>tailarach_cmap</em>.</p>
+<p>Having found the transformation matrix <em>T</em>, the next step in spatial
+normalization is usually to resample the array of <em>subject_img</em> so that it has
+the same shape as some atlas <em>atlas_img</em>. Note that because it is an atlas
+Image, <em>tailarach_camp=atlas_img.coordmap</em>.</p>
+<p>A resampling algorithm uses an interpolator which needs to know
+which voxel of <em>subject_img</em> corresponds to which voxel of <em>atlas_img</em>.
+This is therefore a function from <em>atlas_voxel</em> to <em>subject_voxel</em>.</p>
+<p>This function, paired with the information that it is a map from atlas-voxel to
+subject-voxel is another example of a Coordinate Map. The code to do this might
+look something like the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.testing</span> <span class="kn">import</span> <span class="n">anatfile</span><span class="p">,</span> <span class="n">funcfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.algorithms.registration</span> <span class="kn">import</span> <span class="n">HistogramRegistration</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.algorithms.kernel_smooth</span> <span class="kn">import</span> <span class="n">LinearFilter</span>
+</pre></div>
+</div>
+<p>We&#8217;ll make a smoothed version of the anatomical example image, and pretend it&#8217;s
+the template</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">smoother</span> <span class="o">=</span> <span class="n">LinearFilter</span><span class="p">(</span><span class="n">anat_img</span><span class="o">.</span><span class="n">coordmap</span><span class="p">,</span> <span class="n">anat_img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">atlas_im</span> <span class="o">=</span> <span class="n">smoother</span><span class="o">.</span><span class="n">smooth</span><span class="p">(</span><span class="n">anat_img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject_im</span> <span class="o">=</span> <span class="n">anat_img</span>
+</pre></div>
+</div>
+<p>We do an affine registration between the two.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">reggie</span> <span class="o">=</span> <span class="n">HistogramRegistration</span><span class="p">(</span><span class="n">subject_im</span><span class="p">,</span> <span class="n">atlas_im</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aff</span> <span class="o">=</span> <span class="n">reggie</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="s">&#39;affine&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">as_affine</span><span class="p">()</span> 
+<span class="go">Initial guess...</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<p>Now we make a coordmap with this transformation</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.core.api</span> <span class="kn">import</span> <span class="n">AffineTransform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject_cmap</span> <span class="o">=</span> <span class="n">subject_im</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">talairach_cmap</span> <span class="o">=</span> <span class="n">atlas_im</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subject_world_to_talairach_world</span> <span class="o">=</span> <span class="n">AffineTransform</span><span class="p">(</span>
+<span class="gp">... </span>                                      <span class="n">subject_cmap</span><span class="o">.</span><span class="n">function_range</span><span class="p">,</span>
+<span class="gp">... </span>                                      <span class="n">talairach_cmap</span><span class="o">.</span><span class="n">function_range</span><span class="p">,</span>
+<span class="gp">... </span>                                      <span class="n">aff</span><span class="p">)</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<p>We resample the &#8216;subject&#8217; image to the &#8216;atlas image</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.algorithms.resample</span> <span class="kn">import</span> <span class="n">resample</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalized_subject_im</span> <span class="o">=</span> <span class="n">resample</span><span class="p">(</span><span class="n">subject_im</span><span class="p">,</span> <span class="n">talairach_cmap</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">subject_world_to_talairach_world</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="n">atlas_im</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalized_subject_im</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">atlas_im</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalized_subject_im</span><span class="o">.</span><span class="n">coordmap</span> <span class="o">==</span> <span class="n">atlas_im</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">normalized_subject_im</span><span class="o">.</span><span class="n">affine</span> <span class="o">==</span> <span class="n">atlas_im</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mathematical-definition">
+<h2>Mathematical definition<a class="headerlink" href="#mathematical-definition" title="Permalink to this headline">¶</a></h2>
+<p>For a more formal mathematical description of the coordinate map, see
+<a class="reference internal" href="math_coordmap.html#math-coordmap"><span>Mathematical formulation of the Coordinate Map</span></a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="glm_spec.html" title="Specifying a GLM in NiPy"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="basic_io.html" title="Basic Data IO"
+             >previous</a> |</li>
+  <li><a href="../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >User Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="tutorial.html" >Tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

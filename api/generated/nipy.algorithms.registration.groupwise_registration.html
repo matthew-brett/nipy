@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="API" href="../index.html" />
+    <link rel="next" title="algorithms.registration.histogram_registration" href="nipy.algorithms.registration.histogram_registration.html" />
+    <link rel="prev" title="algorithms.registration.chain_transform" href="nipy.algorithms.registration.chain_transform.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.algorithms.registration.histogram_registration.html" title="algorithms.registration.histogram_registration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nipy.algorithms.registration.chain_transform.html" title="algorithms.registration.chain_transform"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">algorithms.registration.groupwise_registration</a><ul>
+<li><a class="reference internal" href="#module-algorithms-registration-groupwise-registration">Module: <code class="docutils literal"><span class="pre">algorithms.registration.groupwise_registration</span></code></a></li>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
+<li><a class="reference internal" href="#fmrirealign4d"><code class="docutils literal"><span class="pre">FmriRealign4d</span></code></a></li>
+<li><a class="reference internal" href="#image4d"><code class="docutils literal"><span class="pre">Image4d</span></code></a></li>
+<li><a class="reference internal" href="#realign4d"><code class="docutils literal"><span class="pre">Realign4d</span></code></a></li>
+<li><a class="reference internal" href="#realign4dalgorithm"><code class="docutils literal"><span class="pre">Realign4dAlgorithm</span></code></a></li>
+<li><a class="reference internal" href="#spacerealign"><code class="docutils literal"><span class="pre">SpaceRealign</span></code></a></li>
+<li><a class="reference internal" href="#spacetimerealign"><code class="docutils literal"><span class="pre">SpaceTimeRealign</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nipy.algorithms.registration.chain_transform.html"
+                        title="previous chapter">algorithms.registration.chain_transform</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nipy.algorithms.registration.histogram_registration.html"
+                        title="next chapter">algorithms.registration.histogram_registration</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/generated/nipy.algorithms.registration.groupwise_registration.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="algorithms-registration-groupwise-registration">
+<h1>algorithms.registration.groupwise_registration<a class="headerlink" href="#algorithms-registration-groupwise-registration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-algorithms-registration-groupwise-registration">
+<h2>Module: <code class="xref py py-mod docutils literal"><span class="pre">algorithms.registration.groupwise_registration</span></code><a class="headerlink" href="#module-algorithms-registration-groupwise-registration" title="Permalink to this headline">¶</a></h2>
+<p>Inheritance diagram for <code class="docutils literal"><span class="pre">nipy.algorithms.registration.groupwise_registration</span></code>:</p>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fmrirealign4d">
+<h3><code class="xref py py-class docutils literal"><span class="pre">FmriRealign4d</span></code><a class="headerlink" href="#fmrirealign4d" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="image4d">
+<h3><code class="xref py py-class docutils literal"><span class="pre">Image4d</span></code><a class="headerlink" href="#image4d" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="realign4d">
+<h3><code class="xref py py-class docutils literal"><span class="pre">Realign4d</span></code><a class="headerlink" href="#realign4d" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="realign4dalgorithm">
+<h3><code class="xref py py-class docutils literal"><span class="pre">Realign4dAlgorithm</span></code><a class="headerlink" href="#realign4dalgorithm" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="spacerealign">
+<h3><code class="xref py py-class docutils literal"><span class="pre">SpaceRealign</span></code><a class="headerlink" href="#spacerealign" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="spacetimerealign">
+<h3><code class="xref py py-class docutils literal"><span class="pre">SpaceTimeRealign</span></code><a class="headerlink" href="#spacetimerealign" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.algorithms.registration.histogram_registration.html" title="algorithms.registration.histogram_registration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="nipy.algorithms.registration.chain_transform.html" title="algorithms.registration.chain_transform"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

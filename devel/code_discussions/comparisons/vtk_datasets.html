@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../../index.html" />
+    <link rel="up" title="Software Design" href="index.html" />
+    <link rel="next" title="Developer Tools" href="../../tools/index.html" />
+    <link rel="prev" title="Software Design" href="index.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../../index.html">
+  <img src="../../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../tools/index.html" title="Developer Tools"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Software Design"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >Developer Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" >Code discussions</a> &raquo;</li>
+          <li class="nav-item nav-item-4"><a href="index.html" accesskey="U">Software Design</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../../documentation.html">Documentation</a></li>
+    <li><a href="../../index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">VTK datasets</a><ul>
+<li><a class="reference internal" href="#what-is-a-vtk-dataset">What is a VTK dataset?</a><ul>
+<li><a class="reference internal" href="#structure-topology-geometry">Structure: topology / geometry</a></li>
+<li><a class="reference internal" href="#an-id-is-an-index-into-a-given-vector">An <em>id</em> is an index into a given vector</a><ul>
+<li><a class="reference internal" href="#a-dataset-has-one-or-more-points">A dataset has one or more points</a></li>
+<li><a class="reference internal" href="#a-dataset-has-one-or-more-cells">A dataset has one or more cells</a></li>
+<li><a class="reference internal" href="#associating-points-and-cells">Associating points and cells</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-attributes">Data attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Software Design</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../tools/index.html"
+                        title="next chapter">Developer Tools</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/devel/code_discussions/comparisons/vtk_datasets.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="vtk-datasets">
+<h1>VTK datasets<a class="headerlink" href="#vtk-datasets" title="Permalink to this headline">¶</a></h1>
+<p>Here we describe the VTK dataset model, because of some parallels with
+our own idea of an image object.  The document is from the VTK book - <a class="reference internal" href="#vtk4" id="id1">[VTK4]</a></p>
+<p>See also:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://code.enthought.com/projects/mayavi/docs/development/html/mayavi/data.html#vtk-data-structures">http://code.enthought.com/projects/mayavi/docs/development/html/mayavi/data.html#vtk-data-structures</a></li>
+<li><a class="reference external" href="http://code.enthought.com/projects/mayavi/docs/development/html/mayavi/auto/example_datasets.html">http://code.enthought.com/projects/mayavi/docs/development/html/mayavi/auto/example_datasets.html</a></li>
+<li><a class="reference external" href="http://www.vtk.org/Wiki/VTK/Writing_VTK_files_using_python">http://www.vtk.org/Wiki/VTK/Writing_VTK_files_using_python</a></li>
+<li><a class="reference external" href="http://www.vtk.org/VTK/img/file-formats.pdf">http://www.vtk.org/VTK/img/file-formats.pdf</a></li>
+<li><a class="reference external" href="https://svn.enthought.com/enthought/attachment/wiki/MayaVi/tvtk_datasets.pdf?format=raw">https://svn.enthought.com/enthought/attachment/wiki/MayaVi/tvtk_datasets.pdf?format=raw</a></li>
+<li><a class="reference external" href="http://public.kitware.com/cgi-bin/viewcvs.cgi/">http://public.kitware.com/cgi-bin/viewcvs.cgi/</a><em>checkout</em>/Examples/DataManipulation/Python/BuildUGrid.py?root=VTK&amp;content-type=text/plain</li>
+</ul>
+<div class="section" id="what-is-a-vtk-dataset">
+<h2>What is a VTK dataset?<a class="headerlink" href="#what-is-a-vtk-dataset" title="Permalink to this headline">¶</a></h2>
+<p>VTK datasets represent discrete spatial data.</p>
+<p>Datasets consist of two components:</p>
+<ul>
+<li><p class="first"><em>organizing structure</em> - the topology and geometry</p>
+</li>
+<li><dl class="first docutils">
+<dt><em>data attributes</em> - data that can be attached to the topology /</dt>
+<dd><p class="first last">geometry above.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="structure-topology-geometry">
+<h3>Structure: topology / geometry<a class="headerlink" href="#structure-topology-geometry" title="Permalink to this headline">¶</a></h3>
+<p>The structure part of a dataset is the part that gives the position and
+connection of points in 3D space.</p>
+<p>Let us first import <em>vtk</em> for our code examples.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">vtk</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="an-id-is-an-index-into-a-given-vector">
+<h3>An <em>id</em> is an index into a given vector<a class="headerlink" href="#an-id-is-an-index-into-a-given-vector" title="Permalink to this headline">¶</a></h3>
+<p>We introduce <em>id</em> to explain the code below.  An id is simply an index
+into a vector, and is therefore an integer.  Of course the id identifies
+the element in the vector; as long as you know which vector the id
+refers to, you can identify the element.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pts</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span> <span class="o">=</span> <span class="n">pts</span><span class="o">.</span><span class="n">InsertNextPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span> <span class="o">=</span> <span class="n">pts</span><span class="o">.</span><span class="n">InsertNextPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pts</span><span class="o">.</span><span class="n">GetPoint</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="section" id="a-dataset-has-one-or-more-points">
+<h4>A dataset has one or more points<a class="headerlink" href="#a-dataset-has-one-or-more-points" title="Permalink to this headline">¶</a></h4>
+<p>Points have coordinates in 3 dimensions, in the order <code class="docutils literal"><span class="pre">x</span></code>, <code class="docutils literal"><span class="pre">y</span></code>,
+<code class="docutils literal"><span class="pre">z</span></code> - see <a class="reference external" href="http://www.vtk.org/doc/release/5.4/html/a00374.html">http://www.vtk.org/doc/release/5.4/html/a00374.html</a> -
+<code class="docutils literal"><span class="pre">GetPoint()</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pts</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pts</span><span class="o">.</span><span class="n">InsertNextPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c"># needs 3 coordinates</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">TypeError</span>: <span class="n">function takes exactly 3 arguments (2 given)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">pts</span><span class="o">.</span><span class="n">InsertNextPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c"># returns point index in point array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pts</span><span class="o">.</span><span class="n">GetPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">(0.0, 0.0, 0.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">pts</span><span class="o">.</span><span class="n">InsertNextPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">pts</span><span class="o">.</span><span class="n">InsertNextPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-dataset-has-one-or-more-cells">
+<h4>A dataset has one or more cells<a class="headerlink" href="#a-dataset-has-one-or-more-cells" title="Permalink to this headline">¶</a></h4>
+<p>A cell is a local specification of the connection between points - an
+atom of topology in VTK.  A cell has a type, and a list of point ids.
+The point type determines (by convention) what the connectivity of the
+list of points should be.  For example we can make a cell of type
+<code class="docutils literal"><span class="pre">vtkTriangle</span></code>.  The first point starts the triangle, the next point is
+the next point in the triangle counterclockwise, connected to the first
+and third, and the third is the remaining point, connected to the first
+and second.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">VTK_TRIANGLE</span> <span class="o">=</span> <span class="mi">5</span> <span class="c"># A VTK constant identifying the triangle type</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">triangle</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTriangle</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">triangle</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCell</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">triangle</span><span class="o">.</span><span class="n">GetCellType</span><span class="p">()</span> <span class="o">==</span> <span class="n">VTK_TRIANGLE</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pt_ids</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="n">GetPointIds</span><span class="p">()</span> <span class="c"># these are default (zeros) at the moment</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">pt_ids</span><span class="o">.</span><span class="n">GetId</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pt_ids</span><span class="o">.</span><span class="n">GetNumberOfIds</span><span class="p">())]</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Here we set the ids.  The ids refer to the points above.  The system
+does not know this yet, but it will because, later, we are going to
+associate this cell with the points, in a dataset object.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pt_ids</span><span class="o">.</span><span class="n">GetNumberOfIds</span><span class="p">()):</span> <span class="n">pt_ids</span><span class="o">.</span><span class="n">SetId</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="associating-points-and-cells">
+<h4>Associating points and cells<a class="headerlink" href="#associating-points-and-cells" title="Permalink to this headline">¶</a></h4>
+<p>We make the most general possible of VTK datasets - the unstructured
+grid.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ugrid</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkUnstructuredGrid</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ugrid</span><span class="o">.</span><span class="n">Allocate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ugrid</span><span class="o">.</span><span class="n">SetPoints</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span> <span class="o">=</span> <span class="n">ugrid</span><span class="o">.</span><span class="n">InsertNextCell</span><span class="p">(</span><span class="n">VTK_TRIANGLE</span><span class="p">,</span> <span class="n">pt_ids</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="data-attributes">
+<h3>Data attributes<a class="headerlink" href="#data-attributes" title="Permalink to this headline">¶</a></h3>
+<p>So far we have specified a triangle, with 3 points, but no associated data.</p>
+<p>You can associate data with cells, or with points, or both.  Point data
+associates values (e.g. scalars) with the points in the dataset.  Cell
+data associates values (e.g. scalars) with the cells - in this case one
+(e.g) scalar value with the whole triangle.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pt_data</span> <span class="o">=</span> <span class="n">ugrid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cell_data</span> <span class="o">=</span> <span class="n">ugrid</span><span class="o">.</span><span class="n">GetCellData</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>There are many data attributes that can be set, include scalars,
+vectors, normals (normalized vectors), texture coordinates and tensors,
+using (respectively)
+<code class="docutils literal"><span class="pre">{pt|cell|_data.{Get|Set}{Scalars|Vectors|Normals|TCoords|Tensors}</span></code>.
+For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pt_data</span><span class="o">.</span><span class="n">GetScalars</span><span class="p">()</span> <span class="ow">is</span> <span class="bp">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>But we can set the scalar (or other) data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tri_pt_data</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkFloatArray</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tri_pt_data</span><span class="o">.</span><span class="n">InsertNextValue</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">pt_data</span><span class="o">.</span><span class="n">SetScalars</span><span class="p">(</span><span class="n">tri_pt_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To the cells as well, or instead, if we want.  Don&#8217;t forget there is
+only one cell.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tri_cell_data</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkFloatArray</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">tri_cell_data</span><span class="o">.</span><span class="n">InsertNextValue</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">cell_data</span><span class="o">.</span><span class="n">SetScalars</span><span class="p">(</span><span class="n">tri_cell_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can set different types of data into the same dataset:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tri_pt_vecs</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkFloatArray</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tri_pt_vecs</span><span class="o">.</span><span class="n">SetNumberOfComponents</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tri_pt_vecs</span><span class="o">.</span><span class="n">InsertNextTuple3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tri_pt_vecs</span><span class="o">.</span><span class="n">InsertNextTuple3</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tri_pt_vecs</span><span class="o">.</span><span class="n">InsertNextTuple3</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">pt_data</span><span class="o">.</span><span class="n">SetVectors</span><span class="p">(</span><span class="n">tri_pt_vecs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want to look at what you have, run this code</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># ..testcode:: when live</span>
+<span class="c"># make a dataset mapper and actor for our unstructured grid</span>
+<span class="n">mapper</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkDataSetMapper</span><span class="p">()</span>
+<span class="n">mapper</span><span class="o">.</span><span class="n">SetInput</span><span class="p">(</span><span class="n">ugrid</span><span class="p">)</span>
+<span class="n">actor</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkActor</span><span class="p">()</span>
+<span class="n">actor</span><span class="o">.</span><span class="n">SetMapper</span><span class="p">(</span><span class="n">mapper</span><span class="p">)</span>
+<span class="c"># Create the usual rendering stuff.</span>
+<span class="n">ren</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkRenderer</span><span class="p">()</span>
+<span class="n">renWin</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkRenderWindow</span><span class="p">()</span>
+<span class="n">renWin</span><span class="o">.</span><span class="n">AddRenderer</span><span class="p">(</span><span class="n">ren</span><span class="p">)</span>
+<span class="n">iren</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkRenderWindowInteractor</span><span class="p">()</span>
+<span class="n">iren</span><span class="o">.</span><span class="n">SetRenderWindow</span><span class="p">(</span><span class="n">renWin</span><span class="p">)</span>
+<span class="c"># add the actor</span>
+<span class="n">ren</span><span class="o">.</span><span class="n">AddActor</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
+<span class="c"># Render the scene and start interaction.</span>
+<span class="n">iren</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
+<span class="n">renWin</span><span class="o">.</span><span class="n">Render</span><span class="p">()</span>
+<span class="n">iren</span><span class="o">.</span><span class="n">Start</span><span class="p">()</span>
+</pre></div>
+</div>
+<table class="docutils citation" frame="void" id="vtk4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[VTK4]</a></td><td>Schroeder, Will, Ken Martin, and Bill Lorensen. (2006) <em>The
+Visualization Toolkit&#8211;An Object-Oriented Approach To 3D Graphics</em>. :
+Kitware, Inc.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../tools/index.html" title="Developer Tools"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Software Design"
+             >previous</a> |</li>
+  <li><a href="../../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >Developer Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" >Code discussions</a> &raquo;</li>
+          <li class="nav-item nav-item-4"><a href="index.html" >Software Design</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

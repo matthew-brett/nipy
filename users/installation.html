@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../index.html" />
+    <link rel="up" title="User Guide" href="index.html" />
+    <link rel="next" title="Geography of the Scipy world" href="scipy_orientation.html" />
+    <link rel="prev" title="A history of NIPY" href="../history.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../index.html">
+  <img src="../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="scipy_orientation.html" title="Geography of the Scipy world"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../history.html" title="A history of NIPY"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../documentation.html">Documentation</a></li>
+    <li><a href="../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Download and Install</a><ul>
+<li><a class="reference internal" href="#dependencies-for-install">Dependencies for install</a><ul>
+<li><a class="reference internal" href="#must-have">Must Have</a></li>
+<li><a class="reference internal" href="#strong-recommendations">Strong Recommendations</a></li>
+<li><a class="reference internal" href="#installing-from-binary-packages">Installing from binary packages</a><ul>
+<li><a class="reference internal" href="#for-debian-or-ubuntu">For Debian or Ubuntu</a></li>
+<li><a class="reference internal" href="#for-fedora-centos">For Fedora, CentOS</a><ul>
+<li><a class="reference internal" href="#for-osx">For OSX</a></li>
+<li><a class="reference internal" href="#for-windows">For Windows</a><ul>
+<li><a class="reference internal" href="#option-1">Option 1</a></li>
+<li><a class="reference internal" href="#option-2">Option 2</a></li>
+<li><a class="reference internal" href="#option-3">Option 3</a></li>
+<li><a class="reference internal" href="#option-4">Option 4</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#otherwise">Otherwise</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#building-from-source-code">Building from source code</a><ul>
+<li><a class="reference internal" href="#dependencies-for-build">Dependencies for build</a></li>
+<li><a class="reference internal" href="#recommended-for-build">Recommended for build</a></li>
+<li><a class="reference internal" href="#procedure">Procedure</a><ul>
+<li><a class="reference internal" href="#installing-useful-data-files">Installing useful data files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../history.html"
+                        title="previous chapter">A history of NIPY</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy_orientation.html"
+                        title="next chapter">Geography of the Scipy world</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/users/installation.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="download-and-install">
+<span id="installation"></span><h1>Download and Install<a class="headerlink" href="#download-and-install" title="Permalink to this headline">¶</a></h1>
+<p>This page covers the necessary steps to install and run NIPY.  Below is a list
+of required dependencies, along with additional software recommendations.</p>
+<div class="section" id="dependencies-for-install">
+<h2>Dependencies for install<a class="headerlink" href="#dependencies-for-install" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="must-have">
+<h3>Must Have<a class="headerlink" href="#must-have" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://www.python.org">Python</a> 2.6 or later</li>
+<li><a class="reference external" href="http://numpy.scipy.org">NumPy</a> 1.2 or later:  Numpy is an array library for Python</li>
+<li><a class="reference external" href="http://www.scipy.org">SciPy</a> 0.7 or later:  Scipy contains scientific computing libraries based on
+numpy</li>
+<li><a class="reference external" href="http://sympy.org">Sympy</a> 0.6.6 or later: Sympy is a symbolic mathematics library for Python.  We
+use it for statistical formulae.</li>
+<li><a class="reference external" href="http://nipy.org/nibabel">Nibabel</a> 1.2.0 or later.  Nibabel loads and saves images in neuroimaging
+formats.</li>
+</ul>
+</div>
+<div class="section" id="strong-recommendations">
+<h3>Strong Recommendations<a class="headerlink" href="#strong-recommendations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://ipython.org">IPython</a>: Interactive Python environment.</li>
+<li><a class="reference external" href="http://matplotlib.sourceforge.net">Matplotlib</a>: python plotting library.</li>
+</ul>
+</div>
+<div class="section" id="installing-from-binary-packages">
+<h3>Installing from binary packages<a class="headerlink" href="#installing-from-binary-packages" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="for-debian-or-ubuntu">
+<h4>For Debian or Ubuntu<a class="headerlink" href="#for-debian-or-ubuntu" title="Permalink to this headline">¶</a></h4>
+<p>Please use the <a class="reference external" href="http://neuro.debian.net">NeuroDebian</a> repository, and install with:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install python-nipy
+</pre></div>
+</div>
+<p>This will install the dependencies for you.</p>
+</div>
+<div class="section" id="for-fedora-centos">
+<h4>For Fedora, CentOS<a class="headerlink" href="#for-fedora-centos" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre>sudo yum install numpy scipy sympy python-pip
+sudo yum install python-devel gcc
+sudo pip install nibabel
+sudo pip install nipy
+</pre></div>
+</div>
+<p>Recommended:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo yum install ipython
+</pre></div>
+</div>
+<div class="section" id="for-osx">
+<h5>For OSX<a class="headerlink" href="#for-osx" title="Permalink to this headline">¶</a></h5>
+<p>Install Python, Numpy, and Scipy via their respective <code class="docutils literal"><span class="pre">dmg</span></code> installers.</p>
+<p>Install via <a class="reference external" href="http://pypi.python.org/pypi/distribute">distribute</a> / <a class="reference external" href="http://pypi.python.org/pypi/setuptools">setuptools</a> and <code class="docutils literal"><span class="pre">easy_install</span></code>. See the <a class="reference external" href="http://pypi.python.org/pypi/distribute">distribute</a>
+page for how to install <code class="docutils literal"><span class="pre">easy_install</span></code> and related tools. Then (from the
+command prompt):</p>
+<div class="highlight-python"><div class="highlight"><pre>easy_install nipy
+</pre></div>
+</div>
+</div>
+<div class="section" id="for-windows">
+<h5>For Windows<a class="headerlink" href="#for-windows" title="Permalink to this headline">¶</a></h5>
+<div class="section" id="option-1">
+<h6>Option 1<a class="headerlink" href="#option-1" title="Permalink to this headline">¶</a></h6>
+<p>You can make your life much easier by using <a class="reference external" href="http://www.pythonxy.com/">Python (X, Y)</a>.  This will install
+Python, Numpy, Scipy, IPython, Matplotlib, Sympy and many other useful things.</p>
+<p>Then go to <a class="reference external" href="http://pypi.python.org/pypi/nipy">nipy pypi</a> and download the <code class="docutils literal"><span class="pre">.exe</span></code> installer for nipy.  Double click
+to install.</p>
+</div>
+<div class="section" id="option-2">
+<h6>Option 2<a class="headerlink" href="#option-2" title="Permalink to this headline">¶</a></h6>
+<ul class="simple">
+<li>Download <a class="reference external" href="http://www.python.org">Python</a> and install with the <code class="docutils literal"><span class="pre">exe</span></code> or <code class="docutils literal"><span class="pre">msi</span></code> installer</li>
+<li>Download and install the &#8220;Scipy stack&#8221; from Christophe Gohlke&#8217;s <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs">unofficial
+windows binaries</a>.</li>
+<li>If the nipy version on the <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs">unofficial windows binaries</a> page is current, use
+that, otherwise, go to <a class="reference external" href="http://pypi.python.org/pypi/nipy">nipy pypi</a>, download and install the <code class="docutils literal"><span class="pre">exe</span></code>
+installer for nipy</li>
+</ul>
+</div>
+<div class="section" id="option-3">
+<h6>Option 3<a class="headerlink" href="#option-3" title="Permalink to this headline">¶</a></h6>
+<p>Consider one of the big Python bundles such as <a class="reference external" href="http://www.enthought.com/products/epd_free.php">EPD free</a> or <a class="reference external" href="https://store.continuum.io/">Anaconda CE</a> for
+the dependencies.  Install nipy from the <code class="docutils literal"><span class="pre">exe</span></code> installer at <a class="reference external" href="http://pypi.python.org/pypi/nipy">nipy pypi</a>.</p>
+</div>
+<div class="section" id="option-4">
+<h6>Option 4<a class="headerlink" href="#option-4" title="Permalink to this headline">¶</a></h6>
+<p>Do all the installs by hand:</p>
+<ul>
+<li><p class="first">Download <a class="reference external" href="http://www.python.org">Python</a> and install with the <code class="docutils literal"><span class="pre">exe</span></code> or <code class="docutils literal"><span class="pre">msi</span></code> installer.  Make sure
+your python and the scripts directory (say, <code class="docutils literal"><span class="pre">c:\Python27\Scripts</span></code>) are on
+your windows path.</p>
+</li>
+<li><p class="first">Download Numpy and Scipy <code class="docutils literal"><span class="pre">exe</span></code> installers for your Python version from their
+respective Numpy and Scipy download sites.</p>
+</li>
+<li><p class="first">Install <a class="reference external" href="http://pypi.python.org/pypi/distribute">distribute</a> to give you <code class="docutils literal"><span class="pre">easy_install</span></code>.</p>
+</li>
+<li><p class="first">Install <a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a> using <code class="docutils literal"><span class="pre">easy_install</span></code> from a windows <code class="docutils literal"><span class="pre">cmd</span></code> shell:</p>
+<div class="highlight-python"><div class="highlight"><pre>easy_install pip
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install sympy and nibabel using pip from a window <code class="docutils literal"><span class="pre">cmd</span></code> shell:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install sympy
+pip install nibabel
+</pre></div>
+</div>
+</li>
+<li><p class="first">On 32-bit Windows, install nipy using <code class="docutils literal"><span class="pre">easy_install</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre>easy_install nipy
+</pre></div>
+</div>
+<p>This will pick up and use the <code class="docutils literal"><span class="pre">exe</span></code> installer.  For 64-bits install use the
+installer at the <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs">unofficial windows binaries</a> site.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="otherwise">
+<h5>Otherwise<a class="headerlink" href="#otherwise" title="Permalink to this headline">¶</a></h5>
+<p>I&#8217;m afraid you might need to build from source...</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="building-from-source-code">
+<span id="building-source"></span><h2>Building from source code<a class="headerlink" href="#building-from-source-code" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dependencies-for-build">
+<h3>Dependencies for build<a class="headerlink" href="#dependencies-for-build" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>A C compiler: NIPY does contain a few C extensions for optimized routines.
+Therefore, you must have a compiler to build from source.  <a class="reference external" href="http://developer.apple.com/TOOLS/xcode">XCode</a> (OSX) and
+<a class="reference external" href="http://www.mingw.org">MinGW</a> (Windows) both include a C compiler.  On Linux, try <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span>
+<span class="pre">build-essential</span></code> on Debian / Ubuntu, <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">yum</span> <span class="pre">install</span> <span class="pre">gcc</span></code> on Fedora and
+related distributions.</li>
+</ul>
+</div>
+<div class="section" id="recommended-for-build">
+<h3>Recommended for build<a class="headerlink" href="#recommended-for-build" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://www.cython.org/">Cython</a> 0.12.1 or later:  Cython is a language that is a fusion of Python and
+C.  It allows us to write fast code using Python and C syntax, so that it
+easier to read and maintain. You don&#8217;t need it to build a release, unless you
+modify the Cython <code class="docutils literal"><span class="pre">*.pyx</span></code> files in the nipy distribution.</li>
+</ul>
+</div>
+<div class="section" id="procedure">
+<h3>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h3>
+<p>Developers should look through the
+<a class="reference internal" href="../devel/development_quickstart.html#development-quickstart"><span>development quickstart</span></a>
+documentation.  There you will find information on building NIPY, the
+required software packages and our developer guidelines.</p>
+<p>If you are primarily interested in using NIPY, download the source
+tarball from <cite>nipy pypi</cite> and follow these instructions for building.  The
+installation process is similar to other Python packages so it will be familiar
+if you have Python experience.</p>
+<p>Unpack the source tarball and change into the source directory.  Once in the
+source directory, you can build the neuroimaging package using:</p>
+<div class="highlight-python"><div class="highlight"><pre>python setup.py build
+</pre></div>
+</div>
+<p>To install, simply do:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo python setup.py install
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>As with any Python installation, this will install the modules in your
+system Python <em>site-packages</em> directory (which is why you need <em>sudo</em>).
+Many of us prefer to install development packages in a local directory so as
+to leave the system python alone.  This is merely a preference, nothing will
+go wrong if you install using the <em>sudo</em> method.</p>
+<p>If you have Python 2.6 or later, you might want to do a <a class="reference external" href="http://docs.python.org/2/install/index.html#alternate-installation-the-user-scheme">user install</a></p>
+<blockquote>
+<div>python setup.py install &#8211;user</div></blockquote>
+<p>To install nipy in some other local directory, use the <strong>&#8211;prefix</strong> option.
+For example, if you created a <code class="docutils literal"><span class="pre">local</span></code> directory in your home directory,
+you would install nipy like this:</p>
+<div class="last highlight-python"><div class="highlight"><pre>python setup.py install --prefix=$HOME/local
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-useful-data-files">
+<h4>Installing useful data files<a class="headerlink" href="#installing-useful-data-files" title="Permalink to this headline">¶</a></h4>
+<p>See <a class="reference internal" href="install_data.html#data-files"><span>Optional data packages</span></a> for some instructions on installing data packages.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="scipy_orientation.html" title="Geography of the Scipy world"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../history.html" title="A history of NIPY"
+             >previous</a> |</li>
+  <li><a href="../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

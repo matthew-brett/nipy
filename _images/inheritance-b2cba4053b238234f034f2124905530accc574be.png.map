@@ -1,0 +1,9 @@
+<map id="inheritance077079e6e0" name="inheritance077079e6e0">
+<area shape="rect" id="node1" href="#nipy.labs.viz_tools.slicers.BaseSlicer" title="The main purpose of these class is to have auto adjust of axes size" alt="" coords="5,81,194,108"/>
+<area shape="rect" id="node2" href="#nipy.labs.viz_tools.slicers.BaseStackedSlicer" title="A class to create linked axes for plotting stacked" alt="" coords="242,56,482,82"/>
+<area shape="rect" id="node4" href="#nipy.labs.viz_tools.slicers.OrthoSlicer" title="A class to create 3 linked axes for plotting orthogonal" alt="" coords="263,107,461,133"/>
+<area shape="rect" id="node5" href="#nipy.labs.viz_tools.slicers.XSlicer" title="viz_tools.slicers.XSlicer" alt="" coords="530,5,698,32"/>
+<area shape="rect" id="node6" href="#nipy.labs.viz_tools.slicers.YSlicer" title="viz_tools.slicers.YSlicer" alt="" coords="530,56,698,82"/>
+<area shape="rect" id="node7" href="#nipy.labs.viz_tools.slicers.ZSlicer" title="viz_tools.slicers.ZSlicer" alt="" coords="530,107,698,133"/>
+<area shape="rect" id="node3" href="#nipy.labs.viz_tools.slicers.CutAxes" title="An MPL axis&#45;like object that displays a cut of 3D volumes" alt="" coords="11,31,189,57"/>
+</map>

@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="Developer Tools" href="index.html" />
+    <link rel="next" title="FAQ" href="../../faq/index.html" />
+    <link rel="prev" title="Tricked out emacs for python coding" href="tricked_out_emacs.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../faq/index.html" title="FAQ"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tricked_out_emacs.html" title="Tricked out emacs for python coding"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >Developer Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" accesskey="U">Developer Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Setting up virtualenv</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#installing">Installing</a></li>
+<li><a class="reference internal" href="#setup-virtualenv">Setup virtualenv</a></li>
+<li><a class="reference internal" href="#create-a-virtualenv">Create a virtualenv</a></li>
+<li><a class="reference internal" href="#activate-a-virtualenv">Activate a virtualenv</a></li>
+<li><a class="reference internal" href="#install-packages-into-a-virtualenv">Install packages into a virtualenv</a></li>
+<li><a class="reference internal" href="#pragmatic-virtualenv">Pragmatic virtualenv</a></li>
+<li><a class="reference internal" href="#installing-ets-3-0-0">Installing ETS 3.0.0</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tricked_out_emacs.html"
+                        title="previous chapter">Tricked out emacs for python coding</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../faq/index.html"
+                        title="next chapter">FAQ</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/devel/tools/virtualenv-tutor.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="setting-up-virtualenv">
+<h1><a class="toc-backref" href="#id4">Setting up virtualenv</a><a class="headerlink" href="#setting-up-virtualenv" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#setting-up-virtualenv" id="id4">Setting up virtualenv</a><ul>
+<li><a class="reference internal" href="#overview" id="id5">Overview</a></li>
+<li><a class="reference internal" href="#installing" id="id6">Installing</a></li>
+<li><a class="reference internal" href="#setup-virtualenv" id="id7">Setup virtualenv</a></li>
+<li><a class="reference internal" href="#create-a-virtualenv" id="id8">Create a virtualenv</a></li>
+<li><a class="reference internal" href="#activate-a-virtualenv" id="id9">Activate a virtualenv</a></li>
+<li><a class="reference internal" href="#install-packages-into-a-virtualenv" id="id10">Install packages into a virtualenv</a></li>
+<li><a class="reference internal" href="#pragmatic-virtualenv" id="id11">Pragmatic virtualenv</a></li>
+<li><a class="reference internal" href="#installing-ets-3-0-0" id="id12">Installing ETS 3.0.0</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id5">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://pypi.python.org/pypi/virtualenv">virtualenv</a> is a tool that allows you to install python packages in
+isolated environments. In this way you can have multiple versions of
+the same package without interference.  I started using this to easily
+switch between multiple versions of numpy without having to constantly
+reinstall and update my symlinks.  I also did this as a way to install
+software for <a class="reference external" href="http://conference.scipy.org/">Scipy2008</a>, like the Enthought Tool Suite (<a class="reference external" href="http://code.enthought.com/projects/tool-suite.php">ETS</a>), in a
+way that would not effect my current development environment.</p>
+<p>This tutorial is based heavily on a blog entry from <a class="reference external" href="http://prabhuramachandran.blogspot.com/2008/03/using-virtualenv-under-linux.html">Prabhu</a>.  I&#8217;ve
+extended his shell script to make switching between virtual
+environments a one-command operation.  (Few others who should be
+credited for encouraging me to use <a class="reference external" href="http://pypi.python.org/pypi/virtualenv">virtualenv</a>: <a class="reference external" href="http://gael-varoquaux.info/blog/">Gael</a>, <a class="reference external" href="http://jarrodmillman.blogspot.com/">Jarrod</a>,
+<a class="reference external" href="http://fdoperez.blogspot.com/search/label/scipy">Fernando</a>)</p>
+</div>
+<div class="section" id="installing">
+<h2><a class="toc-backref" href="#id6">Installing</a><a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
+<p>Download and install the tarball for <a class="reference external" href="http://pypi.python.org/pypi/virtualenv">virtualenv</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre>tar xzf virtualenv-1.1.tar.gz
+cd virtualenv-1.1
+python setup.py install --prefix=$HOME/local
+</pre></div>
+</div>
+<p>Note: I install in a local directory, your install location may differ.</p>
+</div>
+<div class="section" id="setup-virtualenv">
+<h2><a class="toc-backref" href="#id7">Setup virtualenv</a><a class="headerlink" href="#setup-virtualenv" title="Permalink to this headline">¶</a></h2>
+<p>Setup a base virtualenv directory.  I create this in a local
+directory, you can do this in a place of your choosing.  All virtual
+environments will be installed as subdirectories in here.:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd ~/local
+mkdir -p virtualenv
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-virtualenv">
+<h2><a class="toc-backref" href="#id8">Create a virtualenv</a><a class="headerlink" href="#create-a-virtualenv" title="Permalink to this headline">¶</a></h2>
+<p>Create a virtual environment.  Here I change into my virtualenv
+directory and create a virtual environment for my numpy-1.1.1
+install:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd virtualenv/
+virtualenv numpy-1.1.1
+</pre></div>
+</div>
+</div>
+<div class="section" id="activate-a-virtualenv">
+<h2><a class="toc-backref" href="#id9">Activate a virtualenv</a><a class="headerlink" href="#activate-a-virtualenv" title="Permalink to this headline">¶</a></h2>
+<p>Set the numpy-1.1.1 as the <em>active</em> virtual environment:</p>
+<div class="highlight-python"><div class="highlight"><pre>ln -s numpy-1.1.1/bin/activate .
+</pre></div>
+</div>
+<p>We <em>enable</em> the numpy-1.1.1 virtual environment by sourcing it&#8217;s
+activate script.  This will prepend our <cite>PATH</cite> with the currently
+active virtual environment.:</p>
+<div class="highlight-python"><div class="highlight"><pre># note: still in the ~/local/virtualenv directory
+source activate
+</pre></div>
+</div>
+<p>We can see our <cite>PATH</cite> with the numpy-1.1.1 virtual environment at the
+beginning.  Also not the label of the virtual environment prepends our
+prompt.:</p>
+<div class="highlight-python"><div class="highlight"><pre>(numpy-1.1.1)cburns@~ 20:23:54 $ echo $PATH
+/Users/cburns/local/virtualenv/numpy-1.1.1/bin:
+/Library/Frameworks/Python.framework/Versions/Current/bin:
+/Users/cburns/local/bin:
+/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-packages-into-a-virtualenv">
+<h2><a class="toc-backref" href="#id10">Install packages into a virtualenv</a><a class="headerlink" href="#install-packages-into-a-virtualenv" title="Permalink to this headline">¶</a></h2>
+<p>Then we install numpy-1.1.1 into the virtual environment.  In order to install
+packages in the virtual environment, you need to use the <em>python</em> or
+<em>easy_install</em> from that virtualenv.:</p>
+<div class="highlight-python"><div class="highlight"><pre>~/local/virtualenv/numpy-1.1.1/bin/python setup.py install
+</pre></div>
+</div>
+<p>At this point any package I install in this virtual environment will
+only be used when the environment is active.</p>
+</div>
+<div class="section" id="pragmatic-virtualenv">
+<h2><a class="toc-backref" href="#id11">Pragmatic virtualenv</a><a class="headerlink" href="#pragmatic-virtualenv" title="Permalink to this headline">¶</a></h2>
+<p>There are a few more manual steps in the above process then I wanted,
+so I extended the shell script that <a class="reference external" href="http://prabhuramachandran.blogspot.com/2008/03/using-virtualenv-under-linux.html">Prabhu</a> wrote to make this a
+simple one-command operation.  One still needs to manually create each
+virtual environment, and install packages, but this script simplifies
+activating and deactivating them.</p>
+<p>The <cite>venv_switch.sh</cite> script will:</p>
+<ul class="simple">
+<li>Activate the selected virtual environment. (Or issue an error if it
+doesn&#8217;t exist.)</li>
+<li>Launch a new bash shell using the ~/.virtualenvrc file which sources
+the virtualenv/activate script.</li>
+<li>The activate script modifies the PATH and prepends the bash prompt
+with the virtualenv label.</li>
+</ul>
+<p><cite>venv_switch.sh</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre>#!/bin/sh
+# venv_switch.sh
+# switch between different virtual environments
+
+# verify a virtualenv is passed in
+if [ $# -ne 1 ]
+then
+    echo &#39;Usage: venv_switch venv-label&#39;
+    exit -1
+fi
+
+# verify the virtualenv exists
+VENV_PATH=~/local/virtualenv/$1
+
+# activate env script
+ACTIVATE_ENV=~/local/virtualenv/activate
+
+echo $VENV_PATH
+if [ -e $VENV_PATH ]
+then
+    echo &#39;Switching to virtualenv&#39; $VENV_PATH
+    echo &quot;Starting new bash shell.  Simply &#39;exit&#39; to return to previous shell&quot;
+else
+    echo &#39;Error: virtualenv&#39; $VENV_PATH &#39;does not exist!&#39;
+    exit -1
+fi
+
+rm $ACTIVATE_ENV
+ln -s ~/local/virtualenv/$1/bin/activate $ACTIVATE_ENV
+
+# Launch new terminal
+bash --rcfile ~/.virtualenvrc
+</pre></div>
+</div>
+<p>Now to activate our numpy-1.1.1 virtual environment, we simply do:</p>
+<div class="highlight-python"><div class="highlight"><pre>venv_switch.sh numpy-1.1.1
+</pre></div>
+</div>
+<p>To deactivate the virtual environment and go back to your original
+environment, just exit the bash shell:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">exit</span>
+</pre></div>
+</div>
+<p>The rcfile used to source the activate script.  I first source my
+.profile to setup my environment and custom prompt, then source the
+virtual environment.  <cite>.virtualenvrc</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre># rc file to initialize bash environment for virtualenv sessions
+
+# first source the bash_profile
+source ~/.bash_profile
+
+# source the virtualenv
+source ~/local/virtualenv/activate
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-ets-3-0-0">
+<h2><a class="toc-backref" href="#id12">Installing ETS 3.0.0</a><a class="headerlink" href="#installing-ets-3-0-0" title="Permalink to this headline">¶</a></h2>
+<p>As another example, I installed <a class="reference external" href="http://code.enthought.com/projects/tool-suite.php">ETS</a> 3.0.0 for the Tutorial sessions
+at <a class="reference external" href="http://conference.scipy.org/">Scipy2008</a>.  (Note the <a class="reference external" href="https://svn.enthought.com/enthought/wiki/Install">prerequisites</a>.)</p>
+<p>Set up an ets-3.0.0 virtualenv:</p>
+<div class="highlight-python"><div class="highlight"><pre>cburns@virtualenv 15:23:50 $ pwd
+/Users/cburns/local/virtualenv
+
+cburns@virtualenv 15:23:50 $ virtualenv ets-3.0.0
+New python executable in ets-3.0.0/bin/python
+Installing setuptools............done.
+
+cburns@virtualenv 15:24:29 $ ls
+activate      ets-3.0.0       numpy-1.1.1     numpy-1.2.0b2
+</pre></div>
+</div>
+<p>Switch into my ets-3.0.0 virtualenv using the <cite>venv_switch.sh</cite> script:</p>
+<div class="highlight-python"><div class="highlight"><pre>cburns@~ 15:29:12 $ venv_switch.sh ets-3.0.0
+/Users/cburns/local/virtualenv/ets-3.0.0
+Switching to virtualenv /Users/cburns/local/virtualenv/ets-3.0.0
+Starting new bash shell.  Simply &#39;exit&#39; to return to previous shell
+</pre></div>
+</div>
+<p>Install <a class="reference external" href="http://code.enthought.com/projects/tool-suite.php">ETS</a> using easy_install.  Note we need to use the easy_install
+from our ets-3.0.0 virtual environment:</p>
+<div class="highlight-python"><div class="highlight"><pre>(ets-3.0.0)cburns@~ 15:31:41 $ which easy_install
+/Users/cburns/local/virtualenv/ets-3.0.0/bin/easy_install
+
+(ets-3.0.0)cburns@~ 15:31:48 $ easy_install ETS
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../faq/index.html" title="FAQ"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tricked_out_emacs.html" title="Tricked out emacs for python coding"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >Developer Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" >Developer Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

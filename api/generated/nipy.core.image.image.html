@@ -1,0 +1,1015 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="API" href="../index.html" />
+    <link rel="prev" title="algorithms.utils.pca" href="nipy.algorithms.utils.pca.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.algorithms.utils.pca.html" title="algorithms.utils.pca"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">core.image.image</a><ul>
+<li><a class="reference internal" href="#module-core-image-image">Module: <code class="docutils literal"><span class="pre">core.image.image</span></code></a></li>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
+<li><a class="reference internal" href="#image"><code class="docutils literal"><span class="pre">Image</span></code></a></li>
+<li><a class="reference internal" href="#slicemaker"><code class="docutils literal"><span class="pre">SliceMaker</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nipy.algorithms.utils.pca.html"
+                        title="previous chapter">algorithms.utils.pca</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/generated/nipy.core.image.image.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="core-image-image">
+<h1>core.image.image<a class="headerlink" href="#core-image-image" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-core-image-image">
+<h2>Module: <code class="xref py py-mod docutils literal"><span class="pre">core.image.image</span></code><a class="headerlink" href="#module-core-image-image" title="Permalink to this headline">¶</a></h2>
+<p>Inheritance diagram for <code class="docutils literal"><span class="pre">nipy.core.image.image</span></code>:</p>
+<p class="graphviz">
+<img src="../../_images/inheritance-c6c2b95cd1f165c9ae4d04c23a14b7581a3026df.png" alt="Inheritance diagram of nipy.core.image.image" usemap="#inheritance1541aafb4c" class="inheritance"/>
+<map id="inheritance1541aafb4c" name="inheritance1541aafb4c">
+<area shape="rect" id="node1" href="#nipy.core.image.image.Image" title="The `Image` class provides the core object type used in nipy." alt="" coords="20,56,168,82"/>
+<area shape="rect" id="node2" href="#nipy.core.image.image.SliceMaker" title="This class just creates slice objects for image resampling" alt="" coords="5,5,182,32"/>
+</map>
+</p>
+<span class="target" id="module-nipy.core.image.image"></span><p>Define the Image class and functions to work with Image instances</p>
+<ul class="simple">
+<li>fromarray : create an Image instance from an ndarray (deprecated in favor of
+using the Image constructor)</li>
+<li>subsample : slice an Image instance (deprecated in favor of image slicing)</li>
+<li>rollimg : roll an image axis to given location</li>
+<li>synchronized_order : match coordinate systems between images</li>
+<li>iter_axis : make iterator to iterate over an image axis</li>
+<li>is_image : test for an object obeying the Image API</li>
+</ul>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="image">
+<h3><a class="reference internal" href="#nipy.core.image.image.Image" title="nipy.core.image.image.Image"><code class="xref py py-class docutils literal"><span class="pre">Image</span></code></a><a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.core.image.image.Image">
+<em class="property">class </em><code class="descclassname">nipy.core.image.image.</code><code class="descname">Image</code><span class="sig-paren">(</span><em>data</em>, <em>coordmap</em>, <em>metadata=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>The <cite>Image</cite> class provides the core object type used in nipy.</p>
+<p>An <cite>Image</cite> represents a volumetric brain image and provides means
+for manipulating the image data.  Most functions in the image module
+operate on <cite>Image</cite> objects.</p>
+<p class="rubric">Notes</p>
+<p>Images can be created through the module functions.  See nipy.io for
+image IO such as <code class="docutils literal"><span class="pre">load</span></code> and <code class="docutils literal"><span class="pre">save</span></code></p>
+<p class="rubric">Examples</p>
+<p>Load an image from disk</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.testing</span> <span class="kn">import</span> <span class="n">anatfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.io.api</span> <span class="kn">import</span> <span class="n">load_image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">anatfile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Make an image from an array.  We need to make a meaningful coordinate map
+for the image.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">21</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cmap</span> <span class="o">=</span> <span class="n">AffineTransform</span><span class="p">(</span><span class="s">&#39;kji&#39;</span><span class="p">,</span> <span class="s">&#39;zxy&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">cmap</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.core.image.image.Image.affine" title="nipy.core.image.image.Image.affine"><code class="xref py py-obj docutils literal"><span class="pre">affine</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.core.image.image.Image.axes" title="nipy.core.image.image.Image.axes"><code class="xref py py-obj docutils literal"><span class="pre">axes</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.core.image.image.Image.from_image" title="nipy.core.image.image.Image.from_image"><code class="xref py py-obj docutils literal"><span class="pre">from_image</span></code></a>(klass,&nbsp;img[,&nbsp;data,&nbsp;coordmap,&nbsp;...])</td>
+<td>Classmethod makes new instance of this <cite>klass</cite> from instance <cite>img</cite></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.core.image.image.Image.get_data" title="nipy.core.image.image.Image.get_data"><code class="xref py py-obj docutils literal"><span class="pre">get_data</span></code></a>()</td>
+<td>Return data as a numpy array.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.core.image.image.Image.ndim" title="nipy.core.image.image.Image.ndim"><code class="xref py py-obj docutils literal"><span class="pre">ndim</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.core.image.image.Image.reference" title="nipy.core.image.image.Image.reference"><code class="xref py py-obj docutils literal"><span class="pre">reference</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.core.image.image.Image.renamed_axes" title="nipy.core.image.image.Image.renamed_axes"><code class="xref py py-obj docutils literal"><span class="pre">renamed_axes</span></code></a>(**names_dict)</td>
+<td>Return a new image with input (domain) axes renamed</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.core.image.image.Image.renamed_reference" title="nipy.core.image.image.Image.renamed_reference"><code class="xref py py-obj docutils literal"><span class="pre">renamed_reference</span></code></a>(**names_dict)</td>
+<td>Return new image with renamed output (range) coordinates</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.core.image.image.Image.reordered_axes" title="nipy.core.image.image.Image.reordered_axes"><code class="xref py py-obj docutils literal"><span class="pre">reordered_axes</span></code></a>([order])</td>
+<td>Return a new Image with reordered input coordinates.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.core.image.image.Image.reordered_reference" title="nipy.core.image.image.Image.reordered_reference"><code class="xref py py-obj docutils literal"><span class="pre">reordered_reference</span></code></a>([order])</td>
+<td>Return new Image with reordered output coordinates</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.core.image.image.Image.shape" title="nipy.core.image.image.Image.shape"><code class="xref py py-obj docutils literal"><span class="pre">shape</span></code></a>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nipy.core.image.image.Image.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data</em>, <em>coordmap</em>, <em>metadata=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an <cite>Image</cite> object from array and <cite>CoordinateMap</cite> object.</p>
+<p>Images are often created through the <code class="docutils literal"><span class="pre">load_image</span></code> function in the nipy
+base namespace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : array-like</p>
+<blockquote>
+<div><p>object that as attribute <code class="docutils literal"><span class="pre">shape</span></code> and returns an array from
+<code class="docutils literal"><span class="pre">np.asarray(data)</span></code></p>
+</div></blockquote>
+<p><strong>coordmap</strong> : <cite>AffineTransform</cite> object</p>
+<blockquote>
+<div><p>coordmap mapping the domain (input) voxel axes of the image to the
+range (reference, output) axes - usually mm in real world space</p>
+</div></blockquote>
+<p><strong>metadata</strong> : dict, optional</p>
+<blockquote class="last">
+<div><p>Freeform metadata for image.  Most common contents is <code class="docutils literal"><span class="pre">header</span></code>
+from nifti etc loaded images.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal"><span class="pre">load_image</span></code></dt>
+<dd>load <code class="docutils literal"><span class="pre">Image</span></code> from a file</dd>
+<dt><code class="xref py py-obj docutils literal"><span class="pre">save_image</span></code></dt>
+<dd>save <code class="docutils literal"><span class="pre">Image</span></code> to a file</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.image.image.Image.affine">
+<code class="descname">affine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.affine" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.image.image.Image.axes">
+<code class="descname">axes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.axes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.image.image.Image.coordmap">
+<code class="descname">coordmap</code><em class="property"> = AffineTransform(    function_domain=CoordinateSystem(coord_names=('i', 'j', 'k'), name='', coord_dtype=float64),    function_range=CoordinateSystem(coord_names=('x', 'y', 'z'), name='', coord_dtype=float64),    affine=array([[ 3.,  0.,  0.,  0.],                  [ 0.,  5.,  0.,  0.],                  [ 0.,  0.,  7.,  0.],                  [ 0.,  0.,  0.,  1.]]) )</em><a class="headerlink" href="#nipy.core.image.image.Image.coordmap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="nipy.core.image.image.Image.from_image">
+<em class="property">classmethod </em><code class="descname">from_image</code><span class="sig-paren">(</span><em>klass</em>, <em>img</em>, <em>data=None</em>, <em>coordmap=None</em>, <em>metadata=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.from_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classmethod makes new instance of this <cite>klass</cite> from instance <cite>img</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : array-like</p>
+<blockquote>
+<div><p>object that as attribute <code class="docutils literal"><span class="pre">shape</span></code> and returns an array from
+<code class="docutils literal"><span class="pre">np.asarray(data)</span></code></p>
+</div></blockquote>
+<p><strong>coordmap</strong> : <cite>AffineTransform</cite> object</p>
+<blockquote>
+<div><p>coordmap mapping the domain (input) voxel axes of the image to the
+range (reference, output) axes - usually mm in real world space</p>
+</div></blockquote>
+<p><strong>metadata</strong> : dict, optional</p>
+<blockquote>
+<div><p>Freeform metadata for image.  Most common contents is <code class="docutils literal"><span class="pre">header</span></code>
+from nifti etc loaded images.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>img</strong> : <cite>klass</cite> instance</p>
+<blockquote class="last">
+<div><p>New image with data from <cite>data</cite>, coordmap from <cite>coordmap</cite> maybe
+metadata from <cite>metadata</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Subclasses of <code class="docutils literal"><span class="pre">Image</span></code> with different semantics for <code class="docutils literal"><span class="pre">__init__</span></code> will
+need to override this classmethod.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy</span> <span class="kn">import</span> <span class="n">load_image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.core.api</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.testing</span> <span class="kn">import</span> <span class="n">anatfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aimg</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">anatfile</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">from_image</span><span class="p">(</span><span class="n">aimg</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.image.image.Image.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return data as a numpy array.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.image.image.Image.header">
+<code class="descname">header</code><a class="headerlink" href="#nipy.core.image.image.Image.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>The file header structure for this image, if available.  This interface
+will soon go away - you should use <a href="#id1"><span class="problematic" id="id2">``</span></a>img.metadata[&#8216;header&#8217;] instead.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.image.image.Image.metadata">
+<code class="descname">metadata</code><em class="property"> = {}</em><a class="headerlink" href="#nipy.core.image.image.Image.metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.image.image.Image.ndim">
+<code class="descname">ndim</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.ndim" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.image.image.Image.reference">
+<code class="descname">reference</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.reference" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.image.image.Image.renamed_axes">
+<code class="descname">renamed_axes</code><span class="sig-paren">(</span><em>**names_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.renamed_axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new image with input (domain) axes renamed</p>
+<p>Axes renamed according to the input dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>**names_dict</strong> : dict</p>
+<blockquote>
+<div><p>with keys being old names, and values being new names</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>newimg</strong> : Image</p>
+<blockquote class="last">
+<div><p>An Image with the same data, having its axes renamed.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="mi">11</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">AffineTransform</span><span class="o">.</span><span class="n">from_params</span><span class="p">(</span><span class="s">&#39;ijk&#39;</span><span class="p">,</span> <span class="s">&#39;xyz&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="s">&#39;domain&#39;</span><span class="p">,</span> <span class="s">&#39;range&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_renamed</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">renamed_axes</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="s">&#39;slice&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">im_renamed</span><span class="o">.</span><span class="n">axes</span>
+<span class="go">CoordinateSystem(coord_names=(&#39;slice&#39;, &#39;j&#39;, &#39;k&#39;), name=&#39;domain&#39;, coord_dtype=float64)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.image.image.Image.renamed_reference">
+<code class="descname">renamed_reference</code><span class="sig-paren">(</span><em>**names_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.renamed_reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return new image with renamed output (range) coordinates</p>
+<p>Coordinates renamed according to the dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>**names_dict</strong> : dict</p>
+<blockquote>
+<div><p>with keys being old names, and values being new names</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>newimg</strong> : Image</p>
+<blockquote class="last">
+<div><p>An Image with the same data, having its output coordinates renamed.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="mi">11</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">AffineTransform</span><span class="o">.</span><span class="n">from_params</span><span class="p">(</span><span class="s">&#39;ijk&#39;</span><span class="p">,</span> <span class="s">&#39;xyz&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="s">&#39;domain&#39;</span><span class="p">,</span> <span class="s">&#39;range&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_renamed_reference</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">renamed_reference</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;newx&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&#39;newy&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">im_renamed_reference</span><span class="o">.</span><span class="n">reference</span>
+<span class="go">CoordinateSystem(coord_names=(&#39;newx&#39;, &#39;newy&#39;, &#39;z&#39;), name=&#39;range&#39;, coord_dtype=float64)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.image.image.Image.reordered_axes">
+<code class="descname">reordered_axes</code><span class="sig-paren">(</span><em>order=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.reordered_axes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new Image with reordered input coordinates.</p>
+<p>This transposes the data as well.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>order</strong> : None, sequence, optional</p>
+<blockquote>
+<div><p>Sequence of int (giving indices) or str (giving names) - expressing
+new order of coordmap output coordinates.  None (the default)
+results in reversed ordering.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>r_img</strong> : object</p>
+<blockquote class="last">
+<div><p>Image of same class as <cite>self</cite>, with reordered output coordinates.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cmap</span> <span class="o">=</span> <span class="n">AffineTransform</span><span class="o">.</span><span class="n">from_start_step</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="s">&#39;ijk&#39;</span><span class="p">,</span> <span class="s">&#39;xyz&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s">&#39;domain&#39;</span><span class="p">,</span> <span class="s">&#39;range&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;i&#39;, &#39;j&#39;, &#39;k&#39;), name=&#39;domain&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;x&#39;, &#39;y&#39;, &#39;z&#39;), name=&#39;range&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 4.,  0.,  0.,  1.],</span>
+<span class="go">                 [ 0.,  5.,  0.,  2.],</span>
+<span class="go">                 [ 0.,  0.,  6.,  3.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">50</span><span class="p">)),</span> <span class="n">cmap</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_reordered</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">reordered_axes</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_reordered</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(50, 30, 40)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_reordered</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;k&#39;, &#39;i&#39;, &#39;j&#39;), name=&#39;domain&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;x&#39;, &#39;y&#39;, &#39;z&#39;), name=&#39;range&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 0.,  4.,  0.,  1.],</span>
+<span class="go">                 [ 0.,  0.,  5.,  2.],</span>
+<span class="go">                 [ 6.,  0.,  0.,  3.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.image.image.Image.reordered_reference">
+<code class="descname">reordered_reference</code><span class="sig-paren">(</span><em>order=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.reordered_reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return new Image with reordered output coordinates</p>
+<p>New Image coordmap has reordered output coordinates. This does
+not transpose the data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>order</strong> : None, sequence, optional</p>
+<blockquote>
+<div><p>sequence of int (giving indices) or str (giving names) - expressing
+new order of coordmap output coordinates.  None (the default)
+results in reversed ordering.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>r_img</strong> : object</p>
+<blockquote class="last">
+<div><p>Image of same class as <cite>self</cite>, with reordered output coordinates.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cmap</span> <span class="o">=</span> <span class="n">AffineTransform</span><span class="o">.</span><span class="n">from_start_step</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="s">&#39;ijk&#39;</span><span class="p">,</span> <span class="s">&#39;xyz&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s">&#39;domain&#39;</span><span class="p">,</span> <span class="s">&#39;range&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">50</span><span class="p">)),</span> <span class="n">cmap</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_reordered</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">reordered_reference</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_reordered</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(30, 40, 50)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_reordered</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;i&#39;, &#39;j&#39;, &#39;k&#39;), name=&#39;domain&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;z&#39;, &#39;x&#39;, &#39;y&#39;), name=&#39;range&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 0.,  0.,  6.,  3.],</span>
+<span class="go">                 [ 4.,  0.,  0.,  1.],</span>
+<span class="go">                 [ 0.,  5.,  0.,  2.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.image.image.Image.shape">
+<code class="descname">shape</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.Image.shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="slicemaker">
+<h3><a class="reference internal" href="#nipy.core.image.image.SliceMaker" title="nipy.core.image.image.SliceMaker"><code class="xref py py-class docutils literal"><span class="pre">SliceMaker</span></code></a><a class="headerlink" href="#slicemaker" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.core.image.image.SliceMaker">
+<em class="property">class </em><code class="descclassname">nipy.core.image.image.</code><code class="descname">SliceMaker</code><a class="headerlink" href="#nipy.core.image.image.SliceMaker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class just creates slice objects for image resampling</p>
+<p>It only has a __getitem__ method that returns its argument.</p>
+<p>XXX Wouldn&#8217;t need this if there was a way
+XXX to do this
+XXX subsample(img, [::2,::3,10:1:-1])
+XXX
+XXX Could be something like this Subsample(img)[::2,::3,10:1:-1]</p>
+<dl class="method">
+<dt id="nipy.core.image.image.SliceMaker.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.SliceMaker.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="nipy.core.image.image.fromarray">
+<code class="descclassname">nipy.core.image.image.</code><code class="descname">fromarray</code><span class="sig-paren">(</span><em>data</em>, <em>innames</em>, <em>outnames</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.fromarray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an image from array <cite>data</cite>, and input/output coordinate names</p>
+<p>The mapping between the input and output coordinate names is the identity
+matrix.</p>
+<p>Please don&#8217;t use this routine, but instead prefer:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">nipy.core.api</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">AffineTransform</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">AffineTransform</span><span class="p">(</span><span class="n">innames</span><span class="p">,</span> <span class="n">outnames</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">4</span></code> is <code class="docutils literal"><span class="pre">len(innames)</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : numpy array</p>
+<blockquote>
+<div><p>A numpy array of three dimensions.</p>
+</div></blockquote>
+<p><strong>innames</strong> : sequence</p>
+<blockquote>
+<div><p>a list of input axis names</p>
+</div></blockquote>
+<p><strong>innames</strong> : sequence</p>
+<blockquote>
+<div><p>a list of output axis names</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>image</strong> : An <cite>Image</cite> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></dt>
+<dd>function for loading images</dd>
+<dt><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></dt>
+<dd>function for saving images</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">fromarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)),</span> <span class="s">&#39;ijk&#39;</span><span class="p">,</span> <span class="s">&#39;xyz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;i&#39;, &#39;j&#39;, &#39;k&#39;), name=&#39;&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;x&#39;, &#39;y&#39;, &#39;z&#39;), name=&#39;&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 1.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  1.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  1.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.image.image.is_image">
+<code class="descclassname">nipy.core.image.image.</code><code class="descname">is_image</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.is_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if this object obeys the Image API</p>
+<p>This allows us to test for something that is duck-typing an image.</p>
+<p>For now an array must have a &#8216;coordmap&#8217; attribute, and a callable
+&#8216;get_data&#8217; attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>obj</strong> : object</p>
+<blockquote>
+<div><p>object for which to test API</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>is_img</strong> : bool</p>
+<blockquote class="last">
+<div><p>True if object obeys image API</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.testing</span> <span class="kn">import</span> <span class="n">anatfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.io.api</span> <span class="kn">import</span> <span class="n">load_image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">anatfile</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_image</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.image.image.iter_axis">
+<code class="descclassname">nipy.core.image.image.</code><code class="descname">iter_axis</code><span class="sig-paren">(</span><em>img</em>, <em>axis</em>, <em>asarray=False</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.iter_axis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return generator to slice an image <cite>img</cite> over <cite>axis</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>img</strong> : <code class="docutils literal"><span class="pre">Image</span></code> instance</p>
+<p><strong>axis</strong> : int or str</p>
+<blockquote>
+<div><p>axis identifier, either name or axis number</p>
+</div></blockquote>
+<p><strong>asarray</strong> : {False, True}, optional</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>g</strong> : generator</p>
+<blockquote class="last">
+<div><p>such that list(g) returns a list of slices over <cite>axis</cite>.  If <cite>asarray</cite> is
+<cite>False</cite> the slices are images.  If <cite>asarray</cite> is True, slices are the
+data from the images.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">AffineTransform</span><span class="p">(</span><span class="s">&#39;ijk&#39;</span><span class="p">,</span> <span class="s">&#39;xyz&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iter_axis</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="s">&#39;j&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">slices</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(4, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iter_axis</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="s">&#39;k&#39;</span><span class="p">,</span> <span class="n">asarray</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slices</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="n">data</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.image.image.rollaxis">
+<code class="descclassname">nipy.core.image.image.</code><code class="descname">rollaxis</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.rollaxis" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>rollaxis</cite> is deprecated!
+Please use rollimg instead</p>
+<blockquote>
+<div><p>Roll <cite>axis</cite> backwards, until it lies in the first position.</p>
+<blockquote>
+<div><p>It also reorders the reference coordinates by the same ordering.
+This is done to preserve a diagonal affine matrix if image.affine
+is diagonal. It also makes it possible to unambiguously specify
+an axis to roll along in terms of either a reference name (i.e. &#8216;z&#8217;)
+or an axis name (i.e. &#8216;slice&#8217;).</p>
+<p>This function is deprecated; please use <code class="docutils literal"><span class="pre">rollimg</span></code> instead.</p>
+</div></blockquote>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>img</strong> : Image</p>
+<blockquote>
+<div><blockquote>
+<div><p>Image whose axes and reference coordinates are to be reordered
+by rolling.</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>axis <span class="classifier-delimiter">:</span> <span class="classifier">str or int</span></dt>
+<dd><p class="first last">Axis to be rolled, can be specified by name or as an integer.</p>
+</dd>
+<dt>inverse <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If inverse is True, then axis must be an integer and the first axis is
+returned to the position axis.  This keyword is deprecated and we&#8217;ll
+remove it in a future version of nipy.</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>newimg</strong> : Image</p>
+<blockquote class="last">
+<div><p>Image with reordered axes and reference coordinates.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine_transform</span> <span class="o">=</span> <span class="n">AffineTransform</span><span class="o">.</span><span class="n">from_params</span><span class="p">(</span><span class="s">&#39;ijkl&#39;</span><span class="p">,</span> <span class="s">&#39;xyzt&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">affine_transform</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;), name=&#39;&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;t&#39;), name=&#39;&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 1.,  0.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  2.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  3.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  4.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_t_first</span> <span class="o">=</span> <span class="n">rollaxis</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="s">&#39;t&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">im_t_first</span><span class="o">.</span><span class="n">affine</span><span class="p">)</span>
+<span class="go">array([ 4.,  1.,  2.,  3.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_t_first</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(5, 30, 40, 50)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_t_first</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;l&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;), name=&#39;&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;t&#39;, &#39;x&#39;, &#39;y&#39;, &#39;z&#39;), name=&#39;&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 4.,  0.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  1.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  2.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  3.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.image.image.rollimg">
+<code class="descclassname">nipy.core.image.image.</code><code class="descname">rollimg</code><span class="sig-paren">(</span><em>img</em>, <em>axis</em>, <em>start=0</em>, <em>fix0=True</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.rollimg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Roll <cite>axis</cite> backwards in the inputs, until it lies before <cite>start</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>img</strong> : Image</p>
+<blockquote>
+<div><p>Image whose axes and reference coordinates are to be reordered by
+rollimg.</p>
+</div></blockquote>
+<p><strong>axis</strong> : str or int</p>
+<blockquote>
+<div><p>Axis to be rolled, can be specified by name or as an integer.  If an
+integer, axis is an input axis.  If a name, can be name of input or
+output axis.  If an output axis, we search for the closest matching
+input axis, and raise an AxisError if this fails.</p>
+</div></blockquote>
+<p><strong>start</strong> : str or int, optional</p>
+<blockquote>
+<div><p>position before which to roll axis <cite>axis</cite>.  Default to 0.  Can again be
+an integer (input axis) or name of input or output axis.</p>
+</div></blockquote>
+<p><strong>fix0</strong> : bool, optional</p>
+<blockquote>
+<div><p>Whether to allow for zero scaling when searching for an input axis
+matching an output axis.  Useful for images where time scaling is 0.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>newimg</strong> : Image</p>
+<blockquote class="last">
+<div><p>Image with reordered input axes and corresponding data.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">affine_transform</span> <span class="o">=</span> <span class="n">AffineTransform</span><span class="p">(</span><span class="s">&#39;ijkl&#39;</span><span class="p">,</span> <span class="s">&#39;xyzt&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">affine_transform</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;), name=&#39;&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;t&#39;), name=&#39;&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 1.,  0.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  2.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  3.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  4.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_t_first</span> <span class="o">=</span> <span class="n">rollimg</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="s">&#39;t&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_t_first</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(5, 30, 40, 50)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_t_first</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;l&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;), name=&#39;&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;t&#39;), name=&#39;&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 0.,  1.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  2.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  3.,  0.],</span>
+<span class="go">                 [ 4.,  0.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.image.image.subsample">
+<code class="descclassname">nipy.core.image.image.</code><code class="descname">subsample</code><span class="sig-paren">(</span><em>img</em>, <em>slice_object</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.subsample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subsample an image</p>
+<p>Please don&#8217;t use this function, but use direct image slicing instead.  That
+is, replace:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">frame3</span> <span class="o">=</span> <span class="n">subsample</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">slice_maker</span><span class="p">[:,:,:,</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">frame3</span> <span class="o">=</span> <span class="n">im</span><span class="p">[:,:,:,</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>img</strong> : Image</p>
+<p><strong>slice_object: int, slice or sequence of slice</strong> :</p>
+<blockquote>
+<div><p>An object representing a numpy &#8216;slice&#8217;.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>img_subsampled: Image</strong> :</p>
+<blockquote class="last">
+<div><p>An Image with data img.get_data()[slice_object] and an appropriately
+corrected CoordinateMap.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.io.api</span> <span class="kn">import</span> <span class="n">load_image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.testing</span> <span class="kn">import</span> <span class="n">funcfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.core.api</span> <span class="kn">import</span> <span class="n">subsample</span><span class="p">,</span> <span class="n">slice_maker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">funcfile</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frame3</span> <span class="o">=</span> <span class="n">subsample</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">slice_maker</span><span class="p">[:,:,:,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">frame3</span><span class="o">.</span><span class="n">get_data</span><span class="p">(),</span> <span class="n">im</span><span class="o">.</span><span class="n">get_data</span><span class="p">()[:,:,:,</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.image.image.synchronized_order">
+<code class="descclassname">nipy.core.image.image.</code><code class="descname">synchronized_order</code><span class="sig-paren">(</span><em>img</em>, <em>target_img</em>, <em>axes=True</em>, <em>reference=True</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.image.image.synchronized_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reorder reference and axes of <cite>img</cite> to match target_img.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>img</strong> : Image</p>
+<p><strong>target_img</strong> : Image</p>
+<p><strong>axes</strong> : bool, optional</p>
+<blockquote>
+<div><p>If True, synchronize the order of the axes.</p>
+</div></blockquote>
+<p><strong>reference</strong> : bool, optional</p>
+<blockquote>
+<div><p>If True, synchronize the order of the reference coordinates.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>newimg</strong> : Image</p>
+<blockquote class="last">
+<div><p>An Image satisfying newimg.axes == target.axes (if axes == True),
+newimg.reference == target.reference (if reference == True).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">AffineTransform</span><span class="o">.</span><span class="n">from_params</span><span class="p">(</span><span class="s">&#39;ijkl&#39;</span><span class="p">,</span> <span class="s">&#39;xyzt&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_scrambled</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">reordered_axes</span><span class="p">(</span><span class="s">&#39;iljk&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reordered_reference</span><span class="p">(</span><span class="s">&#39;txyz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">==</span> <span class="n">im_scrambled</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_unscrambled</span> <span class="o">=</span> <span class="n">synchronized_order</span><span class="p">(</span><span class="n">im_scrambled</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">==</span> <span class="n">im_unscrambled</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The images don&#8217;t have to be the same shape</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im2</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">AffineTransform</span><span class="o">.</span><span class="n">from_params</span><span class="p">(</span><span class="s">&#39;ijkl&#39;</span><span class="p">,</span> <span class="s">&#39;xyzt&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_scrambled2</span> <span class="o">=</span> <span class="n">im2</span><span class="o">.</span><span class="n">reordered_axes</span><span class="p">(</span><span class="s">&#39;iljk&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reordered_reference</span><span class="p">(</span><span class="s">&#39;xtyz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_unscrambled2</span> <span class="o">=</span> <span class="n">synchronized_order</span><span class="p">(</span><span class="n">im_scrambled2</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_unscrambled2</span><span class="o">.</span><span class="n">coordmap</span> <span class="o">==</span> <span class="n">im</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>or have the same coordmap</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im3</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data3</span><span class="p">,</span> <span class="n">AffineTransform</span><span class="o">.</span><span class="n">from_params</span><span class="p">(</span><span class="s">&#39;ijkl&#39;</span><span class="p">,</span> <span class="s">&#39;xyzt&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_scrambled3</span> <span class="o">=</span> <span class="n">im3</span><span class="o">.</span><span class="n">reordered_axes</span><span class="p">(</span><span class="s">&#39;iljk&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reordered_reference</span><span class="p">(</span><span class="s">&#39;xtyz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_unscrambled3</span> <span class="o">=</span> <span class="n">synchronized_order</span><span class="p">(</span><span class="n">im_scrambled3</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_unscrambled3</span><span class="o">.</span><span class="n">axes</span> <span class="o">==</span> <span class="n">im</span><span class="o">.</span><span class="n">axes</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_unscrambled3</span><span class="o">.</span><span class="n">reference</span> <span class="o">==</span> <span class="n">im</span><span class="o">.</span><span class="n">reference</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_unscrambled4</span> <span class="o">=</span> <span class="n">synchronized_order</span><span class="p">(</span><span class="n">im_scrambled3</span><span class="p">,</span> <span class="n">im</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_unscrambled4</span><span class="o">.</span><span class="n">axes</span> <span class="o">==</span> <span class="n">im</span><span class="o">.</span><span class="n">axes</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_unscrambled4</span><span class="o">.</span><span class="n">axes</span> <span class="o">==</span> <span class="n">im_scrambled3</span><span class="o">.</span><span class="n">axes</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im_unscrambled4</span><span class="o">.</span><span class="n">reference</span> <span class="o">==</span> <span class="n">im</span><span class="o">.</span><span class="n">reference</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.algorithms.utils.pca.html" title="algorithms.utils.pca"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

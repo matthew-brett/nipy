@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../../index.html" />
+    <link rel="up" title="Defining use cases" href="index.html" />
+    <link rel="next" title="Image model use cases" href="images.html" />
+    <link rel="prev" title="Defining use cases" href="index.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../../index.html">
+  <img src="../../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="images.html" title="Image model use cases"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Defining use cases"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >Developer Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" >Code discussions</a> &raquo;</li>
+          <li class="nav-item nav-item-4"><a href="index.html" accesskey="U">Defining use cases</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../../documentation.html">Documentation</a></li>
+    <li><a href="../../index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Transformation use cases</a><ul>
+<li><a class="reference internal" href="#image-orientation">Image Orientation</a></li>
+<li><a class="reference internal" href="#creating-transformations-co-ordinate-maps">Creating transformations / co-ordinate maps</a><ul>
+<li><a class="reference internal" href="#composing-transforms">Composing transforms</a></li>
+<li><a class="reference internal" href="#real-world-to-real-world-transform">Real world to real world transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Defining use cases</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="images.html"
+                        title="next chapter">Image model use cases</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/devel/code_discussions/usecases/transformations.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="transformation-use-cases">
+<span id="transformations"></span><h1>Transformation use cases<a class="headerlink" href="#transformation-use-cases" title="Permalink to this headline">¶</a></h1>
+<p>Use cases for defining and using transforms on images.</p>
+<p>We should be very careful to only use the terms <code class="docutils literal"><span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">z</span></code> to refer to
+physical space.  For voxels, we should use <code class="docutils literal"><span class="pre">i,</span> <span class="pre">j,</span> <span class="pre">k</span></code>, or <code class="docutils literal"><span class="pre">i',</span> <span class="pre">j',</span> <span class="pre">k'</span></code> (i
+prime, j prime k prime).</p>
+<p>I have an image <em>Img</em>.</p>
+<div class="section" id="image-orientation">
+<h2>Image Orientation<a class="headerlink" href="#image-orientation" title="Permalink to this headline">¶</a></h2>
+<p>I would like to know what the voxel sizes are.</p>
+<p>I would like to determine whether it was acquired axially,
+coronally or sagittally.  What is the brain orientation in relation to
+the voxels?  Has it been acquired at an oblique angle?  What are the
+voxel dimensions?:</p>
+<div class="highlight-python"><div class="highlight"><pre>img = load_image(file)
+cm = img.coordmap
+print cm
+
+input_coords axis_i:
+             axis_j:
+             axis_k:
+
+             effective pixel dimensions
+                            axis_i: 4mm
+                            axis_j: 2mm
+                            axis_k: 2mm
+
+input/output mapping
+               &lt;Affine Matrix&gt;
+
+
+
+
+                   x   y   z
+                 ------------
+               i|  90  90   0
+               j|  90   0  90
+               k| 180  90  90
+
+               input axis_i maps exactly to output axis_z
+               input axis_j maps exactly to output axis_y
+               input axis_k maps exactly to output axis_x flipped 180
+
+output_coords axis0: Left -&gt; Right
+              axis1: Posterior -&gt; Anterior
+              axis2: Inferior -&gt; Superior
+</pre></div>
+</div>
+<p>In the case of a mapping that does not exactly align the input and
+output axes, something like:</p>
+<div class="highlight-python"><div class="highlight"><pre>...
+input/output mapping
+               &lt;Affine Matrix&gt;
+
+               input axis0 maps closest to output axis2
+               input axis1 maps closest to output axis1
+               input axis2 maps closest to output axis0
+...
+</pre></div>
+</div>
+<p>If the best matching axis is reversed compared to input axis:</p>
+<div class="highlight-python"><div class="highlight"><pre>...
+input axis0 maps [closest|exactly] to negative output axis2
+</pre></div>
+</div>
+<p>and so on.</p>
+</div>
+<div class="section" id="creating-transformations-co-ordinate-maps">
+<h2>Creating transformations / co-ordinate maps<a class="headerlink" href="#creating-transformations-co-ordinate-maps" title="Permalink to this headline">¶</a></h2>
+<p>I have an array <em>pixelarray</em> that represents voxels in an image and have a
+matrix/transform <em>mat</em> which represents the relation between the voxel
+coordinates and the coordinates in scanner space (world coordinates).
+I want to associate the array with the matrix:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">img</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+<span class="n">pixelarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<em>pixelarray</em> is an array and does not have a coordinate map.):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pixelarray</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="mi">40</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>So, now I have some arbitrary transformation matrix:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="c"># giving x mm scaling</span>
+<span class="n">mat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="c"># giving y mm scaling</span>
+<span class="n">mat</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span> <span class="c"># giving z mm scaling</span>
+<span class="n">mat</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># because it must be so</span>
+<span class="c"># Note inverse diagonal for zyx-&gt;xyz coordinate flip</span>
+</pre></div>
+</div>
+<p>I want to make an <code class="docutils literal"><span class="pre">Image</span></code> with these two:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">coordmap</span> <span class="o">=</span> <span class="n">voxel2mm</span><span class="p">(</span><span class="n">pixelarray</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mat</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">pixelarray</span><span class="p">,</span> <span class="n">coordmap</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">voxel2mm</span></code> function allows separation of the image <em>array</em> from
+the size of the array, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">coordmap</span> <span class="o">=</span> <span class="n">voxel2mm</span><span class="p">((</span><span class="mi">40</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">),</span> <span class="n">mat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We could have another way of constructing image which allows passing
+of <em>mat</em> directly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">pixelarray</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="n">mat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">from_data_and_mat</span><span class="p">(</span><span class="n">pixelarray</span><span class="p">,</span> <span class="n">mat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>but there should be &#8220;only one (obvious) way to do it&#8221;.</p>
+<div class="section" id="composing-transforms">
+<h3>Composing transforms<a class="headerlink" href="#composing-transforms" title="Permalink to this headline">¶</a></h3>
+<p>I have two images, <em>img1</em> and <em>img2</em>.  Each image has a voxel-to-world
+transform associated with it.  (The &#8220;world&#8221; for these two transforms
+could be similar or even identical in the case of an fmri series.)  I
+would like to get from voxel coordinates in <em>img1</em> to voxel
+coordinates in <em>img2</em>, for resampling:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">imgA</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">infile_A</span><span class="p">)</span>
+<span class="n">vx2mmA</span> <span class="o">=</span> <span class="n">imgA</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="n">imgB</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">infile_B</span><span class="p">)</span>
+<span class="n">vx2mmB</span> <span class="o">=</span> <span class="n">imgB</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="n">mm2vxB</span> <span class="o">=</span> <span class="n">vx2mmB</span><span class="o">.</span><span class="n">inverse</span>
+<span class="c"># I want to first apply transform implied in</span>
+<span class="c"># cmA, then the inverse of transform implied in</span>
+<span class="c"># cmB.  If these are matrices then this would be</span>
+<span class="c"># np.dot(mm2vxB, vx2mmA)</span>
+<span class="n">voxA_to_voxB</span> <span class="o">=</span> <span class="n">mm2vxB</span><span class="o">.</span><span class="n">composewith</span><span class="p">(</span><span class="n">vx2mmA</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The (matrix) multiply version of this syntax would be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">voxA_to_voxB</span> <span class="o">=</span> <span class="n">mm2vxB</span> <span class="o">*</span> <span class="n">vx2mmA</span>
+</pre></div>
+</div>
+<p>Composition should be of form <code class="docutils literal"><span class="pre">Second.composewith(First)</span></code> - as in
+<code class="docutils literal"><span class="pre">voxA_to_voxB</span> <span class="pre">=</span> <span class="pre">mm2vxB.composewith(vx2mmA)</span></code> above. The alternative
+is <code class="docutils literal"><span class="pre">First.composewith(Second)</span></code>, as in <code class="docutils literal"><span class="pre">voxA_to_voxB</span> <span class="pre">=</span>
+<span class="pre">vx2mmA.composewith(mm2vxB)</span></code>.  We choose <code class="docutils literal"><span class="pre">Second.composewith(First)</span></code>
+on the basis that people need to understand the mathematics of
+function composition to some degree - see
+<a class="reference external" href="http://en.wikipedia.org/wiki/Function_composition">wikipedia_function_composition</a>.</p>
+</div>
+<div class="section" id="real-world-to-real-world-transform">
+<h3>Real world to real world transform<a class="headerlink" href="#real-world-to-real-world-transform" title="Permalink to this headline">¶</a></h3>
+<p>We remind each other that a mapping is a function (callable) that takes
+coordinates as input and returns coordinates as output.  So, if <em>M</em> is
+a mapping then:</p>
+<div class="highlight-python"><div class="highlight"><pre>[i&#39;,j&#39;,k&#39;] = M(i, j, k)
+</pre></div>
+</div>
+<p>where the <em>i, j, k</em> tuple is a coordinate, and the <em>i&#8217;, j&#8217;, k&#8217;</em> tuple is a
+transformed coordinate.</p>
+<p>Let us imagine we have somehow come by a mapping <em>T</em> that relates a
+coordinate in a world space (mm) to other coordinates in a world
+space.  A registration may return such a real-world to
+real-world mapping.  Let us say that <em>V</em> is a useful mapping
+matching the voxel coordinates in <em>img1</em> to voxel coordinates in
+<em>img2</em>.  If <em>img1</em> has a voxel to mm mapping <em>M1</em> and <em>img2</em> has a mm
+to voxel mapping of <em>inv_M2</em>, as in the previous example (repeated here):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">imgA</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">infile_A</span><span class="p">)</span>
+<span class="n">vx2mmA</span> <span class="o">=</span> <span class="n">imgA</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="n">imgB</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="n">infile_B</span><span class="p">)</span>
+<span class="n">vx2mmB</span> <span class="o">=</span> <span class="n">imgB</span><span class="o">.</span><span class="n">coordmap</span>
+<span class="n">mm2vxB</span> <span class="o">=</span> <span class="n">vx2mmB</span><span class="o">.</span><span class="n">inverse</span>
+</pre></div>
+</div>
+<p>then the registration may return the some coordinate map, <em>T</em> such that the
+intended mapping <em>V</em> from voxels in <em>img1</em> to voxels in <em>img2</em> is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mm2vxB_map</span> <span class="o">=</span> <span class="n">mm2vxB</span><span class="o">.</span><span class="n">mapping</span>
+<span class="n">vx2mmA_map</span> <span class="o">=</span> <span class="n">vx2mmA</span><span class="o">.</span><span class="n">mapping</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">mm2vxB_map</span><span class="o">.</span><span class="n">composewith</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">composedwith</span><span class="p">(</span><span class="n">vx2mmA_map</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>To support this, there should be a CoordinateMap constructor that
+looks like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">T_coordmap</span> <span class="o">=</span> <span class="n">mm2mm</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <em>T</em> is a mapping, so that:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">V_coordmap</span> <span class="o">=</span> <span class="n">mm2vxB</span><span class="o">.</span><span class="n">composewith</span><span class="p">(</span><span class="n">T_coordmap</span><span class="o">.</span><span class="n">composedwith</span><span class="p">(</span><span class="n">vx2mmA</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>I have done a coregistration between two images, <em>img1</em> and <em>img2</em>.
+This has given me a voxel-to-voxel transformation and I want to store
+this transformation in such a way that I can use this transform to
+resample <em>img1</em> to <em>img2</em>.  <a class="reference internal" href="resampling.html#resampling"><span>Resampling use cases</span></a></p>
+<p>I have done a coregistration between two images, <em>img1</em> and <em>img2</em>. I
+may want this to give me a worldA-to-worldB transformation, where
+worldA is the world of voxel-to-world for <em>img1</em>, and worldB is the
+world of voxel-to-world of <em>img2</em>.</p>
+<p>My <em>img1</em> has a voxel to world transformation.  This transformation
+may (for example) have come from the scanner that acquired the image -
+so telling me how the voxel positions in <em>img1</em> correspond to
+physical coordinates in terms of the magnet isocenter and millimeters
+in terms of the primary gradient orientations (x, y and z). I have the
+same for <em>img2</em>.  For example, I might choose to display this image
+resampled so each voxel is a 1mm cube.</p>
+<p>Now I have these transformations:  ST(<em>img1</em>-V2W), and
+ST(<em>img2</em>-V2W) (where ST is <em>scanner tranform</em> as above, and <em>V2W</em> is
+voxel to world).</p>
+<p>I have now done a coregistration between <em>img1</em> and <em>img2</em>
+(somehow) - giving me, in addition to <em>img1</em> and <em>img2</em>, a
+transformation that registers <em>img1</em> and <em>img2</em>. Let&#8217;s call this
+tranformation V2V(<em>img1</em>, <em>img2</em>), where V2V is voxel-to-voxel.</p>
+<p>In actuality <em>img2</em> can be an array of images, such as series of fMRI
+images and I want to align all the <em>img2</em> series to <em>img1</em> and then
+take these voxel-to-voxel aligned images (the <em>img1</em> and <em>img2</em> array)
+and remap them to the world space (voxel-to-world). Since remapping is
+an interpolation operation I can generate errors in the resampled
+pixel values. If I do more than one resampling, error will
+accumulate. I want to do only a single resampling. To avoid the errors
+associated with resampling I will build a <em>composite transformation</em>
+that will chain the separate voxel-to-voxel and voxel-to-world
+transformations into a single transformation function (such as an
+affine matrix that is the result of multiplying the several affine
+matrices together). With this single <em>composite transformatio</em> I now
+resample <em>img1</em> and <em>img2</em> and put them into the world coordinate
+system from which I can make measurements.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="images.html" title="Image model use cases"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Defining use cases"
+             >previous</a> |</li>
+  <li><a href="../../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >Developer Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" >Code discussions</a> &raquo;</li>
+          <li class="nav-item nav-item-4"><a href="index.html" >Defining use cases</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

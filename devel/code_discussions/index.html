@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="Developer Guide" href="../index.html" />
+    <link rel="next" title="Understanding voxel and real world mappings" href="understanding_affines.html" />
+    <link rel="prev" title="TODO for nipy development" href="../planning/TODO.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="understanding_affines.html" title="Understanding voxel and real world mappings"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../planning/TODO.html" title="TODO for nipy development"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">Developer Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../planning/TODO.html"
+                        title="previous chapter">TODO for nipy development</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="understanding_affines.html"
+                        title="next chapter">Understanding voxel and real world mappings</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/devel/code_discussions/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="code-discussions">
+<span id="id1"></span><h1>Code discussions<a class="headerlink" href="#code-discussions" title="Permalink to this headline">¶</a></h1>
+<p>These are some developer discussions about design of code in NIPY.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">0.4.0.dev</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">August 27, 2015</td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="understanding_affines.html">Understanding voxel and real world mappings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="understanding_affines.html#voxel-coordinates-and-real-world-coordinates">Voxel coordinates and real-world coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understanding_affines.html#image-index-ordering">Image index ordering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="image_ordering.html">Image index ordering</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="image_ordering.html#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_ordering.html#the-problem">The problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_ordering.html#native-fortran-or-c-indexing-for-images">Native fortran or C indexing for images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_ordering.html#an-alternative-proposal-xyz-ordering-of-output-coordinates">An alternative proposal - XYZ ordering of output coordinates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="registration_api.html">Registration API Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="registration_api.html#transform-multiplication">Transform Multiplication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="registration_api.html#matching-coordinate-systems">Matching Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="registration_api.html#coordinatemap">CoordinateMap</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="repository_design.html">Repository design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="brainvisa_repositories.html">Can NIPY get something interesting from BrainVISA databases?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="brainvisa_repositories.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainvisa_repositories.html#what-is-a-database-in-brainvisa-today">What is a database in BrainVISA today?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainvisa_repositories.html#a-few-thoughts-about-a-possible-api-for-repositories">A few thoughts about a possible API for repositories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="repository_api.html">Repository API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelining_api.html">What would pipelining look like?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple_viewer.html">Simple image viewer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple_viewer.html#other-attempts">Other attempts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usecases/index.html">Defining use cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usecases/transformations.html">Transformation use cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usecases/images.html">Image model use cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usecases/resampling.html">Resampling use cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usecases/batching.html">Batching use cases</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="refactoring/index.html">Defining use cases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="refactoring/imagelists.html">Refactoring imagelists</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="comparisons/index.html">Software Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="comparisons/vtk_datasets.html">VTK datasets</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="understanding_affines.html" title="Understanding voxel and real world mappings"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../planning/TODO.html" title="TODO for nipy development"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >Developer Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

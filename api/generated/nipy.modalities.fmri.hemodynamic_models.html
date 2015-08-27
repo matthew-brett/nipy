@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="API" href="../index.html" />
+    <link rel="next" title="modalities.fmri.hrf" href="nipy.modalities.fmri.hrf.html" />
+    <link rel="prev" title="modalities.fmri.glm" href="nipy.modalities.fmri.glm.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.modalities.fmri.hrf.html" title="modalities.fmri.hrf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nipy.modalities.fmri.glm.html" title="modalities.fmri.glm"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modalities.fmri.hemodynamic_models</a><ul>
+<li><a class="reference internal" href="#module-nipy.modalities.fmri.hemodynamic_models">Module: <code class="docutils literal"><span class="pre">modalities.fmri.hemodynamic_models</span></code></a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nipy.modalities.fmri.glm.html"
+                        title="previous chapter">modalities.fmri.glm</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nipy.modalities.fmri.hrf.html"
+                        title="next chapter">modalities.fmri.hrf</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/generated/nipy.modalities.fmri.hemodynamic_models.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="modalities-fmri-hemodynamic-models">
+<h1>modalities.fmri.hemodynamic_models<a class="headerlink" href="#modalities-fmri-hemodynamic-models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-nipy.modalities.fmri.hemodynamic_models">
+<span id="module-modalities-fmri-hemodynamic-models"></span><h2>Module: <code class="xref py py-mod docutils literal"><span class="pre">modalities.fmri.hemodynamic_models</span></code><a class="headerlink" href="#module-nipy.modalities.fmri.hemodynamic_models" title="Permalink to this headline">¶</a></h2>
+<p>This module is for canonical hrf specification.
+Here we provide for SPM, Glover hrfs and finite timpulse response (FIR) models.
+This module closely follows SPM implementation</p>
+<p>Author: Bertrand Thirion, 2011&#8211;2013</p>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="nipy.modalities.fmri.hemodynamic_models.compute_regressor">
+<code class="descclassname">nipy.modalities.fmri.hemodynamic_models.</code><code class="descname">compute_regressor</code><span class="sig-paren">(</span><em>exp_condition</em>, <em>hrf_model</em>, <em>frametimes</em>, <em>con_id='cond'</em>, <em>oversampling=16</em>, <em>fir_delays=None</em>, <em>min_onset=-24</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.modalities.fmri.hemodynamic_models.compute_regressor" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the main function to convolve regressors with hrf model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>exp_condition: descriptor of an experimental condition</strong> :</p>
+<p><strong>hrf_model: string, the hrf model to be used. Can be chosen among:</strong> :</p>
+<blockquote>
+<div><p>&#8216;spm&#8217;, &#8216;spm_time&#8217;, &#8216;spm_time_dispersion&#8217;, &#8216;canonical&#8217;,
+&#8216;canonical_derivative&#8217;, &#8216;fir&#8217;</p>
+</div></blockquote>
+<p><strong>frametimes: array of shape (n):the sought</strong> :</p>
+<p><strong>con_id: string, optional identifier of the condition</strong> :</p>
+<p><strong>oversampling: int, optional, oversampling factor to perform the convolution</strong> :</p>
+<p><strong>fir_delays: array-like of int, onsets corresponding to the fir basis</strong> :</p>
+<p><strong>min_onset: float, optional</strong> :</p>
+<blockquote>
+<div><p>minimal onset relative to frametimes[0] (in seconds)
+events that start before frametimes[0] + min_onset are not considered</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>creg: array of shape(n_scans, n_reg): computed regressors sampled</strong> :</p>
+<blockquote>
+<div><p>at frametimes</p>
+</div></blockquote>
+<p class="last"><strong>reg_names: list of strings, corresponding regressor names</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The different hemodynamic models can be understood as follows:
+&#8216;spm&#8217;: this is the hrf model used in spm
+&#8216;spm_time&#8217;: this is the spm model plus its time derivative (2 regressors)
+&#8216;spm_time_dispersion&#8217;: idem, plus dispersion derivative (3 regressors)
+&#8216;canonical&#8217;: this one corresponds to the Glover hrf
+&#8216;canonical_derivative&#8217;: the Glover hrf + time derivative (2 regressors)
+&#8216;fir&#8217;: finite impulse response basis, a set of delayed dirac models</p>
+<blockquote>
+<div>with arbitrary length. This one currently assumes regularly spaced
+frametimes (i.e. fixed time of repetition).</div></blockquote>
+<p>It is expected that spm standard and Glover model would not yield
+large differences in most cases.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.modalities.fmri.hemodynamic_models.glover_hrf">
+<code class="descclassname">nipy.modalities.fmri.hemodynamic_models.</code><code class="descname">glover_hrf</code><span class="sig-paren">(</span><em>tr</em>, <em>oversampling=16</em>, <em>time_length=32.0</em>, <em>onset=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.modalities.fmri.hemodynamic_models.glover_hrf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of the Glover hrf model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>tr: float, scan repeat time, in seconds</strong> :</p>
+<p><strong>oversampling: int, temporal oversampling factor, optional</strong> :</p>
+<p><strong>time_length: float, hrf kernel length, in seconds</strong> :</p>
+<p><strong>onset: float, onset of the response</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>hrf: array of shape(length / tr * oversampling, float),</strong> :</p>
+<blockquote class="last">
+<div><p>hrf sampling on the oversampled time grid</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.modalities.fmri.hemodynamic_models.glover_time_derivative">
+<code class="descclassname">nipy.modalities.fmri.hemodynamic_models.</code><code class="descname">glover_time_derivative</code><span class="sig-paren">(</span><em>tr</em>, <em>oversampling=16</em>, <em>time_length=32.0</em>, <em>onset=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.modalities.fmri.hemodynamic_models.glover_time_derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of the flover time derivative hrf (dhrf) model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>tr: float, scan repeat time, in seconds</strong> :</p>
+<p><strong>oversampling: int, temporal oversampling factor, optional</strong> :</p>
+<p><strong>time_length: float, hrf kernel length, in seconds</strong> :</p>
+<p><strong>onset: float, onset of the response</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dhrf: array of shape(length / tr, float),</strong> :</p>
+<blockquote class="last">
+<div><p>dhrf sampling on the provided grid</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.modalities.fmri.hemodynamic_models.spm_dispersion_derivative">
+<code class="descclassname">nipy.modalities.fmri.hemodynamic_models.</code><code class="descname">spm_dispersion_derivative</code><span class="sig-paren">(</span><em>tr</em>, <em>oversampling=16</em>, <em>time_length=32.0</em>, <em>onset=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.modalities.fmri.hemodynamic_models.spm_dispersion_derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of the SPM dispersion derivative hrf model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>tr: float, scan repeat time, in seconds</strong> :</p>
+<p><strong>oversampling: int, temporal oversampling factor, optional</strong> :</p>
+<p><strong>time_length: float, hrf kernel length, in seconds</strong> :</p>
+<p><strong>onset: float, onset of the response</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dhrf: array of shape(length / tr * oversampling, float),</strong> :</p>
+<blockquote class="last">
+<div><p>dhrf sampling on the oversampled time grid</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.modalities.fmri.hemodynamic_models.spm_hrf">
+<code class="descclassname">nipy.modalities.fmri.hemodynamic_models.</code><code class="descname">spm_hrf</code><span class="sig-paren">(</span><em>tr</em>, <em>oversampling=16</em>, <em>time_length=32.0</em>, <em>onset=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.modalities.fmri.hemodynamic_models.spm_hrf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of the SPM hrf model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>tr: float, scan repeat time, in seconds</strong> :</p>
+<p><strong>oversampling: int, temporal oversampling factor, optional</strong> :</p>
+<p><strong>time_length: float, hrf kernel length, in seconds</strong> :</p>
+<p><strong>onset: float, onset of the response</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>hrf: array of shape(length / tr * oversampling, float),</strong> :</p>
+<blockquote class="last">
+<div><p>hrf sampling on the oversampled time grid</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.modalities.fmri.hemodynamic_models.spm_time_derivative">
+<code class="descclassname">nipy.modalities.fmri.hemodynamic_models.</code><code class="descname">spm_time_derivative</code><span class="sig-paren">(</span><em>tr</em>, <em>oversampling=16</em>, <em>time_length=32.0</em>, <em>onset=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.modalities.fmri.hemodynamic_models.spm_time_derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of the SPM time derivative hrf (dhrf) model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>tr: float, scan repeat time, in seconds</strong> :</p>
+<p><strong>oversampling: int, temporal oversampling factor, optional</strong> :</p>
+<p><strong>time_length: float, hrf kernel length, in seconds</strong> :</p>
+<p><strong>onset: float, onset of the response</strong> :</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dhrf: array of shape(length / tr, float),</strong> :</p>
+<blockquote class="last">
+<div><p>dhrf sampling on the provided grid</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.modalities.fmri.hrf.html" title="modalities.fmri.hrf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="nipy.modalities.fmri.glm.html" title="modalities.fmri.glm"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

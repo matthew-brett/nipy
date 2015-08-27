@@ -1,0 +1,5 @@
+<map id="inheritance32493386b4" name="inheritance32493386b4">
+<area shape="rect" id="node1" href="#nipy.modalities.fmri.experimental_paradigm.BlockParadigm" title="Class to handle block paradigms" alt="" coords="347,5,651,32"/>
+<area shape="rect" id="node2" href="#nipy.modalities.fmri.experimental_paradigm.Paradigm" title="Simple class to handle the experimental paradigm in one session" alt="" coords="5,31,275,57"/>
+<area shape="rect" id="node3" href="#nipy.modalities.fmri.experimental_paradigm.EventRelatedParadigm" title="Class to handle event&#45;related paradigms" alt="" coords="323,56,675,82"/>
+</map>

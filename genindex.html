@@ -1,0 +1,2741 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="index.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="index.html">
+  <img src="_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="#" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+  <li><a href="index.html">NIPY home</a> |&nbsp;</li>
+ 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="documentation.html">Documentation</a></li>
+    <li><a href="devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+
+   
+
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
+ | <a href="#Z"><strong>Z</strong></a>
+ 
+</div>
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.__init__">__init__() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.SliceMaker.__init__">(nipy.core.image.image.SliceMaker method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.image.image_list.html#nipy.core.image.image_list.ImageList.__init__">(nipy.core.image.image_list.ImageList method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.array_coords.html#nipy.core.reference.array_coords.ArrayCoordMap.__init__">(nipy.core.reference.array_coords.ArrayCoordMap method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.array_coords.html#nipy.core.reference.array_coords.Grid.__init__">(nipy.core.reference.array_coords.Grid method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.__init__">(nipy.core.reference.coordinate_map.AffineTransform method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AxisError.__init__">(nipy.core.reference.coordinate_map.AxisError method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordMapMaker.__init__">(nipy.core.reference.coordinate_map.CoordMapMaker method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordMapMakerError.__init__">(nipy.core.reference.coordinate_map.CoordMapMakerError method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.__init__">(nipy.core.reference.coordinate_map.CoordinateMap method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordSysMaker.__init__">(nipy.core.reference.coordinate_system.CoordSysMaker method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordSysMakerError.__init__">(nipy.core.reference.coordinate_system.CoordSysMakerError method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystem.__init__">(nipy.core.reference.coordinate_system.CoordinateSystem method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystemError.__init__">(nipy.core.reference.coordinate_system.CoordinateSystemError method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.AffineError.__init__">(nipy.core.reference.spaces.AffineError method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.AxesError.__init__">(nipy.core.reference.spaces.AxesError method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.SpaceError.__init__">(nipy.core.reference.spaces.SpaceError method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.SpaceTypeError.__init__">(nipy.core.reference.spaces.SpaceTypeError method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.__init__">(nipy.core.reference.spaces.XYZSpace method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.SpmInfo.__init__">(nipy.interfaces.spm.SpmInfo method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.io.nifti_ref.html#nipy.io.nifti_ref.NiftiError.__init__">(nipy.io.nifti_ref.NiftiError method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_transform.html#nipy.labs.datasets.transforms.affine_transform.AffineTransform.__init__">(nipy.labs.datasets.transforms.affine_transform.AffineTransform method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.CompositionError.__init__">(nipy.labs.datasets.transforms.transform.CompositionError method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.Transform.__init__">(nipy.labs.datasets.transforms.transform.Transform method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.__init__">(nipy.labs.datasets.volumes.volume_data.VolumeData method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField.__init__">(nipy.labs.datasets.volumes.volume_field.VolumeField method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.__init__">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.__init__">(nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.__init__">(nipy.labs.spatial_models.parcellation.MultiSubjectParcellation method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.spatial_models.structural_bfls.html#nipy.labs.spatial_models.structural_bfls.LandmarkRegions.__init__">(nipy.labs.spatial_models.structural_bfls.LandmarkRegions method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseSlicer.__init__">(nipy.labs.viz_tools.slicers.BaseSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseStackedSlicer.__init__">(nipy.labs.viz_tools.slicers.BaseStackedSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.CutAxes.__init__">(nipy.labs.viz_tools.slicers.CutAxes method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.OrthoSlicer.__init__">(nipy.labs.viz_tools.slicers.OrthoSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.XSlicer.__init__">(nipy.labs.viz_tools.slicers.XSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.YSlicer.__init__">(nipy.labs.viz_tools.slicers.YSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.ZSlicer.__init__">(nipy.labs.viz_tools.slicers.ZSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.design_matrix.html#nipy.modalities.fmri.design_matrix.DesignMatrix.__init__">(nipy.modalities.fmri.design_matrix.DesignMatrix method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#nipy.modalities.fmri.experimental_paradigm.BlockParadigm.__init__">(nipy.modalities.fmri.experimental_paradigm.BlockParadigm method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#nipy.modalities.fmri.experimental_paradigm.EventRelatedParadigm.__init__">(nipy.modalities.fmri.experimental_paradigm.EventRelatedParadigm method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#nipy.modalities.fmri.experimental_paradigm.Paradigm.__init__">(nipy.modalities.fmri.experimental_paradigm.Paradigm method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.fmri.html#nipy.modalities.fmri.fmri.FmriImageList.__init__">(nipy.modalities.fmri.fmri.FmriImageList method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#nipy.modalities.fmri.fmristat.outputters.RegressionOutput.__init__">(nipy.modalities.fmri.fmristat.outputters.RegressionOutput method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#nipy.modalities.fmri.fmristat.outputters.RegressionOutputList.__init__">(nipy.modalities.fmri.fmristat.outputters.RegressionOutputList method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#nipy.modalities.fmri.fmristat.outputters.TOutput.__init__">(nipy.modalities.fmri.fmristat.outputters.TOutput method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.DocTestSkip.__init__">(nipy.testing.doctester.DocTestSkip method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDocTestFinder.__init__">(nipy.testing.doctester.NipyDocTestFinder method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.__init__">(nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.testing.nosetester.html#nipy.testing.nosetester.NipyNoseTester.__init__">(nipy.testing.nosetester.NipyNoseTester method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.add_options">add_options() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.addOptions">addOptions() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.affine">affine (nipy.core.reference.coordinate_map.AffineTransform attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_transform.html#nipy.labs.datasets.transforms.affine_transform.AffineTransform.affine">(nipy.labs.datasets.transforms.affine_transform.AffineTransform attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.affine">(nipy.labs.datasets.volumes.volume_img.VolumeImg attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.affine">affine() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.maps_3d.html#nipy.labs.viz_tools.maps_3d.affine_img_src">affine_img_src() (in module nipy.labs.viz_tools.maps_3d)</a>, <a href="labs/generated/nipy.labs.viz_tools.maps_3d.affine_img_src.html#nipy.labs.viz_tools.maps_3d.affine_img_src">[1]</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordMapMaker.affine_maker">affine_maker (nipy.core.reference.coordinate_map.CoordMapMaker attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.AffineError">AffineError (class in nipy.core.reference.spaces)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform">AffineTransform (class in nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_transform.html#nipy.labs.datasets.transforms.affine_transform.AffineTransform">(class in nipy.labs.datasets.transforms.affine_transform)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="glossary.html#term-afni"><strong>AFNI</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.afterContext">afterContext() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.cm.html#nipy.labs.viz_tools.cm.alpha_cmap">alpha_cmap() (in module nipy.labs.viz_tools.cm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseSlicer.annotate">annotate() (nipy.labs.viz_tools.slicers.BaseSlicer method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseStackedSlicer.annotate">(nipy.labs.viz_tools.slicers.BaseStackedSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.OrthoSlicer.annotate">(nipy.labs.viz_tools.slicers.OrthoSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.XSlicer.annotate">(nipy.labs.viz_tools.slicers.XSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.YSlicer.annotate">(nipy.labs.viz_tools.slicers.YSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.ZSlicer.annotate">(nipy.labs.viz_tools.slicers.ZSlicer method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.append_io_dim">append_io_dim() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_utils.html#nipy.labs.datasets.transforms.affine_utils.apply_affine">apply_affine() (in module nipy.labs.datasets.transforms.affine_utils)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AxisError.args">args (nipy.core.reference.coordinate_map.AxisError attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordMapMakerError.args">(nipy.core.reference.coordinate_map.CoordMapMakerError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordSysMakerError.args">(nipy.core.reference.coordinate_system.CoordSysMakerError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystemError.args">(nipy.core.reference.coordinate_system.CoordinateSystemError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.AffineError.args">(nipy.core.reference.spaces.AffineError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.AxesError.args">(nipy.core.reference.spaces.AxesError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.SpaceError.args">(nipy.core.reference.spaces.SpaceError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.SpaceTypeError.args">(nipy.core.reference.spaces.SpaceTypeError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.io.nifti_ref.html#nipy.io.nifti_ref.NiftiError.args">(nipy.io.nifti_ref.NiftiError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.CompositionError.args">(nipy.labs.datasets.transforms.transform.CompositionError attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.array_coords.html#nipy.core.reference.array_coords.ArrayCoordMap">ArrayCoordMap (class in nipy.core.reference.array_coords)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.io.files.html#nipy.io.files.as_image">as_image() (in module nipy.io.files)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.as_map">as_map() (nipy.core.reference.spaces.XYZSpace method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.as_tuple">as_tuple() (nipy.core.reference.spaces.XYZSpace method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.converters.html#nipy.labs.datasets.converters.as_volume_img">as_volume_img() (in module nipy.labs.datasets.converters)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.as_volume_img">(nipy.labs.datasets.volumes.volume_data.VolumeData method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField.as_volume_img">(nipy.labs.datasets.volumes.volume_field.VolumeField method)</a>, <a href="labs/generated/nipy.labs.datasets.volumes.volume_field.VolumeField.as_volume_img.html#nipy.labs.datasets.volumes.volume_field.VolumeField.as_volume_img">[1]</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.as_volume_img">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.as_volume_img">(nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.image.image_spaces.html#nipy.core.image.image_spaces.as_xyz_image">as_xyz_image() (in module nipy.core.image.image_spaces)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.maps_3d.html#nipy.labs.viz_tools.maps_3d.autocrop_img">autocrop_img() (in module nipy.labs.viz_tools.maps_3d)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.axes">axes() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.AxesError">AxesError (class in nipy.core.reference.spaces)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmri.html#nipy.modalities.fmri.fmri.axis0_generator">axis0_generator() (in module nipy.modalities.fmri.fmri)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AxisError">AxisError (class in nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.axmap">axmap() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseSlicer">BaseSlicer (class in nipy.labs.viz_tools.slicers)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseStackedSlicer">BaseStackedSlicer (class in nipy.labs.viz_tools.slicers)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.nosetester.html#nipy.testing.nosetester.NipyNoseTester.bench">bench() (nipy.testing.nosetester.NipyNoseTester method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#nipy.modalities.fmri.experimental_paradigm.BlockParadigm">BlockParadigm (class in nipy.modalities.fmri.experimental_paradigm)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-bold"><strong>BOLD</strong></a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.slices.html#nipy.core.reference.slices.bounding_box">bounding_box() (in module nipy.core.reference.slices)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-brainvisa"><strong>BrainVisa</strong></a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-bsd"><strong>BSD</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.structural_bfls.html#nipy.labs.spatial_models.structural_bfls.build_landmarks">build_landmarks() (in module nipy.labs.spatial_models.structural_bfls)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.can_configure">can_configure (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.structural_bfls.html#nipy.labs.spatial_models.structural_bfls.LandmarkRegions.centers">centers() (nipy.labs.spatial_models.structural_bfls.LandmarkRegions method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.check">check() (nipy.labs.spatial_models.parcellation.MultiSubjectParcellation method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.utils.perlpie.html#nipy.utils.perlpie.check_deps">check_deps() (in module nipy.utils.perlpie)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyOutputChecker.check_output">check_output() (nipy.testing.doctester.NipyOutputChecker method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.compose">compose() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_transform.html#nipy.labs.datasets.transforms.affine_transform.AffineTransform.composed_with">composed_with() (nipy.labs.datasets.transforms.affine_transform.AffineTransform method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.Transform.composed_with">(nipy.labs.datasets.transforms.transform.Transform method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.composed_with_transform">composed_with_transform() (nipy.labs.datasets.volumes.volume_data.VolumeData method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField.composed_with_transform">(nipy.labs.datasets.volumes.volume_field.VolumeField method)</a>, <a href="labs/generated/nipy.labs.datasets.volumes.volume_field.VolumeField.composed_with_transform.html#nipy.labs.datasets.volumes.volume_field.VolumeField.composed_with_transform">[1]</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.composed_with_transform">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.composed_with_transform">(nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.CompositionError">CompositionError (class in nipy.labs.datasets.transforms.transform)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.mask.html#nipy.labs.mask.compute_mask">compute_mask() (in module nipy.labs.mask)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.mask.html#nipy.labs.mask.compute_mask_files">compute_mask_files() (in module nipy.labs.mask)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.mask.html#nipy.labs.mask.compute_mask_sessions">compute_mask_sessions() (in module nipy.labs.mask)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.hemodynamic_models.html#nipy.modalities.fmri.hemodynamic_models.compute_regressor">compute_regressor() (in module nipy.modalities.fmri.hemodynamic_models)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.configure">configure() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseSlicer.contour_map">contour_map() (nipy.labs.viz_tools.slicers.BaseSlicer method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseStackedSlicer.contour_map">(nipy.labs.viz_tools.slicers.BaseStackedSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.OrthoSlicer.contour_map">(nipy.labs.viz_tools.slicers.OrthoSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.XSlicer.contour_map">(nipy.labs.viz_tools.slicers.XSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.YSlicer.contour_map">(nipy.labs.viz_tools.slicers.YSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.ZSlicer.contour_map">(nipy.labs.viz_tools.slicers.ZSlicer method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystem.coord_dtype">coord_dtype (nipy.core.reference.coordinate_system.CoordinateSystem attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystem.coord_names">coord_names (nipy.core.reference.coordinate_system.CoordinateSystem attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordSysMaker.coord_sys_klass">coord_sys_klass (nipy.core.reference.coordinate_system.CoordSysMaker attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.coord_tools.html#nipy.labs.viz_tools.coord_tools.coord_transform">coord_transform() (in module nipy.labs.viz_tools.coord_tools)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap">CoordinateMap (class in nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystem">CoordinateSystem (class in nipy.core.reference.coordinate_system)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystemError">CoordinateSystemError (class in nipy.core.reference.coordinate_system)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.coordmap">coordmap (nipy.core.image.image.Image attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordMapMaker">CoordMapMaker (class in nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordMapMakerError">CoordMapMakerError (class in nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordSysMaker">CoordSysMaker (class in nipy.core.reference.coordinate_system)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordSysMakerError">CoordSysMakerError (class in nipy.core.reference.coordinate_system)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.copy">copy() (nipy.labs.spatial_models.parcellation.MultiSubjectParcellation method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.CutAxes">CutAxes (class in nipy.labs.viz_tools.slicers)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.utils.generators.html#nipy.core.utils.generators.data_generator">data_generator() (in module nipy.core.utils.generators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.demo_ortho_slicer">demo_ortho_slicer() (in module nipy.labs.viz_tools.slicers)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.activation_maps.html#nipy.labs.viz_tools.activation_maps.demo_plot_map">demo_plot_map() (in module nipy.labs.viz_tools.activation_maps)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.maps_3d.html#nipy.labs.viz_tools.maps_3d.demo_plot_map_3d">demo_plot_map_3d() (in module nipy.labs.viz_tools.maps_3d)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.design_matrix.html#nipy.modalities.fmri.design_matrix.DesignMatrix">DesignMatrix (class in nipy.modalities.fmri.design_matrix)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.cm.html#nipy.labs.viz_tools.cm.dim_cmap">dim_cmap() (in module nipy.labs.viz_tools.cm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.design_matrix.html#nipy.modalities.fmri.design_matrix.dmtx_from_csv">dmtx_from_csv() (in module nipy.modalities.fmri.design_matrix)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.design_matrix.html#nipy.modalities.fmri.design_matrix.dmtx_light">dmtx_light() (in module nipy.modalities.fmri.design_matrix)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.CutAxes.do_cut">do_cut() (nipy.labs.viz_tools.slicers.CutAxes method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.doctest_case_class">doctest_case_class (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.doctest_ignore">doctest_ignore (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.doctest_optflags">doctest_optflags (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.DocTestSkip">DocTestSkip (class in nipy.testing.doctester)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseStackedSlicer.draw_cross">draw_cross() (nipy.labs.viz_tools.slicers.BaseStackedSlicer method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.OrthoSlicer.draw_cross">(nipy.labs.viz_tools.slicers.OrthoSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.XSlicer.draw_cross">(nipy.labs.viz_tools.slicers.XSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.YSlicer.draw_cross">(nipy.labs.viz_tools.slicers.YSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.ZSlicer.draw_cross">(nipy.labs.viz_tools.slicers.ZSlicer method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.CutAxes.draw_cut">draw_cut() (nipy.labs.viz_tools.slicers.CutAxes method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.CutAxes.draw_left_right">draw_left_right() (nipy.labs.viz_tools.slicers.CutAxes method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.CutAxes.draw_position">draw_position() (nipy.labs.viz_tools.slicers.CutAxes method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.drop_io_dim">drop_io_dim() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-dti"><strong>DTI</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystem.dtype">dtype (nipy.core.reference.coordinate_system.CoordinateSystem attribute)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-dwi"><strong>DWI</strong></a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseSlicer.edge_map">edge_map() (nipy.labs.viz_tools.slicers.BaseSlicer method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseStackedSlicer.edge_map">(nipy.labs.viz_tools.slicers.BaseStackedSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.OrthoSlicer.edge_map">(nipy.labs.viz_tools.slicers.OrthoSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.XSlicer.edge_map">(nipy.labs.viz_tools.slicers.XSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.YSlicer.edge_map">(nipy.labs.viz_tools.slicers.YSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.ZSlicer.edge_map">(nipy.labs.viz_tools.slicers.ZSlicer method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="glossary.html#term-eeglab"><strong>EEGlab</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.enabled">enabled (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.enableOpt">enableOpt (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.equivalent">equivalent() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#nipy.modalities.fmri.experimental_paradigm.EventRelatedParadigm">EventRelatedParadigm (class in nipy.modalities.fmri.experimental_paradigm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.nosetester.html#nipy.testing.nosetester.NipyNoseTester.excludes">excludes (nipy.testing.nosetester.NipyNoseTester attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.extension">extension (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.utils.generators.html#nipy.core.utils.generators.f_generator">f_generator() (in module nipy.core.utils.generators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDocTestFinder.find">find() (nipy.testing.doctester.NipyDocTestFinder method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.coord_tools.html#nipy.labs.viz_tools.coord_tools.find_cut_coords">find_cut_coords() (in module nipy.labs.viz_tools.coord_tools)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseSlicer.find_cut_coords">(nipy.labs.viz_tools.slicers.BaseSlicer static method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseStackedSlicer.find_cut_coords">(nipy.labs.viz_tools.slicers.BaseStackedSlicer class method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.OrthoSlicer.find_cut_coords">(nipy.labs.viz_tools.slicers.OrthoSlicer static method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.XSlicer.find_cut_coords">(nipy.labs.viz_tools.slicers.XSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.YSlicer.find_cut_coords">(nipy.labs.viz_tools.slicers.YSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.ZSlicer.find_cut_coords">(nipy.labs.viz_tools.slicers.ZSlicer method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.coord_tools.html#nipy.labs.viz_tools.coord_tools.find_maxsep_cut_coords">find_maxsep_cut_coords() (in module nipy.labs.viz_tools.coord_tools)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.anat_cache.html#nipy.labs.viz_tools.anat_cache.find_mni_template">find_mni_template() (in module nipy.labs.viz_tools.anat_cache)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.fltcols">fltcols() (in module nipy.interfaces.spm)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-fmri"><strong>FMRI</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmri.html#nipy.modalities.fmri.fmri.FmriImageList">FmriImageList (class in nipy.modalities.fmri.fmri)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.fname_presuffix">fname_presuffix() (in module nipy.interfaces.spm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.fnames_presuffix">fnames_presuffix() (in module nipy.interfaces.spm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.nosetester.html#nipy.testing.nosetester.fpw_opt_str">fpw_opt_str() (in module nipy.testing.nosetester)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.from_image">from_image() (nipy.core.image.image.Image class method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.image.image_list.html#nipy.core.image.image_list.ImageList.from_image">(nipy.core.image.image_list.ImageList class method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.fmri.html#nipy.modalities.fmri.fmri.FmriImageList.from_image">(nipy.modalities.fmri.fmri.FmriImageList class method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_utils.html#nipy.labs.datasets.transforms.affine_utils.from_matrix_vector">from_matrix_vector() (in module nipy.labs.datasets.transforms.affine_utils)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.from_params">from_params() (nipy.core.reference.coordinate_map.AffineTransform static method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.array_coords.html#nipy.core.reference.array_coords.ArrayCoordMap.from_shape">from_shape() (nipy.core.reference.array_coords.ArrayCoordMap static method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.from_start_step">from_start_step() (nipy.core.reference.coordinate_map.AffineTransform static method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.fromarray">fromarray() (in module nipy.core.image.image)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-fsl"><strong>FSL</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.function">function (nipy.core.reference.coordinate_map.CoordinateMap attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.function_domain">function_domain (nipy.core.reference.coordinate_map.AffineTransform attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.function_domain">(nipy.core.reference.coordinate_map.CoordinateMap attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.function_range">function_range (nipy.core.reference.coordinate_map.AffineTransform attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.function_range">(nipy.core.reference.coordinate_map.CoordinateMap attribute)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordMapMaker.generic_maker">generic_maker (nipy.core.reference.coordinate_map.CoordMapMaker attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.io.nibcompat.html#nipy.io.nibcompat.get_affine">get_affine() (in module nipy.io.nibcompat)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.get_affine">(nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_utils.html#nipy.labs.datasets.transforms.affine_utils.get_bounds">get_bounds() (in module nipy.labs.datasets.transforms.affine_utils)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.get_data">get_data() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.get_data">(nipy.labs.datasets.volumes.volume_data.VolumeData method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.get_data">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.get_data">(nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.io.nibcompat.html#nipy.io.nibcompat.get_dataobj">get_dataobj() (in module nipy.io.nibcompat)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.get_feature">get_feature() (nipy.labs.spatial_models.parcellation.MultiSubjectParcellation method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.io.nibcompat.html#nipy.io.nibcompat.get_header">get_header() (in module nipy.io.nibcompat)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_transform.html#nipy.labs.datasets.transforms.affine_transform.AffineTransform.get_inverse">get_inverse() (nipy.labs.datasets.transforms.affine_transform.AffineTransform method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.Transform.get_inverse">(nipy.labs.datasets.transforms.transform.Transform method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.image.image_list.html#nipy.core.image.image_list.ImageList.get_list_data">get_list_data() (nipy.core.image.image_list.ImageList method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.fmri.html#nipy.modalities.fmri.fmri.FmriImageList.get_list_data">(nipy.modalities.fmri.fmri.FmriImageList method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.coord_tools.html#nipy.labs.viz_tools.coord_tools.get_mask_bounds">get_mask_bounds() (in module nipy.labs.viz_tools.coord_tools)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.CutAxes.get_object_bounds">get_object_bounds() (nipy.labs.viz_tools.slicers.CutAxes method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.pkg_info.html#nipy.pkg_info.get_pkg_info">get_pkg_info() (in module nipy.pkg_info)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.get_transform">get_transform() (nipy.labs.datasets.volumes.volume_data.VolumeData method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField.get_transform">(nipy.labs.datasets.volumes.volume_field.VolumeField method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.get_transform">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.get_transform">(nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.io.nibcompat.html#nipy.io.nibcompat.get_unscaled_data">get_unscaled_data() (in module nipy.io.nibcompat)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.get_world_coords">get_world_coords() (nipy.labs.datasets.volumes.volume_grid.VolumeGrid method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.get_world_coords">(nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.get_world_cs">get_world_cs() (in module nipy.core.reference.spaces)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.nosepatch.html#nipy.testing.nosepatch.getTestCaseNames">getTestCaseNames() (in module nipy.testing.nosepatch)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.hemodynamic_models.html#nipy.modalities.fmri.hemodynamic_models.glover_hrf">glover_hrf() (in module nipy.modalities.fmri.hemodynamic_models)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.hemodynamic_models.html#nipy.modalities.fmri.hemodynamic_models.glover_time_derivative">glover_time_derivative() (in module nipy.modalities.fmri.hemodynamic_models)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-gpl"><strong>GPL</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.array_coords.html#nipy.core.reference.array_coords.Grid">Grid (class in nipy.core.reference.array_coords)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.header">header (nipy.core.image.image.Image attribute)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.help">help() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="glossary.html#term-ica"><strong>ICA</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.identity">identity() (nipy.core.reference.coordinate_map.AffineTransform static method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.decorators.html#nipy.testing.decorators.if_datasource">if_datasource() (in module nipy.testing.decorators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.decorators.html#nipy.testing.decorators.if_example_data">if_example_data() (in module nipy.testing.decorators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.decorators.html#nipy.testing.decorators.if_templates">if_templates() (in module nipy.testing.decorators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.ignore_dtype">ignore_dtype() (in module nipy.testing.doctester)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image">Image (class in nipy.core.image.image)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image_list.html#nipy.core.image.image_list.ImageList">ImageList (class in nipy.core.image.image_list)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystem.index">index() (nipy.core.reference.coordinate_system.CoordinateSystem method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseSlicer.init_with_figure">init_with_figure() (nipy.labs.viz_tools.slicers.BaseSlicer class method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseStackedSlicer.init_with_figure">(nipy.labs.viz_tools.slicers.BaseStackedSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.OrthoSlicer.init_with_figure">(nipy.labs.viz_tools.slicers.OrthoSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.XSlicer.init_with_figure">(nipy.labs.viz_tools.slicers.XSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.YSlicer.init_with_figure">(nipy.labs.viz_tools.slicers.YSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.ZSlicer.init_with_figure">(nipy.labs.viz_tools.slicers.ZSlicer method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.input_axis_index">input_axis_index() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_transform.html#nipy.labs.datasets.transforms.affine_transform.AffineTransform.input_space">input_space (nipy.labs.datasets.transforms.affine_transform.AffineTransform attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.Transform.input_space">(nipy.labs.datasets.transforms.transform.Transform attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.interpolation">interpolation (nipy.labs.datasets.volumes.volume_data.VolumeData attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.interpolation">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.interpolation">(nipy.labs.datasets.volumes.volume_img.VolumeImg attribute)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.mask.html#nipy.labs.mask.intersect_masks">intersect_masks() (in module nipy.labs.mask)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.inverse">inverse() (nipy.core.reference.coordinate_map.AffineTransform method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.inverse">(nipy.core.reference.coordinate_map.CoordinateMap method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.inverse_function">inverse_function (nipy.core.reference.coordinate_map.CoordinateMap attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.Transform.inverse_mapping">inverse_mapping (nipy.labs.datasets.transforms.transform.Transform attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_transform.html#nipy.labs.datasets.transforms.affine_transform.AffineTransform.inverse_mapping">inverse_mapping() (nipy.labs.datasets.transforms.affine_transform.AffineTransform method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.io_axis_indices">io_axis_indices() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.is_coordsys">is_coordsys() (in module nipy.core.reference.coordinate_system)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.is_coordsys_maker">is_coordsys_maker() (in module nipy.core.reference.coordinate_system)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.is_image">is_image() (in module nipy.core.image.image)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image_spaces.html#nipy.core.image.image_spaces.is_xyz_affable">is_xyz_affable() (in module nipy.core.image.image_spaces)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.is_xyz_affable">(in module nipy.core.reference.spaces)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.is_xyz_space">is_xyz_space() (in module nipy.core.reference.spaces)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.iter_axis">iter_axis() (in module nipy.core.image.image)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.structural_bfls.html#nipy.labs.spatial_models.structural_bfls.LandmarkRegions.kernel_density">kernel_density() (nipy.labs.spatial_models.structural_bfls.LandmarkRegions method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.known_space">known_space() (in module nipy.core.reference.spaces)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.testing.decorators.html#nipy.testing.decorators.knownfailure">knownfailure() (in module nipy.testing.decorators)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.structural_bfls.html#nipy.labs.spatial_models.structural_bfls.LandmarkRegions">LandmarkRegions (class in nipy.labs.spatial_models.structural_bfls)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.mask.html#nipy.labs.mask.largest_cc">largest_cc() (in module nipy.labs.mask)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-lgpl"><strong>LGPL</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.like_from_data">like_from_data() (nipy.labs.datasets.volumes.volume_data.VolumeData method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.like_from_data">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.like_from_data">(nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.io.files.html#nipy.io.files.load">load() (in module nipy.io.files)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#nipy.modalities.fmri.experimental_paradigm.load_paradigm_from_csv_file">load_paradigm_from_csv_file() (in module nipy.modalities.fmri.experimental_paradigm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.loadTestsFromFile">loadTestsFromFile() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.loadTestsFromModule">loadTestsFromModule() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.maps_3d.html#nipy.labs.viz_tools.maps_3d.m2screenshot">m2screenshot() (in module nipy.labs.viz_tools.maps_3d)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.utils.perlpie.html#nipy.utils.perlpie.main">main() (in module nipy.utils.perlpie)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordMapMaker.make_affine">make_affine() (nipy.core.reference.coordinate_map.CoordMapMaker method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordMapMaker.make_cmap">make_cmap() (nipy.core.reference.coordinate_map.CoordMapMaker method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.design_matrix.html#nipy.modalities.fmri.design_matrix.make_dmtx">make_dmtx() (in module nipy.modalities.fmri.design_matrix)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.make_feature">make_feature() (nipy.labs.spatial_models.parcellation.MultiSubjectParcellation method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.make_job">make_job() (in module nipy.interfaces.spm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.decorators.html#nipy.testing.decorators.make_label_dec">make_label_dec() (in module nipy.testing.decorators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image_spaces.html#nipy.core.image.image_spaces.make_xyz_image">make_xyz_image() (in module nipy.core.image.image_spaces)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.makeTest">makeTest() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.structural_bfls.html#nipy.labs.spatial_models.structural_bfls.LandmarkRegions.map_label">map_label() (nipy.labs.spatial_models.structural_bfls.LandmarkRegions method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.Transform.mapping">mapping (nipy.labs.datasets.transforms.transform.Transform attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_transform.html#nipy.labs.datasets.transforms.affine_transform.AffineTransform.mapping">mapping() (nipy.labs.datasets.transforms.affine_transform.AffineTransform method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.matches">matches() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-matlab"><strong>Matlab</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.utils.generators.html#nipy.core.utils.generators.matrix_generator">matrix_generator() (in module nipy.core.utils.generators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AxisError.message">message (nipy.core.reference.coordinate_map.AxisError attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordMapMakerError.message">(nipy.core.reference.coordinate_map.CoordMapMakerError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordSysMakerError.message">(nipy.core.reference.coordinate_system.CoordSysMakerError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystemError.message">(nipy.core.reference.coordinate_system.CoordinateSystemError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.AffineError.message">(nipy.core.reference.spaces.AffineError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.AxesError.message">(nipy.core.reference.spaces.AxesError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.SpaceError.message">(nipy.core.reference.spaces.SpaceError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.SpaceTypeError.message">(nipy.core.reference.spaces.SpaceTypeError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.io.nifti_ref.html#nipy.io.nifti_ref.NiftiError.message">(nipy.io.nifti_ref.NiftiError attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.CompositionError.message">(nipy.labs.datasets.transforms.transform.CompositionError attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.metadata">metadata (nipy.core.image.image.Image attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.metadata">(nipy.labs.datasets.volumes.volume_data.VolumeData attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField.metadata">(nipy.labs.datasets.volumes.volume_field.VolumeField attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.metadata">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.metadata">(nipy.labs.datasets.volumes.volume_img.VolumeImg attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.interfaces.matlab.html#nipy.interfaces.matlab.mlab_tempfile">mlab_tempfile() (in module nipy.interfaces.matlab)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation">MultiSubjectParcellation (class in nipy.labs.spatial_models.parcellation)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystem.name">name (nipy.core.reference.coordinate_system.CoordinateSystem attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.name">(nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystem.ndim">ndim (nipy.core.reference.coordinate_system.CoordinateSystem attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.ndim">ndim() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.ndims">ndims (nipy.core.reference.coordinate_map.AffineTransform attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.ndims">(nipy.core.reference.coordinate_map.CoordinateMap attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.testing.decorators.html#nipy.testing.decorators.needs_mpl_agg">needs_mpl_agg() (in module nipy.testing.decorators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.decorators.html#nipy.testing.decorators.needs_review">needs_review() (in module nipy.testing.decorators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image_list.html#nipy.core.image.image_list.ImageList.next">next() (nipy.core.image.image_list.ImageList method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.fmri.html#nipy.modalities.fmri.fmri.FmriImageList.next">(nipy.modalities.fmri.fmri.FmriImageList method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.io.nifti_ref.html#nipy.io.nifti_ref.nifti2nipy">nifti2nipy() (in module nipy.io.nifti_ref)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.io.nifti_ref.html#nipy.io.nifti_ref.NiftiError">NiftiError (class in nipy.io.nifti_ref)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#module-nipy.core.image.image">nipy.core.image.image (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image_list.html#module-nipy.core.image.image_list">nipy.core.image.image_list (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image_spaces.html#module-nipy.core.image.image_spaces">nipy.core.image.image_spaces (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.array_coords.html#module-nipy.core.reference.array_coords">nipy.core.reference.array_coords (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#module-nipy.core.reference.coordinate_map">nipy.core.reference.coordinate_map (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#module-nipy.core.reference.coordinate_system">nipy.core.reference.coordinate_system (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.slices.html#module-nipy.core.reference.slices">nipy.core.reference.slices (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#module-nipy.core.reference.spaces">nipy.core.reference.spaces (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.utils.generators.html#module-nipy.core.utils.generators">nipy.core.utils.generators (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.matlab.html#module-nipy.interfaces.matlab">nipy.interfaces.matlab (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#module-nipy.interfaces.spm">nipy.interfaces.spm (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.io.files.html#module-nipy.io.files">nipy.io.files (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.io.nibcompat.html#module-nipy.io.nibcompat">nipy.io.nibcompat (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.io.nifti_ref.html#module-nipy.io.nifti_ref">nipy.io.nifti_ref (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.converters.html#module-nipy.labs.datasets.converters">nipy.labs.datasets.converters (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_transform.html#module-nipy.labs.datasets.transforms.affine_transform">nipy.labs.datasets.transforms.affine_transform (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_utils.html#module-nipy.labs.datasets.transforms.affine_utils">nipy.labs.datasets.transforms.affine_utils (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#module-nipy.labs.datasets.transforms.transform">nipy.labs.datasets.transforms.transform (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#module-nipy.labs.datasets.volumes.volume_data">nipy.labs.datasets.volumes.volume_data (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_field.html#module-nipy.labs.datasets.volumes.volume_field">nipy.labs.datasets.volumes.volume_field (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#module-nipy.labs.datasets.volumes.volume_grid">nipy.labs.datasets.volumes.volume_grid (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#module-nipy.labs.datasets.volumes.volume_img">nipy.labs.datasets.volumes.volume_img (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.mask.html#module-nipy.labs.mask">nipy.labs.mask (module)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#module-nipy.labs.spatial_models.parcellation">nipy.labs.spatial_models.parcellation (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.structural_bfls.html#module-nipy.labs.spatial_models.structural_bfls">nipy.labs.spatial_models.structural_bfls (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.activation_maps.html#module-nipy.labs.viz_tools.activation_maps">nipy.labs.viz_tools.activation_maps (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.anat_cache.html#module-nipy.labs.viz_tools.anat_cache">nipy.labs.viz_tools.anat_cache (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.cm.html#module-nipy.labs.viz_tools.cm">nipy.labs.viz_tools.cm (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.coord_tools.html#module-nipy.labs.viz_tools.coord_tools">nipy.labs.viz_tools.coord_tools (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.maps_3d.html#module-nipy.labs.viz_tools.maps_3d">nipy.labs.viz_tools.maps_3d (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#module-nipy.labs.viz_tools.slicers">nipy.labs.viz_tools.slicers (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_activation_maps.html#module-nipy.labs.viz_tools.test.test_activation_maps">nipy.labs.viz_tools.test.test_activation_maps (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_cm.html#module-nipy.labs.viz_tools.test.test_cm">nipy.labs.viz_tools.test.test_cm (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_coord_tools.html#module-nipy.labs.viz_tools.test.test_coord_tools">nipy.labs.viz_tools.test.test_coord_tools (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_edge_detect.html#module-nipy.labs.viz_tools.test.test_edge_detect">nipy.labs.viz_tools.test.test_edge_detect (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_slicers.html#module-nipy.labs.viz_tools.test.test_slicers">nipy.labs.viz_tools.test.test_slicers (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.design_matrix.html#module-nipy.modalities.fmri.design_matrix">nipy.modalities.fmri.design_matrix (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#module-nipy.modalities.fmri.experimental_paradigm">nipy.modalities.fmri.experimental_paradigm (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmri.html#module-nipy.modalities.fmri.fmri">nipy.modalities.fmri.fmri (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#module-nipy.modalities.fmri.fmristat.outputters">nipy.modalities.fmri.fmristat.outputters (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.hemodynamic_models.html#module-nipy.modalities.fmri.hemodynamic_models">nipy.modalities.fmri.hemodynamic_models (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.pkg_info.html#module-nipy.pkg_info">nipy.pkg_info (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.decorators.html#module-nipy.testing.decorators">nipy.testing.decorators (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#module-nipy.testing.doctester">nipy.testing.doctester (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.nosepatch.html#module-nipy.testing.nosepatch">nipy.testing.nosepatch (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.nosetester.html#module-nipy.testing.nosetester">nipy.testing.nosetester (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.utils.arrays.html#module-nipy.utils.arrays">nipy.utils.arrays (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.utils.compat3.html#module-nipy.utils.compat3">nipy.utils.compat3 (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.utils.perlpie.html#module-nipy.utils.perlpie">nipy.utils.perlpie (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.utils.skip_test.html#module-nipy.utils.skip_test">nipy.utils.skip_test (module)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.io.nifti_ref.html#nipy.io.nifti_ref.nipy2nifti">nipy2nifti() (in module nipy.io.nifti_ref)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest">NipyDoctest (class in nipy.testing.doctester)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDocTestFinder">NipyDocTestFinder (class in nipy.testing.doctester)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.nosetester.html#nipy.testing.nosetester.NipyNoseTester">NipyNoseTester (class in nipy.testing.nosetester)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyOutputChecker">NipyOutputChecker (class in nipy.testing.doctester)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.utils.compat3.html#nipy.utils.compat3.open4csv">open4csv() (in module nipy.utils.compat3)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.options">options() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.orth_axes">orth_axes() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.OrthoSlicer">OrthoSlicer (class in nipy.labs.viz_tools.slicers)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.out_check_class">out_check_class (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#nipy.modalities.fmri.fmristat.outputters.output_AR1">output_AR1() (in module nipy.modalities.fmri.fmristat.outputters)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyOutputChecker.output_difference">output_difference() (nipy.testing.doctester.NipyOutputChecker method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#nipy.modalities.fmri.fmristat.outputters.output_F">output_F() (in module nipy.modalities.fmri.fmristat.outputters)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#nipy.modalities.fmri.fmristat.outputters.output_resid">output_resid() (in module nipy.modalities.fmri.fmristat.outputters)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_transform.html#nipy.labs.datasets.transforms.affine_transform.AffineTransform.output_space">output_space (nipy.labs.datasets.transforms.affine_transform.AffineTransform attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.Transform.output_space">(nipy.labs.datasets.transforms.transform.Transform attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#nipy.modalities.fmri.fmristat.outputters.output_T">output_T() (in module nipy.modalities.fmri.fmristat.outputters)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#nipy.modalities.fmri.experimental_paradigm.Paradigm">Paradigm (class in nipy.modalities.fmri.experimental_paradigm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.utils.generators.html#nipy.core.utils.generators.parcels">parcels() (in module nipy.core.utils.generators)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-pca"><strong>PCA</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.utils.perlpie.html#nipy.utils.perlpie.perl_dash_pie">perl_dash_pie() (in module nipy.utils.perlpie)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-pet"><strong>PET</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.pkg_info.html#nipy.pkg_info.pkg_commit_hash">pkg_commit_hash() (in module nipy.pkg_info)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.activation_maps.html#nipy.labs.viz_tools.activation_maps.plot_anat">plot_anat() (in module nipy.labs.viz_tools.activation_maps)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.maps_3d.html#nipy.labs.viz_tools.maps_3d.plot_anat_3d">plot_anat_3d() (in module nipy.labs.viz_tools.maps_3d)</a>, <a href="labs/generated/nipy.labs.viz_tools.maps_3d.plot_anat_3d.html#nipy.labs.viz_tools.maps_3d.plot_anat_3d">[1]</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.activation_maps.html#nipy.labs.viz_tools.activation_maps.plot_map">plot_map() (in module nipy.labs.viz_tools.activation_maps)</a>, <a href="labs/generated/nipy.labs.viz_tools.activation_maps.plot_map.html#nipy.labs.viz_tools.activation_maps.plot_map">[1]</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseSlicer.plot_map">(nipy.labs.viz_tools.slicers.BaseSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseStackedSlicer.plot_map">(nipy.labs.viz_tools.slicers.BaseStackedSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.OrthoSlicer.plot_map">(nipy.labs.viz_tools.slicers.OrthoSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.XSlicer.plot_map">(nipy.labs.viz_tools.slicers.XSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.YSlicer.plot_map">(nipy.labs.viz_tools.slicers.YSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.ZSlicer.plot_map">(nipy.labs.viz_tools.slicers.ZSlicer method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.maps_3d.html#nipy.labs.viz_tools.maps_3d.plot_map_3d">plot_map_3d() (in module nipy.labs.viz_tools.maps_3d)</a>, <a href="labs/generated/nipy.labs.viz_tools.maps_3d.plot_map_3d.html#nipy.labs.viz_tools.maps_3d.plot_map_3d">[1]</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.population">population() (nipy.labs.spatial_models.parcellation.MultiSubjectParcellation method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.nosetester.html#nipy.testing.nosetester.prepare_imports">prepare_imports() (in module nipy.testing.nosetester)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.nosetester.html#nipy.testing.nosetester.NipyNoseTester.prepare_test_args">prepare_test_args() (nipy.testing.nosetester.NipyNoseTester method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.prepareTestLoader">prepareTestLoader() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.utils.perlpie.html#nipy.utils.perlpie.print_extended_help">print_extended_help() (in module nipy.utils.perlpie)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.product">product() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.product">(in module nipy.core.reference.coordinate_system)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.reference">reference() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.register_to">register_to() (nipy.core.reference.spaces.XYZSpace method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#nipy.modalities.fmri.fmristat.outputters.RegressionOutput">RegressionOutput (class in nipy.modalities.fmri.fmristat.outputters)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#nipy.modalities.fmri.fmristat.outputters.RegressionOutputList">RegressionOutputList (class in nipy.modalities.fmri.fmristat.outputters)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.renamed_axes">renamed_axes() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.renamed_domain">renamed_domain() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.renamed_domain">(nipy.core.reference.coordinate_map.AffineTransform method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.renamed_domain">(nipy.core.reference.coordinate_map.CoordinateMap method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.renamed_range">renamed_range() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.renamed_range">(nipy.core.reference.coordinate_map.AffineTransform method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.renamed_range">(nipy.core.reference.coordinate_map.CoordinateMap method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.renamed_reference">renamed_reference() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.reordered_axes">reordered_axes() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.reordered_domain">reordered_domain() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.reordered_domain">(nipy.core.reference.coordinate_map.AffineTransform method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.reordered_domain">(nipy.core.reference.coordinate_map.CoordinateMap method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.reordered_range">reordered_range() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.reordered_range">(nipy.core.reference.coordinate_map.AffineTransform method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.reordered_range">(nipy.core.reference.coordinate_map.CoordinateMap method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.reordered_reference">reordered_reference() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.cm.html#nipy.labs.viz_tools.cm.replace_inside">replace_inside() (in module nipy.labs.viz_tools.cm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.resampled_to_img">resampled_to_img() (nipy.labs.datasets.volumes.volume_data.VolumeData method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField.resampled_to_img">(nipy.labs.datasets.volumes.volume_field.VolumeField method)</a>, <a href="labs/generated/nipy.labs.datasets.volumes.volume_field.VolumeField.resampled_to_img.html#nipy.labs.datasets.volumes.volume_field.VolumeField.resampled_to_img">[1]</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.resampled_to_img">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.resampled_to_img">(nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.structural_bfls.html#nipy.labs.spatial_models.structural_bfls.LandmarkRegions.roi_prevalence">roi_prevalence() (nipy.labs.spatial_models.structural_bfls.LandmarkRegions method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.rollaxis">rollaxis() (in module nipy.core.image.image)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.rollimg">rollimg() (in module nipy.core.image.image)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.round_numbers">round_numbers() (in module nipy.testing.doctester)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.run_jobdef">run_jobdef() (in module nipy.interfaces.spm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.matlab.html#nipy.interfaces.matlab.run_matlab">run_matlab() (in module nipy.interfaces.matlab)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.matlab.html#nipy.interfaces.matlab.run_matlab_script">run_matlab_script() (in module nipy.interfaces.matlab)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.safe_dtype">safe_dtype() (in module nipy.core.reference.coordinate_system)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.io.files.html#nipy.io.files.save">save() (in module nipy.io.files)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.converters.html#nipy.labs.datasets.converters.save">(in module nipy.labs.datasets.converters)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.scans_for_fname">scans_for_fname() (in module nipy.interfaces.spm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.scans_for_fnames">scans_for_fnames() (in module nipy.interfaces.spm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.score">score (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.mask.html#nipy.labs.mask.series_from_mask">series_from_mask() (in module nipy.labs.mask)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_feature">set_feature() (nipy.labs.spatial_models.parcellation.MultiSubjectParcellation method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_individual_labels">set_individual_labels() (nipy.labs.spatial_models.parcellation.MultiSubjectParcellation method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.parcellation.html#nipy.labs.spatial_models.parcellation.MultiSubjectParcellation.set_template_labels">set_template_labels() (nipy.labs.spatial_models.parcellation.MultiSubjectParcellation method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.set_test_context">set_test_context() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.Image.shape">shape() (nipy.core.image.image.Image method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.utils.generators.html#nipy.core.utils.generators.shape_generator">shape_generator() (in module nipy.core.utils.generators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.shifted_domain_origin">shifted_domain_origin() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.shifted_range_origin">shifted_range_origin() (in module nipy.core.reference.coordinate_map)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.spatial_models.structural_bfls.html#nipy.labs.spatial_models.structural_bfls.LandmarkRegions.show">show() (nipy.labs.spatial_models.structural_bfls.LandmarkRegions method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.design_matrix.html#nipy.modalities.fmri.design_matrix.DesignMatrix.show">(nipy.modalities.fmri.design_matrix.DesignMatrix method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.AffineTransform.similar_to">similar_to() (nipy.core.reference.coordinate_map.AffineTransform method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_map.html#nipy.core.reference.coordinate_map.CoordinateMap.similar_to">(nipy.core.reference.coordinate_map.CoordinateMap method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.core.reference.coordinate_system.html#nipy.core.reference.coordinate_system.CoordinateSystem.similar_to">(nipy.core.reference.coordinate_system.CoordinateSystem method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.testing.decorators.html#nipy.testing.decorators.skip_doctest_if">skip_doctest_if() (in module nipy.testing.decorators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.utils.skip_test.html#nipy.utils.skip_test.skip_if_running_nose">skip_if_running_nose() (in module nipy.utils.skip_test)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.utils.generators.html#nipy.core.utils.generators.slice_generator">slice_generator() (in module nipy.core.utils.generators)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.utils.generators.html#nipy.core.utils.generators.slice_parcels">slice_parcels() (in module nipy.core.utils.generators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.SliceMaker">SliceMaker (class in nipy.core.image.image)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.SpaceError">SpaceError (class in nipy.core.reference.spaces)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.SpaceTypeError">SpaceTypeError (class in nipy.core.reference.spaces)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-spm"><strong>SPM</strong></a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-spm-approach"><strong>SPM approach</strong></a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-spm-software"><strong>SPM software</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.hemodynamic_models.html#nipy.modalities.fmri.hemodynamic_models.spm_dispersion_derivative">spm_dispersion_derivative() (in module nipy.modalities.fmri.hemodynamic_models)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.hemodynamic_models.html#nipy.modalities.fmri.hemodynamic_models.spm_hrf">spm_hrf() (in module nipy.modalities.fmri.hemodynamic_models)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.SpmInfo.spm_path">spm_path (nipy.interfaces.spm.SpmInfo attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.hemodynamic_models.html#nipy.modalities.fmri.hemodynamic_models.spm_time_derivative">spm_time_derivative() (in module nipy.modalities.fmri.hemodynamic_models)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.SpmInfo.spm_ver">spm_ver (nipy.interfaces.spm.SpmInfo attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.interfaces.spm.html#nipy.interfaces.spm.SpmInfo">SpmInfo (class in nipy.interfaces.spm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.utils.arrays.html#nipy.utils.arrays.strides_from">strides_from() (in module nipy.utils.arrays)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.strip_array_repr">strip_array_repr() (in module nipy.testing.doctester)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.subsample">subsample() (in module nipy.core.image.image)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.suiteClass">suiteClass (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.image.image.html#nipy.core.image.image.synchronized_order">synchronized_order() (in module nipy.core.image.image)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.testing.nosetester.html#nipy.testing.nosetester.NipyNoseTester.test">test() (nipy.testing.nosetester.NipyNoseTester method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_activation_maps.html#nipy.labs.viz_tools.test.test_activation_maps.test_anat_cache">test_anat_cache() (in module nipy.labs.viz_tools.test.test_activation_maps)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_coord_tools.html#nipy.labs.viz_tools.test.test_coord_tools.test_coord_transform_trivial">test_coord_transform_trivial() (in module nipy.labs.viz_tools.test.test_coord_tools)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_slicers.html#nipy.labs.viz_tools.test.test_slicers.test_demo_ortho_slicer">test_demo_ortho_slicer() (in module nipy.labs.viz_tools.test.test_slicers)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_activation_maps.html#nipy.labs.viz_tools.test.test_activation_maps.test_demo_plot_map">test_demo_plot_map() (in module nipy.labs.viz_tools.test.test_activation_maps)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_cm.html#nipy.labs.viz_tools.test.test_cm.test_dim_cmap">test_dim_cmap() (in module nipy.labs.viz_tools.test.test_cm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_edge_detect.html#nipy.labs.viz_tools.test.test_edge_detect.test_edge_detect">test_edge_detect() (in module nipy.labs.viz_tools.test.test_edge_detect)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_edge_detect.html#nipy.labs.viz_tools.test.test_edge_detect.test_fast_abs_percentile">test_fast_abs_percentile() (in module nipy.labs.viz_tools.test.test_edge_detect)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_coord_tools.html#nipy.labs.viz_tools.test.test_coord_tools.test_find_cut_coords">test_find_cut_coords() (in module nipy.labs.viz_tools.test.test_coord_tools)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.test_finder_class">test_finder_class (nipy.testing.doctester.NipyDoctest attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_activation_maps.html#nipy.labs.viz_tools.test.test_activation_maps.test_plot_anat">test_plot_anat() (in module nipy.labs.viz_tools.test.test_activation_maps)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_activation_maps.html#nipy.labs.viz_tools.test.test_activation_maps.test_plot_map_empty">test_plot_map_empty() (in module nipy.labs.viz_tools.test.test_activation_maps)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_activation_maps.html#nipy.labs.viz_tools.test.test_activation_maps.test_plot_map_with_auto_cut_coords">test_plot_map_with_auto_cut_coords() (in module nipy.labs.viz_tools.test.test_activation_maps)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.test.test_cm.html#nipy.labs.viz_tools.test.test_cm.test_replace_inside">test_replace_inside() (in module nipy.labs.viz_tools.test.test_cm)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.mask.html#nipy.labs.mask.threshold_connect_components">threshold_connect_components() (in module nipy.labs.mask)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseSlicer.title">title() (nipy.labs.viz_tools.slicers.BaseSlicer method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.BaseStackedSlicer.title">(nipy.labs.viz_tools.slicers.BaseStackedSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.OrthoSlicer.title">(nipy.labs.viz_tools.slicers.OrthoSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.XSlicer.title">(nipy.labs.viz_tools.slicers.XSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.YSlicer.title">(nipy.labs.viz_tools.slicers.YSlicer method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.ZSlicer.title">(nipy.labs.viz_tools.slicers.ZSlicer method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.to_coordsys_maker">to_coordsys_maker() (nipy.core.reference.spaces.XYZSpace method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.affine_utils.html#nipy.labs.datasets.transforms.affine_utils.to_matrix_vector">to_matrix_vector() (in module nipy.labs.datasets.transforms.affine_utils)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.tolist">tolist() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.fmristat.outputters.html#nipy.modalities.fmri.fmristat.outputters.TOutput">TOutput (class in nipy.modalities.fmri.fmristat.outputters)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.transforms.transform.html#nipy.labs.datasets.transforms.transform.Transform">Transform (class in nipy.labs.datasets.transforms.transform)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.array_coords.html#nipy.core.reference.array_coords.ArrayCoordMap.transposed_values">transposed_values (nipy.core.reference.array_coords.ArrayCoordMap attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.array_coords.html#nipy.core.reference.array_coords.ArrayCoordMap.values">values (nipy.core.reference.array_coords.ArrayCoordMap attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.values_in_world">values_in_world() (nipy.labs.datasets.volumes.volume_data.VolumeData method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField.values_in_world">(nipy.labs.datasets.volumes.volume_field.VolumeField method)</a>, <a href="labs/generated/nipy.labs.datasets.volumes.volume_field.VolumeField.values_in_world.html#nipy.labs.datasets.volumes.volume_field.VolumeField.values_in_world">[1]</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.values_in_world">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.values_in_world">(nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData">VolumeData (class in nipy.labs.datasets.volumes.volume_data)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField">VolumeField (class in nipy.labs.datasets.volumes.volume_field)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid">VolumeGrid (class in nipy.labs.datasets.volumes.volume_grid)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg">VolumeImg (class in nipy.labs.datasets.volumes.volume_img)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-voxbo"><strong>VoxBo</strong></a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-voxel"><strong>voxel</strong></a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.testing.doctester.html#nipy.testing.doctester.NipyDoctest.wantFile">wantFile() (nipy.testing.doctester.NipyDoctest method)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-water-activation-pet"><strong>water activation PET</strong></a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData.world_space">world_space (nipy.labs.datasets.volumes.volume_data.VolumeData attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField.world_space">(nipy.labs.datasets.volumes.volume_field.VolumeField attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_grid.html#nipy.labs.datasets.volumes.volume_grid.VolumeGrid.world_space">(nipy.labs.datasets.volumes.volume_grid.VolumeGrid attribute)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.world_space">(nipy.labs.datasets.volumes.volume_img.VolumeImg attribute)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.design_matrix.html#nipy.modalities.fmri.design_matrix.DesignMatrix.write_csv">write_csv() (nipy.modalities.fmri.design_matrix.DesignMatrix method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.utils.generators.html#nipy.core.utils.generators.write_data">write_data() (in module nipy.core.utils.generators)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#nipy.modalities.fmri.experimental_paradigm.BlockParadigm.write_to_csv">write_to_csv() (nipy.modalities.fmri.experimental_paradigm.BlockParadigm method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#nipy.modalities.fmri.experimental_paradigm.EventRelatedParadigm.write_to_csv">(nipy.modalities.fmri.experimental_paradigm.EventRelatedParadigm method)</a>
+  </dt>
+
+        
+  <dt><a href="api/generated/nipy.modalities.fmri.experimental_paradigm.html#nipy.modalities.fmri.experimental_paradigm.Paradigm.write_to_csv">(nipy.modalities.fmri.experimental_paradigm.Paradigm method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.x">x (nipy.core.reference.spaces.XYZSpace attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.x_suffix">x_suffix (nipy.core.reference.spaces.XYZSpace attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.slices.html#nipy.core.reference.slices.xslice">xslice() (in module nipy.core.reference.slices)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.XSlicer">XSlicer (class in nipy.labs.viz_tools.slicers)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.image.image_spaces.html#nipy.core.image.image_spaces.xyz_affine">xyz_affine() (in module nipy.core.image.image_spaces)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.xyz_affine">(in module nipy.core.reference.spaces)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.xyz_order">xyz_order() (in module nipy.core.reference.spaces)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.datasets.volumes.volume_img.html#nipy.labs.datasets.volumes.volume_img.VolumeImg.xyz_ordered">xyz_ordered() (nipy.labs.datasets.volumes.volume_img.VolumeImg method)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace">XYZSpace (class in nipy.core.reference.spaces)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.y">y (nipy.core.reference.spaces.XYZSpace attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.y_suffix">y_suffix (nipy.core.reference.spaces.XYZSpace attribute)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.slices.html#nipy.core.reference.slices.yslice">yslice() (in module nipy.core.reference.slices)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.YSlicer">YSlicer (class in nipy.labs.viz_tools.slicers)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="Z">Z</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.z">z (nipy.core.reference.spaces.XYZSpace attribute)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.core.reference.spaces.html#nipy.core.reference.spaces.XYZSpace.z_suffix">z_suffix (nipy.core.reference.spaces.XYZSpace attribute)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api/generated/nipy.core.reference.slices.html#nipy.core.reference.slices.zslice">zslice() (in module nipy.core.reference.slices)</a>
+  </dt>
+
+      
+  <dt><a href="api/generated/nipy.labs.viz_tools.slicers.html#nipy.labs.viz_tools.slicers.ZSlicer">ZSlicer (class in nipy.labs.viz_tools.slicers)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="#" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+  <li><a href="index.html">NIPY home</a> |&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

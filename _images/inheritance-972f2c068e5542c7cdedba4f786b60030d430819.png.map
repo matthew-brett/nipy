@@ -1,0 +1,7 @@
+<map id="inheritance2fde3dc69c" name="inheritance2fde3dc69c">
+<area shape="rect" id="node1" href="#nipy.core.reference.coordinate_map.AffineTransform" title="Class for affine transformation from domain to a range" alt="" coords="22,208,320,234"/>
+<area shape="rect" id="node2" href="#nipy.core.reference.coordinate_map.AxisError" title="Error for incorrect axis selection" alt="" coords="45,157,298,184"/>
+<area shape="rect" id="node3" href="#nipy.core.reference.coordinate_map.CoordMapMaker" title="Class to create coordinate maps of different dimensions" alt="" coords="21,107,322,133"/>
+<area shape="rect" id="node4" href="#nipy.core.reference.coordinate_map.CoordMapMakerError" title="reference.coordinate_map.CoordMapMakerError" alt="" coords="5,56,337,82"/>
+<area shape="rect" id="node5" href="#nipy.core.reference.coordinate_map.CoordinateMap" title="A set of domain and range CoordinateSystems and a function between them." alt="" coords="25,5,318,32"/>
+</map>

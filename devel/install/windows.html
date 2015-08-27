@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="Developer installs for different distributions" href="index.html" />
+    <link rel="next" title="Development Guidelines" href="../guidelines/index.html" />
+    <link rel="prev" title="Fedora developer install" href="fedora.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../guidelines/index.html" title="Development Guidelines"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fedora.html" title="Fedora developer install"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >Developer Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" accesskey="U">Developer installs for different distributions</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development install on windows</a><ul>
+<li><a class="reference internal" href="#the-easy-way-a-super-package">The easy way - a super-package</a></li>
+<li><a class="reference internal" href="#the-hard-way-by-components">The hard way - by components</a></li>
+<li><a class="reference internal" href="#getting-and-installing-nipy">Getting and installing NIPY</a></li>
+<li><a class="reference internal" href="#running-the-build-install">Running the build / install</a><ul>
+<li><a class="reference internal" href="#the-command-line-from-windows">The command line from Windows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fedora.html"
+                        title="previous chapter">Fedora developer install</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../guidelines/index.html"
+                        title="next chapter">Development Guidelines</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/devel/install/windows.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="development-install-on-windows">
+<h1>Development install on windows<a class="headerlink" href="#development-install-on-windows" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-easy-way-a-super-package">
+<h2>The easy way - a super-package<a class="headerlink" href="#the-easy-way-a-super-package" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to get the dependencies is to install <a class="reference external" href="http://www.pythonxy.com/">PythonXY</a> or the
+<a class="reference external" href="http://code.enthought.com/projects/tool-suite.php">Enthought Tool Suite</a> .  This gives you <a class="reference external" href="http://www.mingw.org">MinGW</a>, <a class="reference external" href="http://www.python.org">Python</a>, <a class="reference external" href="http://numpy.scipy.org">Numpy</a>,
+<a class="reference external" href="http://www.scipy.org">Scipy</a>, <a class="reference external" href="http://ipython.org">ipython</a> and <a class="reference external" href="http://matplotlib.sourceforge.net">matplotlib</a> (and much more).</p>
+</div>
+<div class="section" id="the-hard-way-by-components">
+<h2>The hard way - by components<a class="headerlink" href="#the-hard-way-by-components" title="Permalink to this headline">¶</a></h2>
+<p>If instead you want to do it by component, try the instructions below.</p>
+<p>Requirements:</p>
+<ul class="simple">
+<li>Download and install <a class="reference external" href="http://www.mingw.org">MinGW</a></li>
+<li>Download and install the windows binary for <a class="reference external" href="http://www.python.org">Python</a></li>
+<li>Download and install the <a class="reference external" href="http://numpy.scipy.org">Numpy</a> and <a class="reference external" href="http://www.scipy.org">Scipy</a> binaries</li>
+<li>Download and install <a class="reference external" href="http://sympy.org">Sympy</a></li>
+</ul>
+<p>Options:</p>
+<ul class="simple">
+<li>Download and install <a class="reference external" href="http://ipython.org">ipython</a>, being careful to follow the windows
+installation instructions</li>
+<li>Download and install <a class="reference external" href="http://matplotlib.sourceforge.net">matplotlib</a></li>
+</ul>
+<p>Alternatively, if you are very brave, you may want to install numpy / scipy from
+source - see our maybe out of date <a class="reference internal" href="windows_scipy_build.html#windows-scipy-build"><span>Building Scipy/Numpy on Windows with Optimized Numerical Libraries</span></a> for details.</p>
+</div>
+<div class="section" id="getting-and-installing-nipy">
+<h2>Getting and installing NIPY<a class="headerlink" href="#getting-and-installing-nipy" title="Permalink to this headline">¶</a></h2>
+<p>You will next need to get the NIPY code via version control:</p>
+<ul class="simple">
+<li>Download and install the windows binary for <a class="reference external" href="http://git.or.cz/">git</a></li>
+<li>Go to the windows menu, find the <code class="docutils literal"><span class="pre">git</span></code> menu, and run <code class="docutils literal"><span class="pre">git</span></code> in a
+windows terminal.</li>
+</ul>
+<p>You should now be able to follow the instructions in
+<a class="reference internal" href="../development_quickstart.html#trunk-download"><span>Submitting a patch</span></a>, but with the following modifications:</p>
+</div>
+<div class="section" id="running-the-build-install">
+<h2>Running the build / install<a class="headerlink" href="#running-the-build-install" title="Permalink to this headline">¶</a></h2>
+<p>Here we assume that you do <em>not</em> have the Microsoft visual C tools, you
+did not use the <a class="reference external" href="http://code.enthought.com/projects/tool-suite.php">ETS</a> package (which sets the compiler for you) and <em>are</em>
+using a version of  <a class="reference external" href="http://www.mingw.org">MinGW</a> to compile NIPY.</p>
+<p>First, for the <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span></code> steps, you will need to add the
+<code class="docutils literal"><span class="pre">--compiler=mingw32</span></code> flag, like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>python setup.py build --compiler=mingw32 install
+</pre></div>
+</div>
+<p>Note that, with this setup you cannot do inplace (developer) installs
+(like <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">build_ext</span> <span class="pre">--inplace</span></code>) because of a six-legged
+python packaging feature that does not allow the compiler options (here
+<code class="docutils literal"><span class="pre">--compiler=mingw32</span></code>) to be passed from the <code class="docutils literal"><span class="pre">build_ext</span></code> command.</p>
+<p>If you want to be able to do that, add these lines to your <code class="docutils literal"><span class="pre">distutils.cfg</span></code> file</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">build</span><span class="p">]</span>
+<span class="n">compiler</span><span class="o">=</span><span class="n">mingw32</span>
+
+<span class="p">[</span><span class="n">config</span><span class="p">]</span>
+<span class="n">compiler</span> <span class="o">=</span> <span class="n">mingw32</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="http://docs.python.org/install/#inst-config-files">http://docs.python.org/install/#inst-config-files</a> for details on
+this file.  After you&#8217;ve done this, you can run the standard <code class="docutils literal"><span class="pre">python</span>
+<span class="pre">setup.py</span> <span class="pre">build_ext</span> <span class="pre">--inplace</span></code> command.</p>
+<div class="section" id="the-command-line-from-windows">
+<h3>The command line from Windows<a class="headerlink" href="#the-command-line-from-windows" title="Permalink to this headline">¶</a></h3>
+<p>The default windows XP command line <code class="docutils literal"><span class="pre">cmd</span></code> is very basic.  You might
+consider using the <a class="reference external" href="http://cygwin.com">Cygwin</a> bash shell, or you may want to use the
+<a class="reference external" href="http://ipython.org">ipython</a> shell to work in.  For system commands use the <code class="docutils literal"><span class="pre">!</span></code> escape,
+like this, from the ipython prompt:</p>
+<div class="highlight-python"><div class="highlight"><pre>!python setup.py build --compiler=mingw32
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../guidelines/index.html" title="Development Guidelines"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fedora.html" title="Fedora developer install"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >Developer Guide</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" >Developer installs for different distributions</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+nipy.labs.datasets.volumes.volume_field.VolumeField.as_volume_img
+=================================================================
+
+.. currentmodule:: nipy.labs.datasets.volumes.volume_field
+
+.. automethod:: VolumeField.as_volume_img

@@ -1,0 +1,4 @@
+<map id="inheritanceb0d1d58ea9" name="inheritanceb0d1d58ea9">
+<area shape="rect" id="node1" href="#nipy.core.reference.array_coords.ArrayCoordMap" title="Class combining coordinate map and array shape" alt="" coords="5,56,279,82"/>
+<area shape="rect" id="node2" href="#nipy.core.reference.array_coords.Grid" title="Simple class to construct AffineTransform instances with slice notation" alt="" coords="42,5,242,32"/>
+</map>

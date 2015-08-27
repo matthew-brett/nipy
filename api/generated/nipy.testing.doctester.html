@@ -1,0 +1,683 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="API" href="../index.html" />
+    <link rel="prev" title="testing.decorators" href="nipy.testing.decorators.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.testing.decorators.html" title="testing.decorators"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">testing.doctester</a><ul>
+<li><a class="reference internal" href="#module-testing-doctester">Module: <code class="docutils literal"><span class="pre">testing.doctester</span></code></a></li>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
+<li><a class="reference internal" href="#doctestskip"><code class="docutils literal"><span class="pre">DocTestSkip</span></code></a></li>
+<li><a class="reference internal" href="#nipydoctestfinder"><code class="docutils literal"><span class="pre">NipyDocTestFinder</span></code></a></li>
+<li><a class="reference internal" href="#nipydoctest"><code class="docutils literal"><span class="pre">NipyDoctest</span></code></a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#nipyoutputchecker"><code class="docutils literal"><span class="pre">NipyOutputChecker</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nipy.testing.decorators.html"
+                        title="previous chapter">testing.decorators</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/generated/nipy.testing.doctester.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="testing-doctester">
+<h1>testing.doctester<a class="headerlink" href="#testing-doctester" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-testing-doctester">
+<h2>Module: <code class="xref py py-mod docutils literal"><span class="pre">testing.doctester</span></code><a class="headerlink" href="#module-testing-doctester" title="Permalink to this headline">¶</a></h2>
+<p>Inheritance diagram for <code class="docutils literal"><span class="pre">nipy.testing.doctester</span></code>:</p>
+<p class="graphviz">
+<img src="../../_images/inheritance-36072da8f1c7f3d2c0c86d47488e1cef8d12fd4b.png" alt="Inheritance diagram of nipy.testing.doctester" usemap="#inheritanceecdc83e39f" class="inheritance"/>
+<map id="inheritanceecdc83e39f" name="inheritanceecdc83e39f">
+<area shape="rect" id="node1" title="A class used to extract the DocTests that are relevant to a given" alt="" coords="20,107,131,125"/>
+<area shape="rect" id="node2" title="A class used to check the whether the actual output from a doctest" alt="" coords="18,73,134,90"/>
+<area shape="rect" id="node3" title="Base class for nose plugins. It&#39;s recommended but not *necessary* to" alt="" coords="26,38,125,56"/>
+<area shape="rect" id="node4" title="Activate doctest plugin to find and run doctests in non&#45;test modules." alt="" coords="219,38,340,56"/>
+<area shape="rect" id="node5" href="#nipy.testing.doctester.DocTestSkip" title="Object wrapper for doctests to be skipped." alt="" coords="4,4,148,22"/>
+<area shape="rect" id="node6" href="#nipy.testing.doctester.NipyDocTestFinder" title="testing.doctester.NipyDocTestFinder" alt="" coords="413,107,586,125"/>
+<area shape="rect" id="node8" href="#nipy.testing.doctester.NipyDoctest" title="testing.doctester.NipyDoctest" alt="" coords="621,38,764,56"/>
+<area shape="rect" id="node10" href="#nipy.testing.doctester.NipyOutputChecker" title="testing.doctester.NipyOutputChecker" alt="" coords="411,73,588,90"/>
+</map>
+</p>
+<span class="target" id="module-nipy.testing.doctester"></span><p>Custom doctester based on Numpy doctester</p>
+<p>To run doctests via nose, you&#8217;ll need <code class="docutils literal"><span class="pre">nosetests</span> <span class="pre">nipy/testing/doctester.py</span>
+<span class="pre">--doctest-test</span></code>, because this file will be identified as containing tests.</p>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="doctestskip">
+<h3><a class="reference internal" href="#nipy.testing.doctester.DocTestSkip" title="nipy.testing.doctester.DocTestSkip"><code class="xref py py-class docutils literal"><span class="pre">DocTestSkip</span></code></a><a class="headerlink" href="#doctestskip" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.testing.doctester.DocTestSkip">
+<em class="property">class </em><code class="descclassname">nipy.testing.doctester.</code><code class="descname">DocTestSkip</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.DocTestSkip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Object wrapper for doctests to be skipped.</p>
+<dl class="method">
+<dt id="nipy.testing.doctester.DocTestSkip.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.DocTestSkip.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="nipydoctestfinder">
+<h3><a class="reference internal" href="#nipy.testing.doctester.NipyDocTestFinder" title="nipy.testing.doctester.NipyDocTestFinder"><code class="xref py py-class docutils literal"><span class="pre">NipyDocTestFinder</span></code></a><a class="headerlink" href="#nipydoctestfinder" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.testing.doctester.NipyDocTestFinder">
+<em class="property">class </em><code class="descclassname">nipy.testing.doctester.</code><code class="descname">NipyDocTestFinder</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>parser=&lt;doctest.DocTestParser instance&gt;</em>, <em>recurse=True</em>, <em>exclude_empty=True</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDocTestFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">nipy.fixes.numpy.testing.noseclasses.NumpyDocTestFinder</span></code></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+</tbody>
+</table>
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDocTestFinder.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>parser=&lt;doctest.DocTestParser instance&gt;</em>, <em>recurse=True</em>, <em>exclude_empty=True</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDocTestFinder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new doctest finder.</p>
+<p>The optional argument <cite>parser</cite> specifies a class or
+function that should be used to create new DocTest objects (or
+objects that implement the same interface as DocTest).  The
+signature for this factory function should match the signature
+of the DocTest constructor.</p>
+<p>If the optional argument <cite>recurse</cite> is false, then <cite>find</cite> will
+only examine the given object, and not any contained objects.</p>
+<p>If the optional argument <cite>exclude_empty</cite> is false, then <cite>find</cite>
+will include tests for objects with empty docstrings.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDocTestFinder.find">
+<code class="descname">find</code><span class="sig-paren">(</span><em>obj</em>, <em>name=None</em>, <em>module=None</em>, <em>globs=None</em>, <em>extraglobs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDocTestFinder.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of the DocTests that are defined by the given
+object&#8217;s docstring, or by any of its contained objects&#8217;
+docstrings.</p>
+<p>The optional parameter <cite>module</cite> is the module that contains
+the given object.  If the module is not specified or is None, then
+the test finder will attempt to automatically determine the
+correct module.  The object&#8217;s module is used:</p>
+<blockquote>
+<div><ul class="simple">
+<li>As a default namespace, if <cite>globs</cite> is not specified.</li>
+<li>To prevent the DocTestFinder from extracting DocTests
+from objects that are imported from other modules.</li>
+<li>To find the name of the file containing the object.</li>
+<li>To help find the line number of the object within its
+file.</li>
+</ul>
+</div></blockquote>
+<p>Contained objects whose module does not match <cite>module</cite> are ignored.</p>
+<p>If <cite>module</cite> is False, no attempt to find the module will be made.
+This is obscure, of use mostly in tests:  if <cite>module</cite> is False, or
+is None but cannot be found automatically, then all objects are
+considered to belong to the (non-existent) module, so all contained
+objects will (recursively) be searched for doctests.</p>
+<p>The globals for each DocTest is formed by combining <cite>globs</cite>
+and <cite>extraglobs</cite> (bindings in <cite>extraglobs</cite> override bindings
+in <cite>globs</cite>).  A new copy of the globals dictionary is created
+for each DocTest.  If <cite>globs</cite> is not specified, then it
+defaults to the module&#8217;s <cite>__dict__</cite>, if specified, or {}
+otherwise.  If <cite>extraglobs</cite> is not specified, then it defaults
+to {}.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="nipydoctest">
+<h3><a class="reference internal" href="#nipy.testing.doctester.NipyDoctest" title="nipy.testing.doctester.NipyDoctest"><code class="xref py py-class docutils literal"><span class="pre">NipyDoctest</span></code></a><a class="headerlink" href="#nipydoctest" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.testing.doctester.NipyDoctest">
+<em class="property">class </em><code class="descclassname">nipy.testing.doctester.</code><code class="descname">NipyDoctest</code><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">nipy.fixes.numpy.testing.noseclasses.NumpyDoctest</span></code></p>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.testing.doctester.NipyDoctest.enableOpt" title="nipy.testing.doctester.NipyDoctest.enableOpt"><code class="xref py py-obj docutils literal"><span class="pre">enableOpt</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.testing.doctester.NipyDoctest.extension" title="nipy.testing.doctester.NipyDoctest.extension"><code class="xref py py-obj docutils literal"><span class="pre">extension</span></code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.testing.doctester.NipyDoctest.out_check_class" title="nipy.testing.doctester.NipyDoctest.out_check_class"><code class="xref py py-obj docutils literal"><span class="pre">out_check_class</span></code></a></td>
+<td>alias of <a class="reference internal" href="#nipy.testing.doctester.NipyOutputChecker" title="nipy.testing.doctester.NipyOutputChecker"><code class="xref py py-class docutils literal"><span class="pre">NipyOutputChecker</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.testing.doctester.NipyDoctest.set_test_context" title="nipy.testing.doctester.NipyDoctest.set_test_context"><code class="xref py py-obj docutils literal"><span class="pre">set_test_context</span></code></a>(test)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.testing.doctester.NipyDoctest.test_finder_class" title="nipy.testing.doctester.NipyDoctest.test_finder_class"><code class="xref py py-obj docutils literal"><span class="pre">test_finder_class</span></code></a></td>
+<td>alias of <a class="reference internal" href="#nipy.testing.doctester.NipyDocTestFinder" title="nipy.testing.doctester.NipyDocTestFinder"><code class="xref py py-class docutils literal"><span class="pre">NipyDocTestFinder</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.addOptions">
+<code class="descname">addOptions</code><span class="sig-paren">(</span><em>parser</em>, <em>env=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.addOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add command-line options for this plugin.</p>
+<p>The base plugin class adds &#8211;with-$name by default, used to enable the
+plugin.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Don&#8217;t implement addOptions unless you want to override
+all default option handling behavior, including
+warnings for conflicting options. Implement
+<code class="xref py py-meth docutils literal"><span class="pre">options</span></code>
+instead.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.add_options">
+<code class="descname">add_options</code><span class="sig-paren">(</span><em>parser</em>, <em>env=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.add_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-camel-case version of func name for backwards compatibility.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">DEPRECATED: Do not use this method,
+use <code class="xref py py-meth docutils literal"><span class="pre">options</span></code>
+instead.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.afterContext">
+<code class="descname">afterContext</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.afterContext" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.can_configure">
+<code class="descname">can_configure</code><em class="property"> = False</em><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.can_configure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.configure">
+<code class="descname">configure</code><span class="sig-paren">(</span><em>options</em>, <em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.configure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.doctest_case_class">
+<code class="descname">doctest_case_class</code><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.doctest_case_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">NumpyDocTestCase</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.doctest_ignore">
+<code class="descname">doctest_ignore</code><em class="property"> = ['generate_numpy_api.py', 'scons_support.py', 'setupscons.py', 'setup.py']</em><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.doctest_ignore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.doctest_optflags">
+<code class="descname">doctest_optflags</code><em class="property"> = 12</em><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.doctest_optflags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.enableOpt">
+<code class="descname">enableOpt</code><em class="property"> = None</em><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.enableOpt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.enabled">
+<code class="descname">enabled</code><em class="property"> = False</em><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.enabled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.extension">
+<code class="descname">extension</code><em class="property"> = None</em><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.extension" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.help">
+<code class="descname">help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return help for this plugin. This will be output as the help
+section of the &#8211;with-$name option that enables the plugin.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.loadTestsFromFile">
+<code class="descname">loadTestsFromFile</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.loadTestsFromFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load doctests from the file.</p>
+<p>Tests are loaded only if filename&#8217;s extension matches
+configured doctest extension.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.loadTestsFromModule">
+<code class="descname">loadTestsFromModule</code><span class="sig-paren">(</span><em>module</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.loadTestsFromModule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.makeTest">
+<code class="descname">makeTest</code><span class="sig-paren">(</span><em>obj</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.makeTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look for doctests in the given object, which will be a
+function, method or class.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.matches">
+<code class="descname">matches</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.matches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.name">
+<code class="descname">name</code><em class="property"> = 'nipydoctest'</em><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.options">
+<code class="descname">options</code><span class="sig-paren">(</span><em>parser</em>, <em>env={'FSLDIR': '/opt/fsl/fsl'</em>, <em>'PERL_MM_OPT': 'INSTALL_BASE=/Users/mb312/perl5'</em>, <em>'LESS': '-R'</em>, <em>'PY_USER_BIN': '/Users/mb312/Library/Python/2.7/bin'</em>, <em>'MATLABPATH': '/Users/mb312/matlab:/Users/mb312/matlab/m2html'</em>, <em>'TERM_PROGRAM_VERSION': '326'</em>, <em>'FSLTCLSH': '/opt/fsl/fsl/bin/fsltclsh'</em>, <em>'TMPDIR': '/var/folders/s7/r25pn2xj48n4cm76_mgsb78h0000gn/T/'</em>, <em>'CPATH': ':/Users/mb312/tmp/junk/include:/Users/mb312/tmp/local/include:/Users/mb312/usr/include:/Users/mb312/usr/opt/include:/Users/mb312/usr/local/include:/local/include:/opt/include:'</em>, <em>'FSLREMOTECALL': ''</em>, <em>'USER': 'mb312'</em>, <em>'PATH': '/opt/fsl/fsl/bin:/usr/local/opt/ruby/bin:/Users/mb312/Library/Python/2.7/bin::/Users/mb312/tmp/junk/bin:/Users/mb312/tmp/local/bin:/Users/mb312/usr/bin:/Users/mb312/usr/opt/bin:/Users/mb312/usr/local/bin:/local/bin:/opt/bin:/usr/local/sbin:/usr/sbin:/sbin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin:/Users/mb312/.cabal/bin:/Users/mb312/perl5/bin'</em>, <em>'HOME': '/Users/mb312'</em>, <em>'POPY': '/Library/Frameworks/Python.framework/Versions'</em>, <em>'VAGRANT_HOME': '/Volumes/diosx/.vagrant.d'</em>, <em>'DISPLAY': '/tmp/launch-VIPFwL/org.macosforge.xquartz:0'</em>, <em>'MAKEFLAGS': ''</em>, <em>'TERM_PROGRAM': 'Apple_Terminal'</em>, <em>'LANG': 'en_US.UTF-8'</em>, <em>'FSLLOCKDIR': ''</em>, <em>'TERM': 'xterm-256color'</em>, <em>'SHELL': '/bin/bash'</em>, <em>'LIBRARY_PATH': ':'</em>, <em>'MAKELEVEL': '2'</em>, <em>'SHLVL': '2'</em>, <em>'SECURITYSESSIONID': '186a5'</em>, <em>'LD_LIBRARY_PATH': ':'</em>, <em>'EDITOR': 'mvim -v'</em>, <em>'PYTHONPATH': '/Users/mb312/dev_trees/nipy::/Users/mb312/tmp/junk/lib64/python2.7/site-packages:/Users/mb312/tmp/junk/lib/python2.7/site-packages:/Users/mb312/tmp/local/lib64/python2.7/site-packages:/Users/mb312/tmp/local/lib/python2.7/site-packages:/Users/mb312/usr/lib64/python2.7/site-packages:/Users/mb312/usr/lib/python2.7/site-packages:/Users/mb312/usr/opt/lib64/python2.7/site-packages:/Users/mb312/usr/opt/lib/python2.7/site-packages:/Users/mb312/usr/local/lib64/python2.7/site-packages:/Users/mb312/usr/local/lib/python2.7/site-packages:/local/lib64/python2.7/site-packages:/local/lib/python2.7/site-packages:/opt/lib64/python2.7/site-packages:/opt/lib/python2.7/site-packages:'</em>, <em>'_VIRTUALENVWRAPPER_API': ' mkvirtualenv rmvirtualenv lsvirtualenv showvirtualenv workon add2virtualenv cdsitepackages cdvirtualenv lssitepackages toggleglobalsitepackages cpvirtualenv setvirtualenvproject mkproject cdproject mktmpenv'</em>, <em>'FSLMULTIFILEQUIT': 'TRUE'</em>, <em>'MFLAGS': ''</em>, <em>'FSLWISH': '/opt/fsl/fsl/bin/fslwish'</em>, <em>'WORKON_HOME': '/Users/mb312/.virtualenvs'</em>, <em>'TERM_SESSION_ID': 'DF2CA5CB-42AF-4592-A0FB-D66727D801F0'</em>, <em>'VMAIL_VIM': 'vim'</em>, <em>'FSLOUTPUTTYPE': 'NIFTI_GZ'</em>, <em>'CC': 'clang'</em>, <em>'FFLAGS': '-ff2c'</em>, <em>'SSH_AUTH_SOCK': '/tmp/launch-tC3WzF/Listeners'</em>, <em>'Apple_PubSub_Socket_Render': '/tmp/launch-GtGRbf/Render'</em>, <em>'_': '/Applications/Xcode.app/Contents/Developer/usr/bin/make'</em>, <em>'TEXINPUTS': '.:/Users/mb312/texmf/texinputs::'</em>, <em>'VIRTUALENVWRAPPER_PROJECT_FILENAME': '.project'</em>, <em>'VIRTUALENVWRAPPER_HOOK_DIR': '/Users/mb312/.virtualenvs'</em>, <em>'VE_OLD_PYTHONPATH': ':/Users/mb312/tmp/junk/lib64/python2.7/site-packages:/Users/mb312/tmp/junk/lib/python2.7/site-packages:/Users/mb312/tmp/local/lib64/python2.7/site-packages:/Users/mb312/tmp/local/lib/python2.7/site-packages:/Users/mb312/usr/lib64/python2.7/site-packages:/Users/mb312/usr/lib/python2.7/site-packages:/Users/mb312/usr/opt/lib64/python2.7/site-packages:/Users/mb312/usr/opt/lib/python2.7/site-packages:/Users/mb312/usr/local/lib64/python2.7/site-packages:/Users/mb312/usr/local/lib/python2.7/site-packages:/local/lib64/python2.7/site-packages:/local/lib/python2.7/site-packages:/opt/lib64/python2.7/site-packages:/opt/lib/python2.7/site-packages:'</em>, <em>'CXX': 'clang++'</em>, <em>'FSLGECUDAQ': 'cuda.q'</em>, <em>'OLDPWD': '/Users/mb312/dev_trees/nipy'</em>, <em>'BSTINPUTS': '.:/Users/mb312/texmf/bstinputs::'</em>, <em>'__CF_USER_TEXT_ENCODING': '0x1F5:0:0'</em>, <em>'FSLMACHINELIST': ''</em>, <em>'PWD': '/Users/mb312/dev_trees/nipy/doc'</em>, <em>'PAGER': 'less'</em>, <em>'PERL_MB_OPT': '--install_base &quot;/Users/mb312/perl5&quot;'</em>, <em>'BIBINPUTS': '.:/Users/mb312/texmf/bibinputs::'</em>, <em>'VIRTUALENVWRAPPER_SCRIPT': '/Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh'</em>, <em>'LOGNAME': 'mb312'</em>, <em>'PERL5LIB': '/Users/mb312/perl5/lib/perl5'</em>, <em>'__CHECKFIX1436934': '1'</em>, <em>'GUI_EDITOR': 'gvim'}</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.out_check_class">
+<code class="descname">out_check_class</code><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.out_check_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#nipy.testing.doctester.NipyOutputChecker" title="nipy.testing.doctester.NipyOutputChecker"><code class="xref py py-class docutils literal"><span class="pre">NipyOutputChecker</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.prepareTestLoader">
+<code class="descname">prepareTestLoader</code><span class="sig-paren">(</span><em>loader</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.prepareTestLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capture loader&#8217;s suiteClass.</p>
+<p>This is used to create test suites from doctest files.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.score">
+<code class="descname">score</code><em class="property"> = 1000</em><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.score" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.set_test_context">
+<code class="descname">set_test_context</code><span class="sig-paren">(</span><em>test</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.set_test_context" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.suiteClass">
+<code class="descname">suiteClass</code><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.suiteClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">DoctestSuite</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.testing.doctester.NipyDoctest.test_finder_class">
+<code class="descname">test_finder_class</code><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.test_finder_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#nipy.testing.doctester.NipyDocTestFinder" title="nipy.testing.doctester.NipyDocTestFinder"><code class="xref py py-class docutils literal"><span class="pre">NipyDocTestFinder</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.tolist">
+<code class="descname">tolist</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.tolist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyDoctest.wantFile">
+<code class="descname">wantFile</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyDoctest.wantFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="nipyoutputchecker">
+<h3><a class="reference internal" href="#nipy.testing.doctester.NipyOutputChecker" title="nipy.testing.doctester.NipyOutputChecker"><code class="xref py py-class docutils literal"><span class="pre">NipyOutputChecker</span></code></a><a class="headerlink" href="#nipyoutputchecker" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.testing.doctester.NipyOutputChecker">
+<em class="property">class </em><code class="descclassname">nipy.testing.doctester.</code><code class="descname">NipyOutputChecker</code><a class="headerlink" href="#nipy.testing.doctester.NipyOutputChecker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">nipy.fixes.numpy.testing.noseclasses.NumpyOutputChecker</span></code></p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.testing.doctester.NipyOutputChecker.check_output" title="nipy.testing.doctester.NipyOutputChecker.check_output"><code class="xref py py-obj docutils literal"><span class="pre">check_output</span></code></a>(want,&nbsp;got,&nbsp;optionflags)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyOutputChecker.check_output">
+<code class="descname">check_output</code><span class="sig-paren">(</span><em>want</em>, <em>got</em>, <em>optionflags</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyOutputChecker.check_output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.testing.doctester.NipyOutputChecker.output_difference">
+<code class="descname">output_difference</code><span class="sig-paren">(</span><em>example</em>, <em>got</em>, <em>optionflags</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.NipyOutputChecker.output_difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string describing the differences between the
+expected output for a given example (<cite>example</cite>) and the actual
+output (<cite>got</cite>).  <cite>optionflags</cite> is the set of option flags used
+to compare <cite>want</cite> and <cite>got</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="nipy.testing.doctester.ignore_dtype">
+<code class="descclassname">nipy.testing.doctester.</code><code class="descname">ignore_dtype</code><span class="sig-paren">(</span><em>in_str</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.ignore_dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes dtype=[dtype] from string <cite>in_str</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>in_str</strong> : str</p>
+<blockquote>
+<div><p>String maybe containing dtype specifier</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out_str</strong> : str</p>
+<blockquote class="last">
+<div><p>String from which the dtype specifier has been removed.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s">&#39;i2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here&#8217;s the normal repr:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span>
+<span class="go">array([0, 1, 2, 3, 4], dtype=int16)</span>
+</pre></div>
+</div>
+<p>The repr with the dtype bits removed</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ignore_dtype</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+<span class="go">&#39;array([0, 1, 2, 3, 4])&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ignore_dtype</span><span class="p">(</span><span class="s">&#39;something(again, dtype=something)&#39;</span><span class="p">)</span>
+<span class="go">&#39;something(again)&#39;</span>
+</pre></div>
+</div>
+<p>Even if there are more closed brackets after the dtype</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ignore_dtype</span><span class="p">(</span><span class="s">&#39;something(again, dtype=something) (1, 2)&#39;</span><span class="p">)</span>
+<span class="go">&#39;something(again) (1, 2)&#39;</span>
+</pre></div>
+</div>
+<p>We need the close brackets to match</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ignore_dtype</span><span class="p">(</span><span class="s">&#39;again, dtype=something&#39;</span><span class="p">)</span>
+<span class="go">&#39;again, dtype=something&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.testing.doctester.round_numbers">
+<code class="descclassname">nipy.testing.doctester.</code><code class="descname">round_numbers</code><span class="sig-paren">(</span><em>in_str</em>, <em>precision</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.round_numbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace fp numbers in <cite>in_str</cite> with numbers rounded to <cite>precision</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>in_str</strong> : str</p>
+<blockquote>
+<div><p>string possibly containing floating point numbers</p>
+</div></blockquote>
+<p><strong>precision</strong> : int</p>
+<blockquote>
+<div><p>number of decimal places to round to</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out_str</strong> : str</p>
+<blockquote class="last">
+<div><p><cite>in_str</cite> with any floating point numbers replaced with same numbers
+rounded to <cite>precision</cite> decimal places.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">round_numbers</span><span class="p">(</span><span class="s">&#39;A=0.234, B=12.345&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">&#39;A=0.23, B=12.35&#39;</span>
+</pre></div>
+</div>
+<p>Rounds the floating point value as it finds it in the string.  This is even
+true for numbers with exponentials.  Remember that:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;</span><span class="si">%.3f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="mf">0.3339e-10</span>
+<span class="go">&#39;0.000&#39;</span>
+</pre></div>
+</div>
+<p>This routine will recognize an exponential as something to process, but only
+works on the decimal part (leaving the exponential part is it is):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">round_numbers</span><span class="p">(</span><span class="s">&#39;(0.3339e-10, &quot;string&quot;)&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">&#39;(0.334e-10, &quot;string&quot;)&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.testing.doctester.strip_array_repr">
+<code class="descclassname">nipy.testing.doctester.</code><code class="descname">strip_array_repr</code><span class="sig-paren">(</span><em>in_str</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.testing.doctester.strip_array_repr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes array-specific part of repr from string <cite>in_str</cite></p>
+<p>This parser only works on lines that contain <em>only</em> an array repr (and
+therefore start with <code class="docutils literal"><span class="pre">array</span></code>, and end with a close parenthesis.  To remove
+dtypes in array reprs that may be somewhere within the line, use the
+<code class="docutils literal"><span class="pre">IGNORE_DTYPE</span></code> doctest option.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>in_str</strong> : str</p>
+<blockquote>
+<div><p>String maybe containing a repr for an array</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out_str</strong> : str</p>
+<blockquote class="last">
+<div><p>String from which the array specific parts of the repr have been
+removed.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s">&#39;i2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here&#8217;s the normal repr:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span>
+<span class="go">array([0, 1, 2, 3, 4], dtype=int16)</span>
+</pre></div>
+</div>
+<p>The repr with the &#8216;array&#8217; bits removed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">strip_array_repr</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+<span class="go">&#39;[0, 1, 2, 3, 4]&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.testing.decorators.html" title="testing.decorators"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

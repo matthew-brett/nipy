@@ -1,0 +1,750 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Neuroimaging in Python &mdash; NIPY Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nipy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.4.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="NIPY Documentation" href="../../index.html" />
+    <link rel="up" title="API" href="../index.html" />
+    <link rel="prev" title="core.reference.slices" href="nipy.core.reference.slices.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience, time
+				 series">
+
+  </head>
+  <body role="document">
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+ <a href="../../index.html">
+  <img src="../../_static/reggie2.png" alt="NIPY logo"  border="0" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.core.reference.slices.html" title="core.reference.slices"
+             accesskey="P">previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" accesskey="U">API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+  
+<h4> Site Navigation </h4>
+  <ul>
+    <li><a href="../../documentation.html">Documentation</a></li>
+    <li><a href="../../devel/index.html">Development</a></li>
+  </ul>
+
+<h4> NIPY Community </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://nipy.org/">Community Home</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/projects/">NIPY Projects</a></li>
+    <li><a class="reference external"
+	href="http://mail.scipy.org/mailman/listinfo/nipy-devel">Mailing List</a></li>
+    <li><a class="reference external"
+	href="http://nipy.org/software/license/index.html">License</a></li>
+  </ul>
+
+<h4> Github repo </h4>
+  <ul class="simple">
+    <li><a class="reference external"
+	href="http://github.com/nipy/nipy/">Nipy Github</a></li>
+  </ul>
+
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">core.reference.spaces</a><ul>
+<li><a class="reference internal" href="#module-core-reference-spaces">Module: <code class="docutils literal"><span class="pre">core.reference.spaces</span></code></a></li>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
+<li><a class="reference internal" href="#affineerror"><code class="docutils literal"><span class="pre">AffineError</span></code></a></li>
+<li><a class="reference internal" href="#axeserror"><code class="docutils literal"><span class="pre">AxesError</span></code></a></li>
+<li><a class="reference internal" href="#spaceerror"><code class="docutils literal"><span class="pre">SpaceError</span></code></a></li>
+<li><a class="reference internal" href="#spacetypeerror"><code class="docutils literal"><span class="pre">SpaceTypeError</span></code></a></li>
+<li><a class="reference internal" href="#xyzspace"><code class="docutils literal"><span class="pre">XYZSpace</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nipy.core.reference.slices.html"
+                        title="previous chapter">core.reference.slices</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/api/generated/nipy.core.reference.spaces.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+
+<div id="searchbox-ml" style="display: none">
+  <h3>Search mailing list archive</h3>
+  <script type="text/javascript">
+    function mlsearch(curobj)
+    {
+    curobj.q.value="site:http://mail.scipy.org/pipermail/nipy-devel/ "+curobj.userquery.value
+    }
+  </script>
+  <form action="http://www.google.com/search" method="get" onSubmit="mlsearch(this)">
+    <input name="userquery" size="13" type="text" /> <input type="submit" value="Go" />
+    <input name="q" type="hidden" />
+  </form>
+</div>
+  
+<div id="searchbox-site" style="display: none">
+  <h3>Search this site</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="13" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox-ml').show(0);</script>
+<script type="text/javascript">$('#searchbox-site').show(0);</script>
+
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="core-reference-spaces">
+<h1>core.reference.spaces<a class="headerlink" href="#core-reference-spaces" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-core-reference-spaces">
+<h2>Module: <code class="xref py py-mod docutils literal"><span class="pre">core.reference.spaces</span></code><a class="headerlink" href="#module-core-reference-spaces" title="Permalink to this headline">¶</a></h2>
+<p>Inheritance diagram for <code class="docutils literal"><span class="pre">nipy.core.reference.spaces</span></code>:</p>
+<p class="graphviz">
+<img src="../../_images/inheritance-8d027e6ccf0fee5150d92dadc96f19e767610aee.png" alt="Inheritance diagram of nipy.core.reference.spaces" usemap="#inheritancecf0d4ec7af" class="inheritance"/>
+<map id="inheritancecf0d4ec7af" name="inheritancecf0d4ec7af">
+<area shape="rect" id="node1" href="#nipy.core.reference.spaces.AffineError" title="reference.spaces.AffineError" alt="" coords="270,5,472,32"/>
+<area shape="rect" id="node2" href="#nipy.core.reference.spaces.SpaceError" title="reference.spaces.SpaceError" alt="" coords="5,56,207,82"/>
+<area shape="rect" id="node3" href="#nipy.core.reference.spaces.AxesError" title="reference.spaces.AxesError" alt="" coords="274,56,468,82"/>
+<area shape="rect" id="node4" href="#nipy.core.reference.spaces.SpaceTypeError" title="reference.spaces.SpaceTypeError" alt="" coords="255,107,487,133"/>
+<area shape="rect" id="node5" href="#nipy.core.reference.spaces.XYZSpace" title="Class contains logic for spaces with XYZ coordinate systems" alt="" coords="9,5,204,32"/>
+</map>
+</p>
+<span class="target" id="module-nipy.core.reference.spaces"></span><p>Useful neuroimaging coordinate map makers and utilities</p>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="affineerror">
+<h3><a class="reference internal" href="#nipy.core.reference.spaces.AffineError" title="nipy.core.reference.spaces.AffineError"><code class="xref py py-class docutils literal"><span class="pre">AffineError</span></code></a><a class="headerlink" href="#affineerror" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.core.reference.spaces.AffineError">
+<em class="property">class </em><code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">AffineError</code><a class="headerlink" href="#nipy.core.reference.spaces.AffineError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nipy.core.reference.spaces.SpaceError" title="nipy.core.reference.spaces.SpaceError"><code class="xref py py-class docutils literal"><span class="pre">nipy.core.reference.spaces.SpaceError</span></code></a></p>
+<dl class="method">
+<dt id="nipy.core.reference.spaces.AffineError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.AffineError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.AffineError.args">
+<code class="descname">args</code><a class="headerlink" href="#nipy.core.reference.spaces.AffineError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.AffineError.message">
+<code class="descname">message</code><a class="headerlink" href="#nipy.core.reference.spaces.AffineError.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="axeserror">
+<h3><a class="reference internal" href="#nipy.core.reference.spaces.AxesError" title="nipy.core.reference.spaces.AxesError"><code class="xref py py-class docutils literal"><span class="pre">AxesError</span></code></a><a class="headerlink" href="#axeserror" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.core.reference.spaces.AxesError">
+<em class="property">class </em><code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">AxesError</code><a class="headerlink" href="#nipy.core.reference.spaces.AxesError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nipy.core.reference.spaces.SpaceError" title="nipy.core.reference.spaces.SpaceError"><code class="xref py py-class docutils literal"><span class="pre">nipy.core.reference.spaces.SpaceError</span></code></a></p>
+<dl class="method">
+<dt id="nipy.core.reference.spaces.AxesError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.AxesError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.AxesError.args">
+<code class="descname">args</code><a class="headerlink" href="#nipy.core.reference.spaces.AxesError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.AxesError.message">
+<code class="descname">message</code><a class="headerlink" href="#nipy.core.reference.spaces.AxesError.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="spaceerror">
+<h3><a class="reference internal" href="#nipy.core.reference.spaces.SpaceError" title="nipy.core.reference.spaces.SpaceError"><code class="xref py py-class docutils literal"><span class="pre">SpaceError</span></code></a><a class="headerlink" href="#spaceerror" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.core.reference.spaces.SpaceError">
+<em class="property">class </em><code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">SpaceError</code><a class="headerlink" href="#nipy.core.reference.spaces.SpaceError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+<dl class="method">
+<dt id="nipy.core.reference.spaces.SpaceError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.SpaceError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.SpaceError.args">
+<code class="descname">args</code><a class="headerlink" href="#nipy.core.reference.spaces.SpaceError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.SpaceError.message">
+<code class="descname">message</code><a class="headerlink" href="#nipy.core.reference.spaces.SpaceError.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="spacetypeerror">
+<h3><a class="reference internal" href="#nipy.core.reference.spaces.SpaceTypeError" title="nipy.core.reference.spaces.SpaceTypeError"><code class="xref py py-class docutils literal"><span class="pre">SpaceTypeError</span></code></a><a class="headerlink" href="#spacetypeerror" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.core.reference.spaces.SpaceTypeError">
+<em class="property">class </em><code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">SpaceTypeError</code><a class="headerlink" href="#nipy.core.reference.spaces.SpaceTypeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nipy.core.reference.spaces.SpaceError" title="nipy.core.reference.spaces.SpaceError"><code class="xref py py-class docutils literal"><span class="pre">nipy.core.reference.spaces.SpaceError</span></code></a></p>
+<dl class="method">
+<dt id="nipy.core.reference.spaces.SpaceTypeError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.SpaceTypeError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.SpaceTypeError.args">
+<code class="descname">args</code><a class="headerlink" href="#nipy.core.reference.spaces.SpaceTypeError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.SpaceTypeError.message">
+<code class="descname">message</code><a class="headerlink" href="#nipy.core.reference.spaces.SpaceTypeError.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="xyzspace">
+<h3><a class="reference internal" href="#nipy.core.reference.spaces.XYZSpace" title="nipy.core.reference.spaces.XYZSpace"><code class="xref py py-class docutils literal"><span class="pre">XYZSpace</span></code></a><a class="headerlink" href="#xyzspace" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="nipy.core.reference.spaces.XYZSpace">
+<em class="property">class </em><code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">XYZSpace</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Class contains logic for spaces with XYZ coordinate systems</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">XYZSpace</span><span class="p">(</span><span class="s">&#39;hijo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">sp</span>
+<span class="go">hijo: [(&#39;x&#39;, &#39;hijo-x=L-&gt;R&#39;), (&#39;y&#39;, &#39;hijo-y=P-&gt;A&#39;), (&#39;z&#39;, &#39;hijo-z=I-&gt;S&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csm</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">to_coordsys_maker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span> <span class="o">=</span> <span class="n">csm</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span>
+<span class="go">CoordinateSystem(coord_names=(&#39;hijo-x=L-&gt;R&#39;, &#39;hijo-y=P-&gt;A&#39;, &#39;hijo-z=I-&gt;S&#39;), name=&#39;hijo&#39;, coord_dtype=float64)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span> <span class="ow">in</span> <span class="n">sp</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.core.reference.spaces.XYZSpace.as_map" title="nipy.core.reference.spaces.XYZSpace.as_map"><code class="xref py py-obj docutils literal"><span class="pre">as_map</span></code></a>()</td>
+<td>Return xyz names as dictionary</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.core.reference.spaces.XYZSpace.as_tuple" title="nipy.core.reference.spaces.XYZSpace.as_tuple"><code class="xref py py-obj docutils literal"><span class="pre">as_tuple</span></code></a>()</td>
+<td>Return xyz names as tuple</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#nipy.core.reference.spaces.XYZSpace.register_to" title="nipy.core.reference.spaces.XYZSpace.register_to"><code class="xref py py-obj docutils literal"><span class="pre">register_to</span></code></a>(mapping)</td>
+<td>Update <cite>mapping</cite> with key=self.x, value=&#8217;x&#8217; etc pairs</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#nipy.core.reference.spaces.XYZSpace.to_coordsys_maker" title="nipy.core.reference.spaces.XYZSpace.to_coordsys_maker"><code class="xref py py-obj docutils literal"><span class="pre">to_coordsys_maker</span></code></a>([extras])</td>
+<td>Make a coordinate system maker for this space</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nipy.core.reference.spaces.XYZSpace.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.reference.spaces.XYZSpace.as_map">
+<code class="descname">as_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.as_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return xyz names as dictionary</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">XYZSpace</span><span class="p">(</span><span class="s">&#39;hijo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">as_map</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(&#39;x&#39;, &#39;hijo-x=L-&gt;R&#39;), (&#39;y&#39;, &#39;hijo-y=P-&gt;A&#39;), (&#39;z&#39;, &#39;hijo-z=I-&gt;S&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.reference.spaces.XYZSpace.as_tuple">
+<code class="descname">as_tuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.as_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return xyz names as tuple</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">XYZSpace</span><span class="p">(</span><span class="s">&#39;hijo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()</span>
+<span class="go">(&#39;hijo-x=L-&gt;R&#39;, &#39;hijo-y=P-&gt;A&#39;, &#39;hijo-z=I-&gt;S&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.reference.spaces.XYZSpace.register_to">
+<code class="descname">register_to</code><span class="sig-paren">(</span><em>mapping</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.register_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update <cite>mapping</cite> with key=self.x, value=&#8217;x&#8217; etc pairs</p>
+<p>The mapping will then have keys that are names we (<code class="docutils literal"><span class="pre">self</span></code>) identify as
+being x, or y, or z, values are &#8216;x&#8217; or &#8216;y&#8217; or &#8216;z&#8217;.</p>
+<p>Note that this is the opposite way round for keys, values, compared to
+the <code class="docutils literal"><span class="pre">as_map</span></code> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>mapping</strong> : mapping</p>
+<blockquote>
+<div><p>such as a dict</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>None</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">XYZSpace</span><span class="p">(</span><span class="s">&#39;hijo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">register_to</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(&#39;hijo-x=L-&gt;R&#39;, &#39;x&#39;), (&#39;hijo-y=P-&gt;A&#39;, &#39;y&#39;), (&#39;hijo-z=I-&gt;S&#39;, &#39;z&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nipy.core.reference.spaces.XYZSpace.to_coordsys_maker">
+<code class="descname">to_coordsys_maker</code><span class="sig-paren">(</span><em>extras=()</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.to_coordsys_maker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a coordinate system maker for this space</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>extra</strong> : sequence</p>
+<blockquote>
+<div><p>names for any further axes after x, y, z</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>csm</strong> : CoordinateSystemMaker</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">XYZSpace</span><span class="p">(</span><span class="s">&#39;hijo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csm</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">to_coordsys_maker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csm</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">CoordinateSystem(coord_names=(&#39;hijo-x=L-&gt;R&#39;, &#39;hijo-y=P-&gt;A&#39;, &#39;hijo-z=I-&gt;S&#39;), name=&#39;hijo&#39;, coord_dtype=float64)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.XYZSpace.x">
+<code class="descname">x</code><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>x-space coordinate name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.XYZSpace.x_suffix">
+<code class="descname">x_suffix</code><em class="property"> = 'x=L-&gt;R'</em><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.x_suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.XYZSpace.y">
+<code class="descname">y</code><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>y-space coordinate name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.XYZSpace.y_suffix">
+<code class="descname">y_suffix</code><em class="property"> = 'y=P-&gt;A'</em><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.y_suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.XYZSpace.z">
+<code class="descname">z</code><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.z" title="Permalink to this definition">¶</a></dt>
+<dd><p>z-space coordinate name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="nipy.core.reference.spaces.XYZSpace.z_suffix">
+<code class="descname">z_suffix</code><em class="property"> = 'z=I-&gt;S'</em><a class="headerlink" href="#nipy.core.reference.spaces.XYZSpace.z_suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="nipy.core.reference.spaces.get_world_cs">
+<code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">get_world_cs</code><span class="sig-paren">(</span><em>world_id</em>, <em>ndim=3</em>, <em>extras='tuvw'</em>, <em>spaces=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.get_world_cs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get world coordinate system from <cite>world_id</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>world_id</strong> : str, XYZSPace, CoordSysMaker or CoordinateSystem</p>
+<blockquote>
+<div><p>Object defining a world output system.  If str, then should be a name of
+an XYZSpace in the list <cite>spaces</cite>.</p>
+</div></blockquote>
+<p><strong>ndim</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of dimensions in this world.  Default is 3</p>
+</div></blockquote>
+<p><strong>extras</strong> : sequence, optional</p>
+<blockquote>
+<div><p>Coordinate (axis) names for axes &gt; 3 that are not named by <cite>world_id</cite></p>
+</div></blockquote>
+<p><strong>spaces</strong> : None or sequence, optional</p>
+<blockquote>
+<div><p>List of known (named) spaces to compare a str <cite>world_id</cite> to.  If None,
+use the module level <code class="docutils literal"><span class="pre">known_spaces</span></code></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>world_cs</strong> : CoordinateSystem</p>
+<blockquote class="last">
+<div><p>A world coordinate system</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">get_world_cs</span><span class="p">(</span><span class="s">&#39;mni&#39;</span><span class="p">)</span>
+<span class="go">CoordinateSystem(coord_names=(&#39;mni-x=L-&gt;R&#39;, &#39;mni-y=P-&gt;A&#39;, &#39;mni-z=I-&gt;S&#39;), name=&#39;mni&#39;, coord_dtype=float64)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">get_world_cs</span><span class="p">(</span><span class="n">mni_space</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">CoordinateSystem(coord_names=(&#39;mni-x=L-&gt;R&#39;, &#39;mni-y=P-&gt;A&#39;, &#39;mni-z=I-&gt;S&#39;, &#39;t&#39;), name=&#39;mni&#39;, coord_dtype=float64)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.core.api</span> <span class="kn">import</span> <span class="n">CoordinateSystem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_world_cs</span><span class="p">(</span><span class="n">CoordinateSystem</span><span class="p">(</span><span class="s">&#39;xyz&#39;</span><span class="p">))</span>
+<span class="go">CoordinateSystem(coord_names=(&#39;x&#39;, &#39;y&#39;, &#39;z&#39;), name=&#39;&#39;, coord_dtype=float64)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.reference.spaces.is_xyz_affable">
+<code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">is_xyz_affable</code><span class="sig-paren">(</span><em>coordmap</em>, <em>name2xyz=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.is_xyz_affable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if the coordap has an xyz affine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>coordmap</strong> : <code class="docutils literal"><span class="pre">CoordinateMap</span></code> instance</p>
+<blockquote>
+<div><p>Coordinate map to test</p>
+</div></blockquote>
+<p><strong>name2xyz</strong> : None or mapping, optional</p>
+<blockquote>
+<div><p>Object such that <code class="docutils literal"><span class="pre">name2xyz[ax_name]</span></code> returns &#8216;x&#8217;, or &#8216;y&#8217; or &#8216;z&#8217; or
+raises a KeyError for a str <code class="docutils literal"><span class="pre">ax_name</span></code>.  None means use module default.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>tf</strong> : bool</p>
+<blockquote class="last">
+<div><p>True if <cite>coordmap</cite> has an xyz affine, False otherwise</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cmap</span> <span class="o">=</span> <span class="n">vox2mni</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;), name=&#39;voxels&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;mni-x=L-&gt;R&#39;, &#39;mni-y=P-&gt;A&#39;, &#39;mni-z=I-&gt;S&#39;, &#39;t&#39;), name=&#39;mni&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 2.,  0.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  3.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  4.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  5.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_xyz_affable</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time0_cmap</span> <span class="o">=</span> <span class="n">cmap</span><span class="o">.</span><span class="n">reordered_domain</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time0_cmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;l&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;), name=&#39;voxels&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;mni-x=L-&gt;R&#39;, &#39;mni-y=P-&gt;A&#39;, &#39;mni-z=I-&gt;S&#39;, &#39;t&#39;), name=&#39;mni&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 0.,  2.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  3.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  4.,  0.],</span>
+<span class="go">                 [ 5.,  0.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_xyz_affable</span><span class="p">(</span><span class="n">time0_cmap</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.reference.spaces.is_xyz_space">
+<code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">is_xyz_space</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.is_xyz_space" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if <cite>obj</cite> appears to be an XYZ space definition</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.reference.spaces.known_space">
+<code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">known_space</code><span class="sig-paren">(</span><em>obj</em>, <em>spaces=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.known_space" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <cite>obj</cite> is in a known space, return the space, otherwise return None</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>obj</strong> : object</p>
+<blockquote>
+<div><p>Object that can be tested against an XYZSpace with <code class="docutils literal"><span class="pre">obj</span> <span class="pre">in</span> <span class="pre">sp</span></code></p>
+</div></blockquote>
+<p><strong>spaces</strong> : None or sequence, optional</p>
+<blockquote>
+<div><p>spaces to test against.  If None, use the module level <code class="docutils literal"><span class="pre">known_spaces</span></code>
+list to test against.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sp</strong> : None or XYZSpace</p>
+<blockquote class="last">
+<div><p>If <cite>obj</cite> is not in any of the <cite>known_spaces</cite>, return None.  Otherwise
+return the first matching space in <cite>known_spaces</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.core.api</span> <span class="kn">import</span> <span class="n">CoordinateSystem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp0</span> <span class="o">=</span> <span class="n">XYZSpace</span><span class="p">(</span><span class="s">&#39;hijo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp1</span> <span class="o">=</span> <span class="n">XYZSpace</span><span class="p">(</span><span class="s">&#39;hija&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Make a matching coordinate system</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span> <span class="o">=</span> <span class="n">sp0</span><span class="o">.</span><span class="n">to_coordsys_maker</span><span class="p">()(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Test whether this coordinate system is in either of <code class="docutils literal"><span class="pre">(sp0,</span> <span class="pre">sp1)</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">known_space</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="p">(</span><span class="n">sp0</span><span class="p">,</span> <span class="n">sp1</span><span class="p">))</span>
+<span class="go">XYZSpace(&#39;hijo&#39;)</span>
+</pre></div>
+</div>
+<p>So, yes, it&#8217;s in <code class="docutils literal"><span class="pre">sp0</span></code>. How about another generic CoordinateSystem?</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">known_space</span><span class="p">(</span><span class="n">CoordinateSystem</span><span class="p">(</span><span class="s">&#39;xyz&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">sp0</span><span class="p">,</span> <span class="n">sp1</span><span class="p">))</span> <span class="ow">is</span> <span class="bp">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>So, no, that is not in either of <code class="docutils literal"><span class="pre">(sp0,</span> <span class="pre">sp1)</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.reference.spaces.xyz_affine">
+<code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">xyz_affine</code><span class="sig-paren">(</span><em>coordmap</em>, <em>name2xyz=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.xyz_affine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return (4, 4) affine mapping voxel coordinates to XYZ from <cite>coordmap</cite></p>
+<p>If no (4, 4) affine &#8220;makes sense&#8221;(TM) for this <cite>coordmap</cite> then raise errors
+listed below.  A (4, 4) affine makes sense if the first three output axes
+are recognizably X, Y, and Z in that order AND they there are corresponding
+input dimensions, AND the corresponding input dimensions are the first three
+input dimension (in any order).  Thus the input axes have to be 3D.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>coordmap</strong> : <code class="docutils literal"><span class="pre">CoordinateMap</span></code> instance</p>
+<p><strong>name2xyz</strong> : None or mapping, optional</p>
+<blockquote>
+<div><p>Object such that <code class="docutils literal"><span class="pre">name2xyz[ax_name]</span></code> returns &#8216;x&#8217;, or &#8216;y&#8217; or &#8216;z&#8217; or
+raises a KeyError for a str <code class="docutils literal"><span class="pre">ax_name</span></code>.  None means use module default.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xyz_aff</strong> : (4,4) array</p>
+<blockquote>
+<div><p>voxel to X, Y, Z affine mapping</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>SpaceTypeError</strong> : if this is not an affine coordinate map</p>
+<p><strong>AxesError</strong> : if not all of x, y, z recognized in <cite>coordmap</cite> output, or they</p>
+<p><strong>are in the wrong order, or the x, y, z axes do not correspond to the first</strong> :</p>
+<p><strong>three input axes.</strong> :</p>
+<p><strong>AffineError</strong> : if axes dropped from the affine contribute to x, y, z</p>
+<p class="last"><strong>coordinates.</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>We could also try and &#8220;make sense&#8221; (TM) of a coordmap that had X, Y and Z
+outputs, but not in that order, nor all in the first three axes.  In that
+case we could just permute the affine to get the output order we need.  But,
+that could become confusing if the returned affine has different output
+coordinates than the passed <cite>coordmap</cite>.  And it&#8217;s more complicated.  So,
+let&#8217;s not do that for now.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cmap</span> <span class="o">=</span> <span class="n">vox2mni</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cmap</span>
+<span class="go">AffineTransform(</span>
+<span class="go">   function_domain=CoordinateSystem(coord_names=(&#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;), name=&#39;voxels&#39;, coord_dtype=float64),</span>
+<span class="go">   function_range=CoordinateSystem(coord_names=(&#39;mni-x=L-&gt;R&#39;, &#39;mni-y=P-&gt;A&#39;, &#39;mni-z=I-&gt;S&#39;, &#39;t&#39;), name=&#39;mni&#39;, coord_dtype=float64),</span>
+<span class="go">   affine=array([[ 2.,  0.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  3.,  0.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  4.,  0.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  5.,  0.],</span>
+<span class="go">                 [ 0.,  0.,  0.,  0.,  1.]])</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xyz_affine</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span>
+<span class="go">array([[ 2.,  0.,  0.,  0.],</span>
+<span class="go">       [ 0.,  3.,  0.,  0.],</span>
+<span class="go">       [ 0.,  0.,  4.,  0.],</span>
+<span class="go">       [ 0.,  0.,  0.,  1.]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nipy.core.reference.spaces.xyz_order">
+<code class="descclassname">nipy.core.reference.spaces.</code><code class="descname">xyz_order</code><span class="sig-paren">(</span><em>coordsys</em>, <em>name2xyz=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nipy.core.reference.spaces.xyz_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector of orders for sorting coordsys axes in xyz first order</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>coordsys</strong> : <code class="docutils literal"><span class="pre">CoordinateSystem</span></code> instance</p>
+<p><strong>name2xyz</strong> : None or mapping, optional</p>
+<blockquote>
+<div><p>Object such that <code class="docutils literal"><span class="pre">name2xyz[ax_name]</span></code> returns &#8216;x&#8217;, or &#8216;y&#8217; or &#8216;z&#8217; or
+raises a KeyError for a str <code class="docutils literal"><span class="pre">ax_name</span></code>.  None means use module default.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xyz_order</strong> : list</p>
+<blockquote>
+<div><p>Ordering of axes to get xyz first ordering.  See the examples.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>AxesError</strong> : if there are not all of x, y and z axes</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nipy.core.api</span> <span class="kn">import</span> <span class="n">CoordinateSystem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xyzt_cs</span> <span class="o">=</span> <span class="n">mni_csm</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c"># coordsys with t (time) last</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xyzt_cs</span>
+<span class="go">CoordinateSystem(coord_names=(&#39;mni-x=L-&gt;R&#39;, &#39;mni-y=P-&gt;A&#39;, &#39;mni-z=I-&gt;S&#39;, &#39;t&#39;), name=&#39;mni&#39;, coord_dtype=float64)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xyz_order</span><span class="p">(</span><span class="n">xyzt_cs</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tzyx_cs</span> <span class="o">=</span> <span class="n">CoordinateSystem</span><span class="p">(</span><span class="n">xyzt_cs</span><span class="o">.</span><span class="n">coord_names</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;reversed&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tzyx_cs</span>
+<span class="go">CoordinateSystem(coord_names=(&#39;t&#39;, &#39;mni-z=I-&gt;S&#39;, &#39;mni-y=P-&gt;A&#39;, &#39;mni-x=L-&gt;R&#39;), name=&#39;reversed&#39;, coord_dtype=float64)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xyz_order</span><span class="p">(</span><span class="n">tzyx_cs</span><span class="p">)</span>
+<span class="go">[3, 2, 1, 0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nipy.core.reference.slices.html" title="core.reference.slices"
+             >previous</a> |</li>
+  <li><a href="../../index.html">NIPY home</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../documentation.html" >NIPY documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" >API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2013, Neuroimaging in Python team.
+      Last updated on Aug 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

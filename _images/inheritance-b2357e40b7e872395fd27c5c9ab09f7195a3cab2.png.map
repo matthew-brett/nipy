@@ -1,0 +1,5 @@
+<map id="inheritance1c82da94b1" name="inheritance1c82da94b1">
+<area shape="rect" id="node1" href="nipy.labs.datasets.volumes.volume_data.html#nipy.labs.datasets.volumes.volume_data.VolumeData" title="A class representing data embedded in a 3D space " alt="" coords="274,5,499,29"/>
+<area shape="rect" id="node3" href="#nipy.labs.datasets.volumes.volume_grid.VolumeGrid" title="A class representing data stored in a 3+D array embedded in a 3D" alt="" coords="543,5,763,29"/>
+<area shape="rect" id="node2" href="nipy.labs.datasets.volumes.volume_field.html#nipy.labs.datasets.volumes.volume_field.VolumeField" title="The base volumetric structure." alt="" coords="5,5,230,29"/>
+</map>

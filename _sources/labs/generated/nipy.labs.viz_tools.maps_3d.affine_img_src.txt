@@ -1,0 +1,6 @@
+nipy.labs.viz_tools.maps_3d.affine_img_src
+==========================================
+
+.. currentmodule:: nipy.labs.viz_tools.maps_3d
+
+.. autofunction:: affine_img_src
