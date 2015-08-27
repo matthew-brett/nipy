@@ -9,9 +9,8 @@
    because PyArray_API is defined static, in order not to share that symbol
    within the dso. (import_array() asks the pointer value to the python process)
 */
-void fffpy_import_array(void) { 
-  import_array(); 
-  return;
+void fffpy_import_array(void) {
+  import_array();
 }
 
 
