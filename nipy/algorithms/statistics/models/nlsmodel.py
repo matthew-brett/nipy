@@ -132,7 +132,7 @@ class NLSModel(Model):
         self.theta = self.initial
         return self
 
-    def next(self):
+    def __next__(self):
         """ Do an iteration of fit
 
         Returns
