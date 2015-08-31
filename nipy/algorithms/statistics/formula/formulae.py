@@ -478,7 +478,7 @@ class Formula(object):
     dtype = property(_getdtype, doc='The dtype of the design matrix of the Formula.')
 
     def __repr__(self):
-        return """Formula(%s)""" % `list(self.terms)`
+        return "Formula(%s)" % repr(list(self.terms))
 
     def __getitem__(self, key):
         """ Return the term such that str(term) == key.
@@ -799,13 +799,13 @@ class Formula(object):
         if not set(preterm_recarray.dtype.names).issuperset(self._dtypes['preterm'].names):
             raise ValueError("for term, expecting a recarray with "
                              "dtype having the following names: %s"
-                             % `self._dtypes['preterm'].names`)
+                             % repr(self._dtypes['preterm'].names))
         # The parameters should have field names for all fields in self._dtypes['param']
         if param_recarray is not None:
             if not set(param_recarray.dtype.names).issuperset(self._dtypes['param'].names):
                 raise ValueError("for param, expecting a recarray with "
                                  "dtype having the following names: %s"
-                                 % `self._dtypes['param'].names`)
+                                 % repr(self._dtypes['param'].names))
         # If the only term is an intercept,
         # the return value is a matrix of 1's.
         if list(self.terms) == [sympy.Number(1)]:
