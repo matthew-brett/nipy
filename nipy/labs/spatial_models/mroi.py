@@ -9,6 +9,7 @@ from nipy.io.nibcompat import get_header, get_affine
 
 from . import discrete_domain as ddom
 
+from nipy.externals.six import string_types
 
 ##############################################################################
 # class SubDomains

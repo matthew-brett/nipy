@@ -13,6 +13,7 @@ from scipy import ndimage
 from nibabel import load, nifti1, save
 
 from ..io.nibcompat import get_header, get_affine, get_unscaled_data
+from ..externals.six import string_types
 
 ###############################################################################
 # Operating on connect component
