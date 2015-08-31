@@ -193,5 +193,5 @@ class ImageList(object):
         self._iter = iter(self.list)
         return self
 
-    def next(self):
-        return self._iter.next()
+    def __next__(self):
+        return next(self._iter)
