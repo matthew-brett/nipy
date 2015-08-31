@@ -5,9 +5,10 @@ with an unspecified number of classes
 from __future__ import print_function
 
 import numpy as np
-from bgmm import BGMM, detsh
+
 from scipy.special import gammaln
 
+from .bgmm import BGMM, detsh
 
 def co_labelling(z, kmax=None, kmin=None):
     """
