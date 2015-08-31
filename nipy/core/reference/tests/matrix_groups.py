@@ -47,7 +47,7 @@ class MatrixGroup(Linear):
         Linear.__init__(self, coords, coords, matrix.astype(dtype))
         if not self.validate():
             raise ValueError('this matrix is not an element of %s'
-                             % `self.__class__`)
+                             % repr(self.__class__))
         if not self.coords.coord_dtype == self.dtype:
             raise ValueError('the input coordinates builtin '
                              'dtype should agree with self.dtype')
