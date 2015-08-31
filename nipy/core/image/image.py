@@ -645,7 +645,7 @@ def rollaxis(img, axis, inverse=False):
         if type(axis) != type(0):
             raise ValueError('If carrying out inverse rolling, '
                              'axis must be an integer')
-        order = range(1, img.ndim)
+        order = list(range(1, img.ndim))
         order.insert(axis, 0)
         return img.reordered_axes(order).reordered_reference(order)
     if axis not in (list(range(img.axes.ndim)) +
@@ -674,7 +674,7 @@ def rollaxis(img, axis, inverse=False):
             axis = out_index
     if axis == -1:
         axis += img.axes.ndim
-    order = range(img.ndim)
+    order = list(range(img.ndim))
     order.remove(axis)
     order.insert(0, axis)
     return img.reordered_axes(order).reordered_reference(order)

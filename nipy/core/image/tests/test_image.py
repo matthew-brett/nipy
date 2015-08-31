@@ -438,7 +438,7 @@ def test_rollimg_rollaxis():
         rdata = np.rollaxis(data, axis)
         rimg = rollimg(img, axis)
         assert_array_equal(rdata, rimg.get_data())
-        for start in range(4) + range(-3, -1):
+        for start in list(range(4)) + list(range(-3, -1)):
             rdata = np.rollaxis(data, axis, start)
             rimg = rollimg(img, axis, start)
             assert_array_equal(rdata, rimg.get_data())
