@@ -734,7 +734,7 @@ def rollimg(img, axis, start=0, fix0=True):
     """
     axis = input_axis_index(img.coordmap, axis, fix0)
     start = input_axis_index(img.coordmap, start, fix0)
-    order = range(img.ndim)
+    order = list(range(img.ndim))
     order.remove(axis)
     if axis < start:
         start -= 1
