@@ -646,7 +646,7 @@ def rollaxis(img, axis, inverse=False):
         order = range(1, img.ndim)
         order.insert(axis, 0)
         return img.reordered_axes(order).reordered_reference(order)
-    if axis not in (range(img.axes.ndim) +
+    if axis not in (list(range(img.axes.ndim)) +
                     list(img.axes.coord_names) +
                     list(img.reference.coord_names)):
         raise ValueError('axis must be an axis number,'
