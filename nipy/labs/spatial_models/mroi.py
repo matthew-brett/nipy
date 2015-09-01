@@ -755,7 +755,7 @@ def subdomain_from_image(mim, nn=18):
     Only labels > -1 are considered
 
     """
-    if isinstance(mim, basestring):
+    if isinstance(mim, string_types):
         iim = load(mim)
     else:
         iim = mim
