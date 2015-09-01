@@ -538,7 +538,7 @@ class OrthoSlicer(BaseSlicer):
             xmin, xmax, ymin, ymax = bounds
             width_dict[cut_ax.ax] = (xmax - xmin)
         total_width = float(sum(width_dict.values()))
-        for ax, width in width_dict.iteritems():
+        for ax, width in width_dict.items():
             width_dict[ax] = width/total_width*(x1 -x0)
         left_dict = dict()
         left_dict[y_ax.ax] = x0
@@ -676,7 +676,7 @@ class BaseStackedSlicer(BaseSlicer):
             xmin, xmax, ymin, ymax = bounds
             width_dict[cut_ax.ax] = (xmax - xmin)
         total_width = float(sum(width_dict.values()))
-        for ax, width in width_dict.iteritems():
+        for ax, width in width_dict.items():
             width_dict[ax] = width/total_width*(x1 -x0)
         left_dict = dict()
         left = float(x0)
