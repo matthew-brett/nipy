@@ -534,7 +534,7 @@ class DiscreteDomain(object):
         scoord = self.coord[bmask]
         DD = DiscreteDomain(self.dim, scoord, svol, id, self.referential)
 
-        for fid in self.features.keys():
+        for fid in list(self.features.keys()):
             f = self.features.pop(fid)
             DD.set_feature(fid, f[bmask])
         return DD
