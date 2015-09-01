@@ -5,7 +5,7 @@ from __future__ import print_function
 import numpy as np
 from numpy.linalg import svd
 
-from reml import orth
+from .reml import orth
 
 def _trace(x):
     """
