@@ -138,7 +138,7 @@ MINOR               = _version_minor
 MICRO               = _version_micro
 ISRELEASE           = _version_extra == ''
 VERSION             = __version__
-REQUIRES            = ["numpy", "scipy", "sympy", "nibabel"]
+REQUIRES            = ["numpy", "scipy", "sympy", "nibabel", "transforms3d"]
 STATUS              = 'beta'
 
 # versions

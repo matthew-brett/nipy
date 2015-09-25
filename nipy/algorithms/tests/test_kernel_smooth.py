@@ -4,9 +4,10 @@
 import numpy as np
 from numpy.random import random_integers as randint
 
+from transforms3d.taitbryan import euler2mat
+
 from ... import load_image
 from ..kernel_smooth import LinearFilter, sigma2fwhm, fwhm2sigma
-from ...externals.transforms3d.taitbryan import euler2mat
 from ...core.api import Image, compose, AffineTransform, drop_io_dim
 
 from nose.tools import (assert_true, assert_false, assert_equal, assert_raises)

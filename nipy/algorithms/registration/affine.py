@@ -5,7 +5,8 @@ import scipy.linalg as spl
 
 from nibabel.affines import apply_affine
 
-from ...externals.transforms3d.quaternions import mat2quat, quat2axangle
+from transforms3d.quaternions import mat2quat, quat2axangle
+
 from .transform import Transform
 
 # Globals
