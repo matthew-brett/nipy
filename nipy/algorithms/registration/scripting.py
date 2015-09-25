@@ -14,14 +14,15 @@ import numpy.linalg as npl
 import nibabel as nib
 import nibabel.eulerangles as euler
 from nibabel.optpkg import optional_package
+
 matplotlib, HAVE_MPL, _ = optional_package('matplotlib')
 
 if HAVE_MPL:
     import matplotlib.pyplot as plt
 
 from .groupwise_registration import SpaceTimeRealign
-import nipy.externals.argparse as argparse
 import nipy.algorithms.slicetiming as st
+
 timefuncs = st.timefuncs.SLICETIME_FUNCTIONS
 
 __all__ = ["space_time_realign", "aff2euler"]
@@ -54,10 +55,9 @@ def aff2rot_zooms(affine):
 
     Returns
     -------
-    R: 3 by 3 array
+    R : 3 by 3 array
        A rotation matrix in 3D
-
-    zooms: length 3 1-d array
+    zooms : length 3 1-d array
          Vector with voxel sizes.
     """
     RZS = affine[:3, :3]
@@ -79,7 +79,7 @@ def space_time_realign(input, tr, slice_order='descending', slice_dim=2,
                        slice_dir=1, apply=True, make_figure=False,
                        out_name=None):
     """
-    This is a scripting interface to `nipy.algorithms.registration.SpaceTimeRealign` 
+    Scripting interface to `nipy.algorithms.registration.SpaceTimeRealign` 
 
     Parameters
     ----------
@@ -88,41 +88,40 @@ def space_time_realign(input, tr, slice_order='descending', slice_dim=2,
         containing 4D nifti time-series, or a list of full-paths to files.
     tr : float
         The repetition time
-    slice_order : str (optional)
+    slice_order : str, optional
         This is the order of slice-times in the acquisition. This is used as a
         key into the ``SLICETIME_FUNCTIONS`` dictionary from
         :mod:`nipy.algorithms.slicetiming.timefuncs`. Default: 'descending'.
-    slice_dim : int (optional) 
+    slice_dim : int, optional
         Denotes the axis in `images` that is the slice axis.  In a 4D image,
         this will often be axis = 2 (default).
-    slice_dir : int (optional)
+    slice_dir : int, optional
         1 if the slices were acquired slice 0 first (default), slice -1 last,
         or -1 if acquire slice -1 first, slice 0 last.
-    apply : bool (optional)
+    apply : bool, optional
         Whether to apply the transformation and produce an output. Default:
-        True. 
-    make_figure : bool (optional)
+        True.
+    make_figure : bool, optional
         Whether to generate a .png figure with the parameters across scans.
-    out_name : bool (optional)
+    out_name : bool, optional
         Specify an output location (full path) for the files that are
         generated. Default: generate files in the path of the inputs (with an
         `_mc` suffix added to the file-names.
-    
 
     Returns
     -------
     transforms : ndarray
-        An (n_times_points,) shaped array containing 
-       `nipy.algorithms.registration.affine.Rigid` class instances for each time
-        point in the time-series. These can be used as affine transforms by
-        referring to their `.as_affine` attribute.
+        An (n_time_points,) shaped array containing
+        `nipy.algorithms.registration.affine.Rigid` class instances for each
+        time point in the time-series. These can be used as affine transforms
+        by referring to their `.as_affine` attribute.
     """
     if make_figure:
         if not HAVE_MPL:
             e_s ="You need to have matplotlib installed to run this function"
             e_s += " with `make_figure` set to `True`"
             raise RuntimeError(e_s)
-        
+
     # If we got only a single file, we motion correct that one:
     if op.isfile(input):
         if not (input.endswith('.nii') or input.endswith('.nii.gz')):
@@ -144,7 +143,7 @@ def space_time_realign(input, tr, slice_order='descending', slice_dim=2,
     slice_times = timefuncs[slice_order]
     slice_info = [slice_dim,
                   slice_dir]
-    
+
     reggy = SpaceTimeRealign(input,
                              tr,
                              slice_times,
@@ -168,10 +167,11 @@ def space_time_realign(input, tr, slice_order='descending', slice_dim=2,
             new_ni = nib.Nifti1Image(new_data, new_aff)
             # Save it out to a '.nii.gz' file:
             old_fname_split = op.split(fnames[run_idx])
-            # We retain the file-name adding '_mc' regardless of where it's saved
+            # We retain the file-name adding '_mc' regardless of where it's
+            # saved
             new_fname = old_fname_split[1].split('.')[0] + '_mc.nii.gz'
             if out_name is None:
-                new_path = old_fname_split[0]                               
+                new_path = old_fname_split[0]
             else:
                 new_path = out_name
             new_ni.to_filename(op.join(new_path, new_fname))
