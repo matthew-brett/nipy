@@ -1,5 +1,7 @@
 # emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
 # vi: set ft=python sts=4 ts=4 sw=4 et:
+from __future__ import print_function, absolute_import
+
 import numpy as np
 import scipy.linalg as spl
 
@@ -36,6 +38,8 @@ def rotation_mat2vec(R):
         Rotation vector, where norm of `vec` is the angle ``theta``, and the
         axis of rotation is given by ``vec / theta``
     """
+    print(R)
+    print(mat2quat(R))
     ax, angle = quat2axangle(mat2quat(R))
     return ax * angle
 
