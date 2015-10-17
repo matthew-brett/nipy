@@ -1,30 +1,25 @@
 from __future__ import division, print_function, absolute_import
 
-import os
 import sys
 import subprocess
 
-from .externals.six.moves import configparser
+import numpy as np
 
-COMMIT_INFO_FNAME = 'COMMIT_INFO.txt'
 
+@np.deprecate_with_doc('This function will be removed soon')
 def pkg_commit_hash(pkg_path):
     ''' Get short form of commit hash given directory `pkg_path`
 
-    There should be a file called 'COMMIT_INFO.txt' in `pkg_path`.  This is a
-    file in INI file format, with at least one section: ``commit hash``, and two
-    variables ``archive_subst_hash`` and ``install_hash``.  The first has a
-    substitution pattern in it which may have been filled by the execution of
-    ``git archive`` if this is an archive generated that way.  The second is
-    filled in by the installation, if the installation is from a git archive.
+    Nipy used to get information about which commit the package came from, from
+    a file called ``COMMIT_INFO.txt`` in the nipy package directory.  We now
+    use ``versioneer`` to provide this information in the package version, so
+    this routine now often gives uninformative answers.  We will remove it
+    soon.
 
-    We get the commit hash from (in order of preference):
+    If it does return an informative answer, it is from the output of git if we
+    are in a git repository.
 
-    * A substituted value in ``archive_subst_hash``
-    * A written commit hash value in ``install_hash`
-    * git's output, if we are in a git repository
-
-    If all these fail, we return a not-found placeholder tuple
+    Otherwise, we return a not-found placeholder tuple
 
     Parameters
     -------------
@@ -38,18 +33,6 @@ def pkg_commit_hash(pkg_path):
     hash_str : str
        short form of hash
     '''
-    # Try and get commit from written commit text file
-    pth = os.path.join(pkg_path, COMMIT_INFO_FNAME)
-    if not os.path.isfile(pth):
-        raise IOError('Missing commit info file %s' % pth)
-    cfg_parser = configparser.RawConfigParser()
-    cfg_parser.read(pth)
-    archive_subst = cfg_parser.get('commit hash', 'archive_subst_hash')
-    if not archive_subst.startswith('$Format'): # it has been substituted
-        return 'archive substitution', archive_subst
-    install_subst = cfg_parser.get('commit hash', 'install_hash')
-    if install_subst != '':
-        return 'installation', install_subst
     # maybe we are in a repository
     proc = subprocess.Popen('git rev-parse --short HEAD',
                             stdout=subprocess.PIPE,

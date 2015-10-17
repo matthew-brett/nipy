@@ -2,7 +2,7 @@
 # emacs: -*- mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
 # vi: set ft=python sts=4 ts=4 sw=4 et:
 import os
-from os.path import join as pjoin, exists
+from os.path import exists
 import sys
 from glob import glob
 from distutils import log
@@ -11,9 +11,24 @@ from distutils import log
 # update it when the contents of directories change.
 if exists('MANIFEST'): os.remove('MANIFEST')
 
+# For some commands, use setuptools
+if len(set(('develop', 'bdist_egg', 'bdist_rpm', 'bdist', 'bdist_dumb',
+            'install_egg_info', 'egg_info', 'easy_install', 'bdist_mpkg',
+            'bdist_wheel')).intersection(sys.argv)) > 0:
+    from setup_egg import extra_setuptools_args
+
+# extra_setuptools_args can be defined from the line above, but it can
+# also be defined here because setup.py has been exec'ed from
+# setup_egg.py.
+if not 'extra_setuptools_args' in globals():
+    extra_setuptools_args = dict()
+
+# Local module for setting version
+import npversioneer
+
 # Import build helpers
 try:
-    from nisext.sexts import package_check, get_comrec_build
+    from nisext.sexts import package_check
 except ImportError:
     raise RuntimeError('Need nisext package from nibabel installation'
                        ' - please install nibabel first')
@@ -25,8 +40,6 @@ from setup_helpers import (generate_a_pyrex_source,
 from numpy.distutils.command.build_src import build_src
 build_src.generate_a_pyrex_source = generate_a_pyrex_source
 
-# Add custom commit-recording build command
-cmdclass['build_py'] = get_comrec_build('nipy')
 
 def configuration(parent_package='',top_path=None):
     from numpy.distutils.misc_util import Configuration
@@ -41,23 +54,9 @@ def configuration(parent_package='',top_path=None):
     #    'nipy.core.image')
     # Robert Kern recommends setting quiet=True on the numpy list, stating
     # these messages are probably only used in debugging numpy distutils.
-    config.get_version(pjoin('nipy', 'info.py')) # sets config.version
+    config.version = npversioneer.get_version()
     config.add_subpackage('nipy', 'nipy')
     return config
-
-################################################################################
-# For some commands, use setuptools
-
-if len(set(('develop', 'bdist_egg', 'bdist_rpm', 'bdist', 'bdist_dumb',
-            'install_egg_info', 'egg_info', 'easy_install', 'bdist_mpkg',
-            'bdist_wheel')).intersection(sys.argv)) > 0:
-    from setup_egg import extra_setuptools_args
-
-# extra_setuptools_args can be defined from the line above, but it can
-# also be defined here because setup.py has been exec'ed from
-# setup_egg.py.
-if not 'extra_setuptools_args' in globals():
-    extra_setuptools_args = dict()
 
 
 # Hard and soft dependency checking
@@ -132,6 +131,7 @@ class MyBuildExt(build_ext):
 
 cmdclass['install_data'] = MyInstallData
 cmdclass['build_ext'] = MyBuildExt
+cmdclass.update(npversioneer.get_cmdclass())
 
 ################################################################################
 
