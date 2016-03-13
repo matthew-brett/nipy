@@ -4,11 +4,22 @@ from __future__ import absolute_import
 
 import numpy as np
 
+from ..utilities import pyprod, is_iterable, is_numlike
+
 from nose.tools import (assert_true, assert_false, assert_raises,
                         assert_equal, assert_not_equal)
+from numpy.testing import assert_almost_equal
 
 
-from ..utilities import is_iterable, is_numlike
+def test_pyprod():
+    # Python implementation of product
+    assert_equal(pyprod([3, 2, 1]), 6)
+    assert_equal(pyprod([-3, 2, 1]), -6)
+    assert_almost_equal(pyprod([-3, 2, 1], 2.2), -13.2)
+    assert_equal(pyprod([]), 1)
+    assert_equal(pyprod([], 2.0), 2)
+    assert_raises(TypeError, pyprod, ['a', 'b', 'c'])
+
 
 def test_is_iterable():
     assert_true(is_iterable(()))
