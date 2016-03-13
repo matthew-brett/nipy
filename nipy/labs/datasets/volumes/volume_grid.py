@@ -124,7 +124,7 @@ class VolumeGrid(VolumeData):
                 shape = (np.ceil(xmax - xmin)+1,
                          np.ceil(ymax - ymin)+1,
                          np.ceil(zmax - zmin)+1, )
-        shape = list(shape)
+        shape = [int(v) for v in shape]
         if not len(shape) == 3:
             raise ValueError('The shape specified should be the shape '
                 'the 3D grid, and thus of length 3. %s was specified'

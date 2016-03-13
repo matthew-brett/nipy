@@ -71,7 +71,7 @@ class LinearFilter(object):
                       'l1sum':kernel.sum()}
         self._kernel = kernel
         self.shape = (np.ceil((np.asarray(self.bshape) +
-                              np.asarray(kernel.shape))/2)*2+2)
+                              np.asarray(kernel.shape))/2)*2+2).astype(int)
         self.fkernel = np.zeros(self.shape)
         slices = [slice(0, kernel.shape[i]) for i in range(len(kernel.shape))]
         self.fkernel[slices] = kernel

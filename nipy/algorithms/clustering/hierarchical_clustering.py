@@ -555,7 +555,7 @@ def _remap(K, i, j, k, Features, linc, rinc):
     #------
     # update linc,rinc
     #------
-    lidxk = list(np.concatenate((linc[j], linc[i])))
+    lidxk = [int(v) for v in np.concatenate((linc[j], linc[i]))]
     for l in lidxk:
         if K.edges[l, 1] == - 1:
             lidxk.remove(l)
@@ -563,7 +563,7 @@ def _remap(K, i, j, k, Features, linc, rinc):
     linc[k] = lidxk
     linc[i] = []
     linc[j] = []
-    ridxk = list(np.concatenate((rinc[j], rinc[i])))
+    ridxk = [int(v) for v in np.concatenate((rinc[j], rinc[i]))]
     for l in ridxk:
         if K.edges[l, 0] == - 1:
             ridxk.remove(l)
@@ -695,7 +695,8 @@ def ward_quick(G, feature, verbose=False):
 
             ml = linc[j]
             if np.sum(K.edges[ml, 1] == i) > 0:
-                m = ml[np.flatnonzero(K.edges[ml, 1] == i)]
+                ml_inds = np.flatnonzero(K.edges[ml, 1] == i)
+                m = ml[ml_inds.squeeze()]
                 K.edges[m] = -1
                 K.weights[m] = np.inf
                 linc[j].remove(m)
@@ -957,7 +958,8 @@ def ward(G, feature, verbose=False):
 
         ml = linc[j]
         if np.sum(K.edges[ml, 1] == i) > 0:
-            m = ml[np.flatnonzero(K.edges[ml, 1] == i)]
+            ml_inds = np.flatnonzero(K.edges[ml, 1] == i)
+            m = ml[ml_inds.squeeze()]
             K.edges[m] = -1
             K.weights[m] = np.inf
             linc[j].remove(m)

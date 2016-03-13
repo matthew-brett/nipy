@@ -234,7 +234,7 @@ class IMM(BGMM):
         if np.isscalar(kfold):
             aux = np.argsort(np.random.rand(n_samples))
             idx = - np.ones(n_samples).astype(np.int)
-            j = np.ceil(n_samples / kfold)
+            j = int(np.ceil(n_samples / kfold))
             kmax = kfold
             for k in range(kmax):
                 idx[aux[k * j:min(n_samples, j * (k + 1))]] = k

@@ -180,9 +180,9 @@ class VolumeImg(VolumeGrid):
             offset = np.array((xmin, ymin, zmin))
             offset = np.dot(affine, offset)
             affine = from_matrix_vector(affine, offset[:3])
-            shape = (np.ceil(xmax - xmin)+1,
-                     np.ceil(ymax - ymin)+1,
-                     np.ceil(zmax - zmin)+1, )
+            shape = (int(np.ceil(xmax - xmin) + 1),
+                     int(np.ceil(ymax - ymin) + 1),
+                     int(np.ceil(zmax - zmin) + 1))
         if not len(shape) == 3:
             raise ValueError('The shape specified should be the shape '
                 'the 3D grid, and thus of length 3. %s was specified'

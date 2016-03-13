@@ -404,7 +404,8 @@ def test_dmtx19():
     X, names = dmtx_light(frametimes, paradigm, hrf_model=hrf_model, 
                             drift_model='polynomial', drift_order=3,
                             fir_delays=list(range(1, 5)))
-    idx = paradigm.onset[paradigm.con_id == 0].astype(np.int)
+    idx = paradigm.onset[paradigm.con_id == 'c0'].astype(np.int)
+    assert_equal(len(idx), 3)
     assert_array_equal(X[idx + 1, 0], X[idx + 2, 1])
 
 
@@ -426,7 +427,8 @@ def test_fir_block():
     frametimes = np.linspace(0, 127 * tr, 128)
     X, names = dmtx_light(frametimes, bp, hrf_model='fir', drift_model='blank',
                           fir_delays=list(range(0, 4)))
-    idx = bp.onset[bp.con_id == 1].astype(np.int)
+    idx = bp.onset[bp.con_id == 'c1'].astype(np.int)
+    assert_equal(len(idx), 3)
     assert_equal(X.shape, (128, 13))
     assert_true((X[idx, 4] == 1).all())
     assert_true((X[idx + 1, 5] == 1).all())

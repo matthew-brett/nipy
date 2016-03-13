@@ -20,9 +20,8 @@ def random_shape(size):
     """
     aux = np.random.randint(MAX_TEST_SIZE-1, size=size) + 2
     if size==1:
-        return aux
-    else:
-        return tuple(aux)
+        return int(aux)
+    return tuple(aux)
 
 
 #
@@ -61,11 +60,11 @@ def _test_copy_vector(x):
 
 
 def test_copy_vector_contiguous(): 
-    x = (1000*np.random.rand(1e6)).astype('int32')
+    x = (1000*np.random.rand(int(1e6))).astype('int32')
     _test_copy_vector(x)
 
 def test_copy_vector_strided(): 
-    x0 = (1000*np.random.rand(2e6)).astype('int32')
+    x0 = (1000*np.random.rand(int(2e6))).astype('int32')
     x = x0[::2]
     _test_copy_vector(x)
 

@@ -312,7 +312,7 @@ def grid_domain_from_shape(shape, affine=None):
 
     rect = np.ones(shape)
     ijk = np.array(np.where(rect)).T
-    vol = np.absolute(np.linalg.det(affine[:3, 0:3])) * np.ones(np.sum(rect))
+    vol = np.absolute(np.linalg.det(affine[:3, 0:3])) * np.ones(rect.size)
     topology = smatrix_from_nd_idx(ijk, 0)
     return NDGridDomain(dim, ijk, shape, affine, vol, topology)
 
