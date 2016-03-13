@@ -58,10 +58,19 @@ matrix:
       env:
         - INSTALL_TYPE=requirements
         - DEPENDS=
+    # Compile against numpy pre-release
+    - python: 2.7
+      sudo: required
+      env:
+        - EXTRA_PIP_FLAGS="--pre"
 
 before_install:
     - source travis-tools/utils.sh
     - travis_before_install
+    # numpy pre-release wheel needs ATLAS
+    - if [ "$EXTRA_PIP_FLAGS" == "--pre" ]; then
+          sudo apt-get install libatlas-base-dev;
+      fi
 # command to install dependencies
 # e.g. pip install -r requirements.txt # --use-mirrors
 install:
