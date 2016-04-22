@@ -26,6 +26,21 @@ python:
 
 matrix:
   include:
+    # Build wheel in docker container
+    - python: 2.7
+      env:
+        - INSTALL_TYPE=manylinux-wheel
+        - BUILD_DEPENDS="numpy==1.6.0 scipy==0.15.0 sympy nibabel"
+        # Trusty Python 2.7 is narrow unicode at the moment
+        - UNICODE_WIDTH=16
+      sudo: required
+      services: docker
+    - python: 3.5
+      env:
+        - INSTALL_TYPE=manylinux-wheel
+        - BUILD_DEPENDS="numpy==1.7.2 scipy==0.17.0 sympy nibabel"
+      sudo: required
+      services: docker
     - python: 2.7
       env:
         - COVERAGE=1
@@ -49,7 +64,7 @@ matrix:
     - python: 2.7
       env:
         - INSTALL_TYPE=requirements
-        - DEPENDS=
+        - DEPENDS=""
 
 before_install:
     - source tools/travis_tools.sh
@@ -58,7 +73,7 @@ before_install:
     - python --version # just to check
     - pip install -U pip
     - retry pip install nose # always
-    - wheelhouse_pip_install $DEPENDS
+    - if [ -n "$DEPENDS" ]; then wheelhouse_pip_install $DEPENDS; fi
     - if [ "${COVERAGE}" == "1" ]; then
       pip install coverage;
       pip install coveralls;
@@ -80,6 +95,15 @@ install:
       elif [ "$INSTALL_TYPE" == "requirements" ]; then
         wheelhouse_pip_install -r requirements.txt
         python setup.py install
+      elif [ "$INSTALL_TYPE" == "manylinux-wheel" ]; then
+        docker run --rm \
+            -e PYTHON_VERSION=$TRAVIS_PYTHON_VERSION \
+            -e BUILD_DEPENDS="$BUILD_DEPENDS" \
+            -e UNICODE_WIDTH="$UNICODE_WIDTH" \
+            -v $PWD:/io \
+            quay.io/pypa/manylinux1_x86_64 \
+            /io/tools/build_manylinux.sh
+        pip install dist/nipy*.whl
       fi
 # command to run tests, e.g. python setup.py test
 script:
