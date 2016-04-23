@@ -18,6 +18,7 @@ env:
     global:
         - DEPENDS="numpy scipy sympy matplotlib nibabel"
         - INSTALL_TYPE="setup"
+        - MANYLINUX_URL=https://nipy.bic.berkeley.edu/manylinux
 python:
     - 2.6
     - 3.3
@@ -30,6 +31,7 @@ matrix:
     - python: 2.7
       env:
         - INSTALL_TYPE=manylinux-wheel
+        - DEPENDS="-f $MANYLINUX_URL numpy scipy sympy nibabel"
         - BUILD_DEPENDS="numpy==1.6.0 scipy==0.15.0 sympy nibabel"
         # Trusty Python 2.7 is narrow unicode at the moment
         - UNICODE_WIDTH=16
@@ -38,6 +40,7 @@ matrix:
     - python: 3.5
       env:
         - INSTALL_TYPE=manylinux-wheel
+        - DEPENDS="-f $MANYLINUX_URL numpy scipy sympy nibabel"
         - BUILD_DEPENDS="numpy==1.7.2 scipy==0.17.0 sympy nibabel"
       sudo: required
       services: docker
