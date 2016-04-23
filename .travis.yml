@@ -41,7 +41,7 @@ matrix:
       env:
         - INSTALL_TYPE=manylinux-wheel
         - DEPENDS="-f $MANYLINUX_URL numpy scipy sympy nibabel"
-        - BUILD_DEPENDS="numpy==1.7.2 scipy==0.17.0 sympy nibabel"
+        - BUILD_DEPENDS="numpy==1.9.3 scipy==0.17.0 sympy nibabel"
       sudo: required
       services: docker
     - python: 2.7
