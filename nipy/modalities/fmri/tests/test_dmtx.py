@@ -19,7 +19,7 @@ from ..design_matrix import (dmtx_light, _convolve_regressors, dmtx_from_csv,
 
 from nibabel.tmpdirs import InTemporaryDirectory
 
-from nose.tools import assert_true, assert_equal
+from nipy.testing.compat import assert_true, assert_equal
 from numpy.testing import assert_almost_equal, dec, assert_array_equal
 
 try:

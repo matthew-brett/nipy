@@ -12,7 +12,7 @@ import scipy.linalg as spl
 from ..regression import (OLSModel, ARModel, yule_walker, AREstimator,
                           ar_bias_corrector, ar_bias_correct)
 
-from nose.tools import assert_equal, assert_true
+from nipy.testing.compat import assert_equal, assert_true
 from numpy.testing import assert_array_almost_equal, assert_array_equal
 
 

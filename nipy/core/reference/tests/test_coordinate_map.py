@@ -19,7 +19,7 @@ from ..coordinate_system import (CoordinateSystem, CoordinateSystemError,
 # shortcut
 CS = CoordinateSystem
 
-from nose.tools import (assert_true, assert_equal, assert_raises,
+from nipy.testing.compat import (assert_true, assert_equal, assert_raises,
                         assert_false)
 
 from numpy.testing import (assert_array_equal, assert_almost_equal, dec)

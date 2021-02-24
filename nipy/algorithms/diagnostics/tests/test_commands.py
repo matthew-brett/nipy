@@ -19,8 +19,8 @@ from ..timediff import time_slice_diffs_image
 
 from numpy.testing import (assert_almost_equal, assert_array_equal)
 
-from nose import SkipTest
-from nose.tools import (assert_true, assert_false, assert_raises,
+from nipy.testing.compat import SkipTest
+from nipy.testing.compat import (assert_true, assert_false, assert_raises,
                         assert_equal, assert_not_equal)
 
 from nipy.testing import funcfile

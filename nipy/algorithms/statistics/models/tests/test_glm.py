@@ -10,7 +10,7 @@ import numpy as np
 from .. import family
 from ..glm import Model as GLM
 
-from nose.tools import assert_equal, assert_true, assert_false
+from nipy.testing.compat import assert_equal, assert_true, assert_false
 
 VARS = {}
 

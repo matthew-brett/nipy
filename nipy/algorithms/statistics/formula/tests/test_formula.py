@@ -21,7 +21,7 @@ from nipy.utils import VisibleDeprecationWarning
 from nibabel.py3k import asbytes
 from nibabel.testing import assert_dt_equal
 
-from nose.tools import (assert_true, assert_equal, assert_false,
+from nipy.testing.compat import (assert_true, assert_equal, assert_false,
                         assert_raises)
 
 from numpy.testing import assert_almost_equal, assert_array_equal

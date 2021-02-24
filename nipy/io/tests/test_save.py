@@ -17,7 +17,7 @@ from nipy.core.reference.spaces import mni_csm
 
 from nibabel.tmpdirs import InTemporaryDirectory
 
-from nose.tools import (assert_true, assert_false, assert_equal,
+from nipy.testing.compat import (assert_true, assert_false, assert_equal,
                         assert_not_equal)
 
 from numpy.testing import assert_array_almost_equal

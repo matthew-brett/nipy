@@ -33,7 +33,7 @@ from ..affine import Affine
 from numpy.testing import (assert_array_almost_equal,
                            assert_array_equal)
 
-from nose.tools import assert_true, assert_equal, assert_raises
+from nipy.testing.compat import assert_true, assert_equal, assert_raises
 
 AFF1 = np.diag([2, 3, 4, 1])
 AFF2 = np.eye(4)

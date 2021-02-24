@@ -10,7 +10,7 @@ import numpy as np
 import copy
 # Don't import from nipy.testing not to have a hard dependence on nipy,
 # use np.testing or nose
-from nose.tools import assert_equal, assert_raises, assert_true
+from nipy.testing.compat import assert_equal, assert_raises, assert_true
 
 from ..transform import Transform, CompositionError
 

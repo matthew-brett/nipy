@@ -6,7 +6,7 @@ Test the empirical null estimator.
 from __future__ import absolute_import
 import warnings
 import numpy as np
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 
 
 from ..empirical_pvalue import (

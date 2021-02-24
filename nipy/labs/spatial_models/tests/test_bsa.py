@@ -10,7 +10,7 @@ from __future__ import absolute_import
 
 import numpy as np
 import scipy.stats as st
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 
 from nipy.testing import dec, assert_array_equal
 

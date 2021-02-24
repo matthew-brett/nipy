@@ -5,7 +5,7 @@ from __future__ import print_function
 # vi: set ft=python sts=4 ts=4 sw=4 et:
 import numpy as np
 import os
-from nose.tools import assert_equal
+from nipy.testing.compat import assert_equal
 from numpy.testing import (assert_array_almost_equal,
                            assert_array_equal,
                            assert_raises)

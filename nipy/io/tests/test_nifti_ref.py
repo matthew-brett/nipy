@@ -25,7 +25,7 @@ from ..files import load
 from ..nifti_ref import (nipy2nifti, nifti2nipy, NiftiError)
 from ..nibcompat import get_header, get_affine
 
-from nose.tools import assert_equal, assert_true, assert_false, assert_raises
+from nipy.testing.compat import assert_equal, assert_true, assert_false, assert_raises
 from numpy.testing import assert_almost_equal, assert_array_equal
 
 from ...testing import anatfile, funcfile

@@ -10,7 +10,7 @@ import numpy as np
 
 from ..imm import IMM, MixedIMM, co_labelling
 
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 
 from numpy.testing import assert_array_equal
 

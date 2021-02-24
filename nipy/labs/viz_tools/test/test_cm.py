@@ -3,7 +3,7 @@
 """ Smoke testing the cm module
 """
 from __future__ import absolute_import
-from nose import SkipTest
+from nipy.testing.compat import SkipTest
 
 try:
     import matplotlib as mp

@@ -7,7 +7,7 @@ from ..affine import (Affine, Affine2D, Rigid, Rigid2D,
                       Similarity, Similarity2D,
                       rotation_mat2vec, subgrid_affine, slices2aff)
 
-from nose.tools import assert_true, assert_false, assert_raises
+from nipy.testing.compat import assert_true, assert_false, assert_raises
 from numpy.testing import assert_array_equal, assert_array_almost_equal
 from ....testing import assert_almost_equal
 

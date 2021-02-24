@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 import numpy as np
-from nose.tools import raises
+from nipy.testing.compat import raises
 from numpy.testing import (
     assert_almost_equal, assert_equal, assert_array_equal, assert_warns)
 import warnings

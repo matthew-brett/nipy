@@ -5,7 +5,7 @@ import tempfile
 
 import numpy as np
 
-from nose import SkipTest
+from nipy.testing.compat import SkipTest
 from nipy.testing.decorators import skipif
 try:
     import matplotlib as mp

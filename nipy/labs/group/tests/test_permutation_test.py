@@ -8,7 +8,7 @@ import numpy as np
 from .. import permutation_test as pt
 from nipy.algorithms.graph import wgraph_from_3d_grid
 from numpy.testing import assert_array_equal
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 
 nperms = 2
 ndraws = 10

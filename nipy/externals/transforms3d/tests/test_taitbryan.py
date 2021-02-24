@@ -8,7 +8,7 @@ from numpy import pi
 from .. import quaternions as tq
 from .. import taitbryan as ttb
 
-from nose.tools import assert_true, assert_false, assert_equal
+from nipy.testing.compat import assert_true, assert_false, assert_equal
 
 from numpy.testing import assert_array_equal, assert_array_almost_equal
 

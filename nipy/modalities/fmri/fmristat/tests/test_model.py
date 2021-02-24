@@ -20,7 +20,7 @@ from nipy.algorithms.statistics.formula.formulae import(
 
 from nibabel.tmpdirs import InTemporaryDirectory
 
-from nose.tools import assert_raises, assert_true, assert_equal
+from nipy.testing.compat import assert_raises, assert_true, assert_equal
 
 from numpy.testing import assert_array_equal, assert_array_almost_equal
 from nipy.testing import funcfile, anatfile

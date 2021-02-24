@@ -5,7 +5,7 @@ from __future__ import absolute_import
 # python testClustering.py Test_Clustering
 
 import numpy as np
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 from ..gmm import GMM, best_fitting_GMM
 
 # seed the random number generator to avoid rare random failures

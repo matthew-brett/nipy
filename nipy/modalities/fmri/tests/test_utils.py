@@ -29,7 +29,7 @@ from ..utils import (
     )
 from .. import hrf
 
-from nose.tools import (assert_equal, assert_true, assert_false, raises,
+from nipy.testing.compat import (assert_equal, assert_true, assert_false, raises,
                         assert_raises)
 
 from numpy.testing import (assert_array_equal, assert_array_almost_equal,

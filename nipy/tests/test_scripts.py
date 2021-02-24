@@ -16,7 +16,7 @@ from nibabel.tmpdirs import InTemporaryDirectory
 from nipy import load_image, save_image
 from nipy.core.api import rollimg
 
-from nose.tools import assert_true, assert_false, assert_equal, assert_raises
+from nipy.testing.compat import assert_true, assert_false, assert_equal, assert_raises
 
 from ..testing import funcfile
 from numpy.testing import assert_almost_equal

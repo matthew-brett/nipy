@@ -14,7 +14,7 @@ from ...api import parcels, data_generator, write_data
 from ...reference.coordinate_system import CoordinateSystem
 from ...reference.coordinate_map import AffineTransform, AxisError
 
-from nose.tools import (assert_true, assert_false, assert_equal,
+from nipy.testing.compat import (assert_true, assert_false, assert_equal,
                         assert_not_equal, assert_raises)
 
 from numpy.testing import (assert_array_almost_equal, assert_almost_equal,

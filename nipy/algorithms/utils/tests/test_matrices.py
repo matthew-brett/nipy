@@ -9,7 +9,7 @@ import scipy.linalg as spl
 
 from ..matrices import (matrix_rank, full_rank, pos_recipr, recipr0)
 
-from nose.tools import (assert_true, assert_equal, assert_false,
+from nipy.testing.compat import (assert_true, assert_equal, assert_false,
                         assert_raises)
 
 from numpy.testing import (assert_almost_equal, assert_array_almost_equal)

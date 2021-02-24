@@ -19,7 +19,7 @@ from ..hrf import (
     ddspmt,
     )
 
-from nose.tools import assert_raises
+from nipy.testing.compat import assert_raises
 from numpy.testing import assert_almost_equal
 
 

@@ -10,7 +10,7 @@ from .. import (c_types, fff_type, npy_type, copy_vector, pass_matrix,
                 sum_via_iterators, copy_via_iterators)
 
 
-from nose.tools import assert_equal
+from nipy.testing.compat import assert_equal
 from numpy.testing import assert_almost_equal, assert_array_equal
 
 MAX_TEST_SIZE = 30

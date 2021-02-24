@@ -7,7 +7,7 @@ from nibabel.py3k import asstr, asbytes
 
 from ..compat3 import to_str, open4csv
 
-from nose.tools import (assert_true, assert_false, assert_raises,
+from nipy.testing.compat import (assert_true, assert_false, assert_raises,
                         assert_equal, assert_not_equal)
 
 from nibabel.tmpdirs import InTemporaryDirectory

@@ -7,7 +7,7 @@ from ..coordinate_map import AffineTransform
 from ..coordinate_system import CoordinateSystem as CS
 from ..spaces import scanner_csm, scanner_space, mni_csm
 
-from nose.tools import (
+from nipy.testing.compat import (
     assert_equal,
     assert_true,
     assert_false)

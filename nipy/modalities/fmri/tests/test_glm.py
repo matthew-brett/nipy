@@ -12,7 +12,7 @@ from nibabel import load, Nifti1Image, save
 from ..glm import GeneralLinearModel, data_scaling, FMRILinearModel
 from nipy.io.nibcompat import get_affine
 
-from nose.tools import assert_true, assert_equal, assert_raises
+from nipy.testing.compat import assert_true, assert_equal, assert_raises
 from numpy.testing import (assert_array_almost_equal, assert_almost_equal,
                            assert_array_equal)
 from nibabel.tmpdirs import InTemporaryDirectory

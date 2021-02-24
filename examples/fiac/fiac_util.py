@@ -251,7 +251,7 @@ def test_sanity():
     from nipy.modalities.fmri.fmristat.tests import FIACdesigns
     from nipy.modalities.fmri.fmristat.tests.test_FIAC import matchcol
     from nipy.algorithms.statistics import formula
-    from nose.tools import assert_true
+    from nipy.testing.compat import assert_true
 
     """
     Single subject fitting of FIAC model

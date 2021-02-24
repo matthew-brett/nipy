@@ -16,7 +16,7 @@ from ....core.reference.coordinate_map import AxisError
 
 from .. import timediff as tsd
 
-from nose.tools import (assert_true, assert_false, assert_equal,
+from nipy.testing.compat import (assert_true, assert_false, assert_equal,
                         assert_not_equal, assert_raises)
 
 from numpy.testing import assert_array_equal, assert_array_almost_equal

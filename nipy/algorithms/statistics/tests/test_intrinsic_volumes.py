@@ -9,7 +9,7 @@ import numpy.linalg as npl
 
 from .. import intvol
 
-from nose.tools import assert_equal, assert_raises
+from nipy.testing.compat import assert_equal, assert_raises
 from numpy.testing import assert_array_equal, assert_almost_equal
 
 

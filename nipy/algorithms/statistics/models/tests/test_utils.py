@@ -9,7 +9,7 @@ import numpy as np
 
 from .. import utils
 
-from nose.tools import (assert_equal, assert_true, assert_raises)
+from nipy.testing.compat import (assert_equal, assert_true, assert_raises)
 from numpy.testing import (assert_array_equal, assert_array_almost_equal)
 
 

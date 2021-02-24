@@ -8,6 +8,8 @@ dependency on nose.
 from __future__ import print_function
 from __future__ import absolute_import
 
+from functools import update_wrapper
+
 try:
     from numpy.testing.decorators import *
 except ImportError:
@@ -125,9 +127,8 @@ def needs_mpl_agg(func):
     if not HAVE_MPL:
         return needs_mpl(func)
     import matplotlib.pyplot as plt
-    from nose.tools import make_decorator
     def agg_func(*args, **kwargs):
         matplotlib.use('agg')
         plt.switch_backend('agg')
         return func(*args, **kwargs)
-    return make_decorator(func)(agg_func)
+    return update_wrapper(func)(agg_func)

@@ -5,7 +5,7 @@ import numpy as np
 
 from scipy.ndimage import gaussian_filter, gaussian_filter1d
 
-from nose.tools import assert_true, assert_false
+from nipy.testing.compat import assert_true, assert_false
 from numpy.testing import assert_almost_equal, assert_array_equal
 
 from nipy.core.api import Image, vox2scanner

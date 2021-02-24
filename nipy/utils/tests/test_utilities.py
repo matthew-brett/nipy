@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 import numpy as np
 
-from nose.tools import (assert_true, assert_false, assert_raises,
+from nipy.testing.compat import (assert_true, assert_false, assert_raises,
                         assert_equal, assert_not_equal)
 
 

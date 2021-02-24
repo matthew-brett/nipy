@@ -13,7 +13,7 @@ except ImportError:
         t.slow = True
         return t
 
-from nose.tools import assert_raises, assert_true, assert_false, \
+from nipy.testing.compat import assert_raises, assert_true, assert_false, \
     assert_equal
 
 from numpy.testing import assert_array_almost_equal, assert_array_equal

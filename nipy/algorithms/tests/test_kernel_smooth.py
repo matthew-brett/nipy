@@ -10,7 +10,7 @@ from ..kernel_smooth import LinearFilter, sigma2fwhm, fwhm2sigma
 from ...externals.transforms3d.taitbryan import euler2mat
 from ...core.api import Image, compose, AffineTransform, drop_io_dim
 
-from nose.tools import (assert_true, assert_false, assert_equal, assert_raises)
+from nipy.testing.compat import (assert_true, assert_false, assert_equal, assert_raises)
 
 from numpy.testing import assert_array_equal, assert_array_almost_equal
 

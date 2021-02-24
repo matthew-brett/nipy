@@ -7,7 +7,7 @@ from ..field import (field_from_coo_matrix_and_data,
                      field_from_graph_and_data)
 from ..graph import wgraph_from_3d_grid
 
-from nose.tools import assert_true, assert_equal
+from nipy.testing.compat import assert_true, assert_equal
 
 from numpy.testing import assert_array_equal
 

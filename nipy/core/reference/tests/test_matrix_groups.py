@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import numpy as np
 from scipy.linalg import expm
 
-from nose.tools import assert_true, assert_equal, assert_raises
+from nipy.testing.compat import assert_true, assert_equal, assert_raises
 
 import nipy.core.reference.tests.matrix_groups as MG
 from nipy.core.api import ArrayCoordMap

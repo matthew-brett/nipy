@@ -57,7 +57,7 @@ def import_nose():
     minimum_nose_version = (0,10,0)
     try:
         import nose
-        from nose.tools import raises
+        from nipy.testing.compat import raises
     except ImportError:
         fine_nose = False
     else:

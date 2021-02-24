@@ -20,7 +20,7 @@ from ...utils.tests.test_pca import res2pos1
 
 from nibabel.tmpdirs import InTemporaryDirectory
 
-from nose.tools import (assert_true, assert_false, assert_equal, assert_raises)
+from nipy.testing.compat import (assert_true, assert_false, assert_equal, assert_raises)
 
 from numpy.testing import (assert_array_equal, assert_array_almost_equal,
                            assert_almost_equal)

@@ -6,7 +6,7 @@ from numbers import Number
 
 import numpy as np
 
-from nose.tools import assert_equal, assert_almost_equal
+from nipy.testing.compat import assert_equal, assert_almost_equal
 from numpy.testing import assert_array_almost_equal
 
 from ..segmentation import Segmentation

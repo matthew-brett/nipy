@@ -9,7 +9,7 @@ import numpy as np
 from numpy.testing import (assert_almost_equal,
                            assert_array_almost_equal,
                            assert_raises)
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 import numpy.random as nr
 
 from ..mixed_effects_stat import (

@@ -7,7 +7,7 @@ from ..coordinate_system import (CoordinateSystem, CoordinateSystemError,
                                  is_coordsys, is_coordsys_maker, product,
                                  safe_dtype, CoordSysMaker, CoordSysMakerError)
 
-from nose.tools import (assert_true, assert_false, assert_equal, assert_raises,
+from nipy.testing.compat import (assert_true, assert_false, assert_equal, assert_raises,
                         assert_not_equal)
 
 

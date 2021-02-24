@@ -52,7 +52,7 @@ from . import decorators as dec
 
 # Allow failed import of nose if not now running tests
 try:
-    from nose.tools import assert_true, assert_false
+    from nipy.testing.compat import assert_true, assert_false
 except ImportError:
     pass
 

@@ -21,7 +21,7 @@ from ..hierarchical_clustering import (average_link_graph,
 from nipy.algorithms.graph.graph import WeightedGraph, knn
 from nipy.algorithms.graph.field import field_from_graph_and_data
 
-from nose.tools import assert_true, assert_equal
+from nipy.testing.compat import assert_true, assert_equal
 
 
 def alg_test_basic(n=100,k=5):

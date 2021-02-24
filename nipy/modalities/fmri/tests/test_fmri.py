@@ -12,7 +12,7 @@ from nipy.modalities.fmri.api import axis0_generator, FmriImageList
 from nipy.core.api import parcels, Image, AffineTransform as AfT
 from nipy.io.api import  load_image, save_image
 
-from nose.tools import assert_equal, assert_true
+from nipy.testing.compat import assert_equal, assert_true
 
 from nibabel.tmpdirs import InTemporaryDirectory
 from nipy.testing import funcfile

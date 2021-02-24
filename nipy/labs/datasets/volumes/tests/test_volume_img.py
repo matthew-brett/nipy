@@ -15,7 +15,7 @@ from ...transforms.affine_transform import AffineTransform
 from ...transforms.transform import Transform
 from ..volume_img import VolumeImg, CompositionError
 
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 
 ################################################################################
 # Helper function

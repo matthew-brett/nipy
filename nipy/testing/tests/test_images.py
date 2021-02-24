@@ -6,7 +6,7 @@ from __future__ import absolute_import
 from nipy import load_image
 from nipy.testing import funcfile, anatfile
 
-from nose.tools import assert_true, assert_false, assert_equal
+from nipy.testing.compat import assert_true, assert_false, assert_equal
 
 
 def test_dims():

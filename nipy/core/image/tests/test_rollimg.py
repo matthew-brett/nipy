@@ -40,7 +40,7 @@ from ...reference.coordinate_system import CoordinateSystem as CS
 from ...reference.spaces import mni_csm
 from ...image.image_spaces import xyz_affine
 
-from nose.tools import (assert_raises, assert_equal)
+from nipy.testing.compat import (assert_raises, assert_equal)
 
 from numpy.testing import assert_almost_equal, assert_array_equal
 

@@ -6,7 +6,7 @@ Test surrogate data generation.
 from __future__ import absolute_import
 
 import numpy as np
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 from nibabel import Nifti1Image
 
 from ..simul_multisubject_fmri_dataset import \

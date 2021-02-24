@@ -12,7 +12,7 @@ import nibabel.eulerangles as euler
 from nipy.io.api import load_image, save_image
 import nipy.algorithms.registration as reg
 
-from nose.tools import assert_true, assert_false
+from nipy.testing.compat import assert_true, assert_false
 
 import numpy.testing as npt
 

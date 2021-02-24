@@ -19,7 +19,7 @@ from ..spaces import (vox2mni, vox2scanner, vox2talairach, vox2unknown,
 from numpy.testing import (assert_array_almost_equal,
                            assert_array_equal)
 
-from nose.tools import (assert_true, assert_false, assert_equal, assert_raises,
+from nipy.testing.compat import (assert_true, assert_false, assert_equal, assert_raises,
                         assert_not_equal)
 
 VARS = {}

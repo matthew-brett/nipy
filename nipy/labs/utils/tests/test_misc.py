@@ -6,7 +6,7 @@ from scipy import special
 
 from ..routines import median, mahalanobis, gamln, psi
 
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 from numpy.testing import assert_almost_equal, assert_equal, TestCase
 
 

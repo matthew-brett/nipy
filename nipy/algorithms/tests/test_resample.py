@@ -11,7 +11,7 @@ from nipy.core.reference import slices
 from nipy.algorithms.resample import resample, resample_img2img
 from nipy.io.api import load_image
 
-from nose.tools import assert_true, assert_raises
+from nipy.testing.compat import assert_true, assert_raises
 
 from numpy.testing import assert_array_almost_equal, assert_array_equal
 from nipy.testing import funcfile, anatfile

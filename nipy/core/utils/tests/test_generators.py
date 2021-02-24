@@ -6,7 +6,7 @@ import numpy as np
 from ...api import write_data, slice_generator
 from .. import generators as gen
 
-from nose.tools import assert_equal, assert_raises
+from nipy.testing.compat import assert_equal, assert_raises
 from numpy.testing import assert_almost_equal, assert_array_equal
 
 shape = (10,20,30)

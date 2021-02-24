@@ -12,7 +12,7 @@ from ....core.reference.coordinate_map import (product as cm_product,
 from ....core.image.image import rollimg
 from ....io.api import  load_image
 
-from nose.tools import assert_raises
+from nipy.testing.compat import assert_raises
 from numpy.testing import (assert_equal, assert_almost_equal,
                            assert_array_equal)
 from ....testing import funcfile

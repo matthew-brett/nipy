@@ -12,7 +12,7 @@ from ..von_mises_fisher_mixture import (VonMisesMixture,
                                         select_vmm,
                                         select_vmm_cv)
 
-from nose.tools import assert_true, assert_equal
+from nipy.testing.compat import assert_true, assert_equal
 try:
     from numpy.testing import decorators
 except ImportError:

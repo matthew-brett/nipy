@@ -5,7 +5,7 @@ import numpy as np
 import numpy.random as nr
 from numpy.testing import(assert_array_equal, assert_array_almost_equal,
                           assert_almost_equal)
-from nose.tools import assert_true, assert_equal
+from nipy.testing.compat import assert_true, assert_equal
 
 from ..graph import (WeightedGraph, complete_graph, mst, knn, eps_nn, 
                      wgraph_from_adjacency, wgraph_from_coo_matrix, 

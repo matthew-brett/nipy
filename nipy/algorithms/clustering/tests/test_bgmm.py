@@ -15,7 +15,7 @@ import numpy.random as nr
 
 from ..bgmm import BGMM, VBGMM, dirichlet_eval, multinomial, dkl_gaussian 
 
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 
 def test_dirichlet_eval():
     # check that the Dirichlet evaluation function sums to one on a simple

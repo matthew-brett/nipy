@@ -8,7 +8,7 @@ import numpy as np
 
 from ..realfuncs import dct_ii_basis, dct_ii_cut_basis
 
-from nose.tools import assert_raises
+from nipy.testing.compat import assert_raises
 
 from numpy.testing import (assert_almost_equal,
                            assert_array_equal)

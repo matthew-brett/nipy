@@ -12,7 +12,7 @@ import numpy as np
 
 from ..experimental_paradigm import (EventRelatedParadigm, BlockParadigm,
                                      load_paradigm_from_csv_file)
-from nose.tools import assert_true
+from nipy.testing.compat import assert_true
 
 
 def basic_paradigm():

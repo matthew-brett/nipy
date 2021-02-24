@@ -7,7 +7,7 @@ import warnings
 import numpy as np
 import nibabel as nib
 
-from nose.tools import assert_equal
+from nipy.testing.compat import assert_equal
 from numpy.testing import (assert_array_almost_equal,
                            assert_array_equal,
                            assert_raises)
