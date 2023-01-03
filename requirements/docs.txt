@@ -1,0 +1,5 @@
+sphinx>=1.0,<3.0
+numpydoc==0.8.0
+matplotlib
+texext
+ipython
